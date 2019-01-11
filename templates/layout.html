@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    {% if title %}
-     <title>Mileage - {{title}}</title>
-    {% else %}
-     <title>Mileage</title>
-    {% endif %}
-    <style src="../static/main.css"></style>
-  </head>
 
-  <body>
-    <header class="header">Mileage</header>
+<head>
+  {% if title %}
+  <title>Mileage - {{title}}</title>
+  {% else %}
+  <title>Mileage</title>
+  {% endif %}
+  <style src="../static/main.css"></style>
+</head>
 
-    <
-    
+<body>
+  <header class="header">Mileage</header>
+
+
+  <body class="grid">
+
+    <nav id="navbar">
+      <a href="index.html">FEED</a>
+      <a href="upload.html">UPLOAD</a>
+      <a href="#">SQUADS</a>
+      <a href="profile.html">PROFILE</a>
+      <a href="#">SETTINGS</a>
+      <a href="#">ABOUT</a>
+
+      <div class="machineCount">
+        <svg id="machineIndicator">
+          <circle id="erg-indicator" cx="5" cy="5" r="4" fill="red" />
+        </svg>
+        No machines found!
+      </div>
+    </nav>
+
     <section class="content"></section>
     {% block content %}{% endblock %}
   </body>
+
 </html>

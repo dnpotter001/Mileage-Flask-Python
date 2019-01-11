@@ -1,37 +1,102 @@
+:root {
+  --dark: #4EBABA;
+  --accent: #2E9C9C;
+  --my-red: #FF6B6B;
+  --my-red-accent: #FF4C4C; 
+}
 
+/* -------------------------navbar stylin-------------------------g*/
+
+nav {
+  transition: all 0.5s ease-in-out;
+  grid-area: nav;
+  display: inline-flex;
+  flex-direction: column;
+  background: #555;
+  clear: both;
+  width: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow-x: hidden;
+  height: 100vh;
+  box-shadow: 2px 0px 10px #000000;
+}
+
+nav a {
+  padding: 1.25em 1.5em;
+  color: #ccc;
+  text-decoration: none;
+  width: inherit;
+  box-sizing: border-box;
+  width: 50vw;
+}
+
+nav .machineCount {
+  position: absolute;
+  bottom: 0px;
+  padding: 1.25em 1.5em;
+  color: #ccc;
+  width: 50vw;
+  box-sizing: border-box;
+  border-top: 1px black solid;
+}
 
 /* -------------------------button stylin-------------------------g*/
 
 .button {
   padding: 15px 25px;
-	text-align: center;
+  text-align: center;
   color: white;
-  border:0;
+  border: 0;
   cursor: pointer;
   font-size: 24px;
   border-radius: 5px;
   margin: 10px;
 }
 
-.button:active{ transform: translateY(3px);}
+.button:active {
+  transform: translateY(3px);
+}
 
-.dark{background: var(--dark); box-shadow: 0 6px var(--accent);}
-.dark:active{ box-shadow: 0 3px var(--accent); }
+.dark {
+  background: var(--dark);
+  box-shadow: 0 6px var(--accent);
+}
 
-.contrast{background: var(--contrast); box-shadow: 0 6px var(--contrast-accent);}
-.contrast:active{box-shadow: 0 3px var(--contrast);}
+.dark:active {
+  box-shadow: 0 3px var(--accent);
+}
 
-.red{background: var(--my-red); box-shadow: 0 6px var(--my-red-accent);}
-.red:active{ box-shadow: 0 3px var(--my-red-accent);}
+.contrast {
+  background: var(--contrast);
+  box-shadow: 0 6px var(--contrast-accent);
+}
 
-.square{
+.contrast:active {
+  box-shadow: 0 3px var(--contrast);
+}
+
+.red {
+  background: var(--my-red);
+  box-shadow: 0 6px var(--my-red-accent);
+}
+
+.red:active {
+  box-shadow: 0 3px var(--my-red-accent);
+}
+
+.square {
   width: 150px;
   height: 150px;
 }
-.small{
+
+.small {
   font-size: 12px;
   padding: 8px 12px;
 }
-.wide{
+
+.wide {
   width: 150px;
 }
