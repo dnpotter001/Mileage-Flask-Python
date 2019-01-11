@@ -2,7 +2,8 @@
   --teal: #4EBABA;
   --teal-accent: #2E9C9C;
   --offWhite:#ACEDED ;
-
+  --text: #EEEEEE;
+  --background: #555555;
   --my-red: #FF6B6B;
   --my-red-accent: #FF4C4C;
 }
@@ -18,7 +19,7 @@ body {
 .template {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 60px auto 1fr 20vh;
+  grid-template-rows: 60px auto 1fr auto;
   grid-template-areas: 
     "header"
     "subheader"
@@ -38,13 +39,14 @@ body {
 
 .subheader {
   grid-area: subheader;
-  background: yellow;
-  padding: 10px
-
+  background: #333333;
+  padding: 10px;
+  color:var(--text);
 }
 
 .content{
   grid-area: content;
+  background: var(--background);
 }
 
 .navbutton {
@@ -75,7 +77,7 @@ nav {
   grid-area: nav;
   display: inline-flex;
   flex-direction: column;
-  background: grey;
+  background: #222222;
   clear: both;
   transition: all 0.5s ease-in-out;
   width: 0px;
@@ -90,28 +92,37 @@ nav {
 
 nav a {
   padding: 1.25em 1.5em;
-  color:white;
+  color:#dddddd;
   text-decoration: none;
   width: inherit;
   box-sizing: border-box;
   width: 200px;
-  border-bottom: 2px solid grey;
+  border-bottom: 2px solid #222222;
 }
 
 nav a:hover {
   background: var(--teal);
   border-bottom: 2px solid var(--teal-accent);
+  color:#fff;
 }
 
 nav .machineCount {
   position: absolute;
+  white-space: nowrap;
+  overflow: hidden;
+  height:auto;
+  width: 100%;
   bottom: 0px;
-  padding: 1.25em 1.5em;
-  color: #ccc;
-  width: 50vw;
-  box-sizing: border-box;
-  border-top: 1px black solid;
+  color: var(--text);
+  border-top: 1px var(--text) solid;  
+  padding: 10px;  
 }
+
+#machineIndicator{
+  width: 10px;
+  height: 10px;
+}
+
 
 footer {
   grid-area: footer;
@@ -120,7 +131,17 @@ footer {
   justify-content: center;
   flex-direction: column;
   padding: 10px;
-  background: purple;
+  background: #333333;
+}
+
+footer a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 3px;
+}
+
+footer a:visited {
+  color: var(--text);
 }
 
 /*togglable classes*/
