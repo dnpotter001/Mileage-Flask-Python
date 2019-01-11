@@ -2,10 +2,58 @@
   --dark: #4EBABA;
   --accent: #2E9C9C;
   --my-red: #FF6B6B;
-  --my-red-accent: #FF4C4C; 
+  --my-red-accent: #FF4C4C;
 }
 
-/* -------------------------navbar stylin-------------------------g*/
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+/* template styling */
+
+.template {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px auto 1fr 20vh;
+  grid-template-areas: 
+    "header"
+    "subheader"
+    "content "
+    "footer  "
+  ;
+  width: 100vh;
+}
+
+.header {
+  grid-area: header;
+  font-weight: bold;
+  font-size: 40px;
+  overflow: hidden;
+}
+
+.subheader {
+  grid-area: subheader;
+  background: yellow;
+  padding: 0px;
+}
+
+.content{
+  grid-area: content;
+}
+
+.navbutton {
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 10px;
+  font-size: 40px;
+  color: white;
+  z-index: 1;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+}
 
 nav {
   transition: all 0.5s ease-in-out;
@@ -42,6 +90,17 @@ nav .machineCount {
   box-sizing: border-box;
   border-top: 1px black solid;
 }
+
+footer {
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  background: purple;
+}
+
 
 /* -------------------------button stylin-------------------------g*/
 
@@ -100,3 +159,11 @@ nav .machineCount {
 .wide {
   width: 150px;
 }
+
+/* tablet styling */
+
+@media screen and (min-width: 500px) {}
+
+/* desktop styling */
+
+@media screen and (min-width: 1000px) {}

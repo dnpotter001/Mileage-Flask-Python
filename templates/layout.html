@@ -2,6 +2,10 @@
 <html>
 
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" media="screen" href="../static/main.css" />
+
   {% if title %}
   <title>Mileage - {{title}}</title>
   {% else %}
@@ -10,30 +14,47 @@
   <style src="../static/main.css"></style>
 </head>
 
-<body>
-  <header class="header">Mileage</header>
+<body class="template">
+  <header class="header">
+    <div id="navbutton">&#9776; Mileage</div>
+    <h1 class="desktopheader">Mileage</h1>
+  </header>
 
+  <nav id="navbar">
+    <a href="index.html">FEED</a>
+    <a href="upload.html">UPLOAD</a>
+    <a href="#">SQUADS</a>
+    <a href="profile.html">PROFILE</a>
+    <a href="#">SETTINGS</a>
+    <a href="#">ABOUT</a>
 
-  <body class="grid">
+    <div class="machineCount">
+      <svg id="machineIndicator">
+        <circle id="erg-indicator" cx="5" cy="5" r="4" fill="red" />
+      </svg>
+      No machines found!
+    </div>
+  </nav>
+  <article class="subheader">
+    {% if title %}
+      {{title}}
+    {% else %}
 
-    <nav id="navbar">
-      <a href="index.html">FEED</a>
-      <a href="upload.html">UPLOAD</a>
-      <a href="#">SQUADS</a>
-      <a href="profile.html">PROFILE</a>
-      <a href="#">SETTINGS</a>
-      <a href="#">ABOUT</a>
+    {% endif %}
+  </article>
 
-      <div class="machineCount">
-        <svg id="machineIndicator">
-          <circle id="erg-indicator" cx="5" cy="5" r="4" fill="red" />
-        </svg>
-        No machines found!
-      </div>
-    </nav>
-
-    <section class="content"></section>
+  <section class="content">
     {% block content %}{% endblock %}
-  </body>
+  </section>
+
+  <footer>
+    <a href="index.html">Feed</a>
+    <a href="upload.html">Upload</a>
+    <a href="#">Squads</a>
+    <a href="profile.html">Profile</a>
+    <a href="#">Settings</a>
+    <a href="#">About</a>
+  </footer>
+</body>
 
 </html>

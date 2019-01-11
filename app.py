@@ -17,7 +17,7 @@ workouts = [
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('index.html', posts=workouts)
+    return render_template('index.html', posts=workouts, title="Your Feed")
 
 @app.route("/about")
 def about():
