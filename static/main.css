@@ -73,6 +73,10 @@ body {
   position: absolute;
 }
 
+.desktopheader{
+  display:none;
+}
+
 nav {
   grid-area: nav;
   display: inline-flex;
@@ -270,4 +274,32 @@ footer a:visited {
 
 /* desktop styling */
 
-@media screen and (min-width: 1000px) {}
+@media screen and (min-width: 1000px) {
+  .template {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 100px auto 1fr auto;
+    grid-template-areas: 
+      "nav header"
+      "nav subheader"
+      "nav content "
+      "nav footer  "
+    ;
+    height: 100vh;
+  }
+
+  nav{
+    position: relative;
+    width:auto;
+  }
+
+  #navbutton {
+    display: none;
+  }
+
+  .desktopheader{
+    display: inline;
+    color: white;
+    padding: 10px;
+  }
+}
