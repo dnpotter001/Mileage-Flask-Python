@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for
+import pyrow
 app = Flask(__name__)
 
 workouts = [
@@ -27,3 +28,12 @@ def about():
 
 if __name__ == '__main__':
   app.run(debug=True)
+
+ergs = list(pyrow.find())
+if len(ergs) == 0:
+    print('No ergs found')
+
+erg = pyrow.pyrow(ergs[0])
+print "Connected to erg."
+
+erg.set_workout(distance=2000, split=100, pace=120)
