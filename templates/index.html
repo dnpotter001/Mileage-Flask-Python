@@ -1,4 +1,4 @@
-{% extents "layout.html" %}
+{% extends "layout.html" %}
 {% block content %}
 
 
@@ -8,7 +8,7 @@
 <p>
   By {{ post.author}} on {{post.date}}
 </p>
-
-
 {% endfor %}
-{% endblock %}
+
+
+{% endblock content%}
