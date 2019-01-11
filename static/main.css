@@ -1,0 +1,37 @@
+
+
+/* -------------------------button stylin-------------------------g*/
+
+.button {
+  padding: 15px 25px;
+	text-align: center;
+  color: white;
+  border:0;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.button:active{ transform: translateY(3px);}
+
+.dark{background: var(--dark); box-shadow: 0 6px var(--accent);}
+.dark:active{ box-shadow: 0 3px var(--accent); }
+
+.contrast{background: var(--contrast); box-shadow: 0 6px var(--contrast-accent);}
+.contrast:active{box-shadow: 0 3px var(--contrast);}
+
+.red{background: var(--my-red); box-shadow: 0 6px var(--my-red-accent);}
+.red:active{ box-shadow: 0 3px var(--my-red-accent);}
+
+.square{
+  width: 150px;
+  height: 150px;
+}
+.small{
+  font-size: 12px;
+  padding: 8px 12px;
+}
+.wide{
+  width: 150px;
+}
