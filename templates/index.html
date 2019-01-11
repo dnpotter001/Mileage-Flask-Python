@@ -2,13 +2,15 @@
 {% block content %}
 
 
-<h1>Home Page</h1>
 {% for post in posts %}
-<h2>{{post.title}}</h2>
-<p>
-  By {{ post.author}} on {{post.date}}
-</p>
-{% endfor %}
+<article class="feed-item">
 
+    <div class="feed title">{{post.title}}</div>
+    <figure class="feed graph">graph</figure>
+    <article class="feed table">table</article>
+    <div class="feed info">By {{ post.author}} on {{post.date}}</div>
+
+</article>
+{% endfor %}
 
 {% endblock content%}

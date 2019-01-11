@@ -1,6 +1,8 @@
 :root {
-  --dark: #4EBABA;
-  --accent: #2E9C9C;
+  --teal: #4EBABA;
+  --teal-accent: #2E9C9C;
+  --offWhite:#ACEDED ;
+
   --my-red: #FF6B6B;
   --my-red-accent: #FF4C4C;
 }
@@ -97,9 +99,8 @@ nav a {
 }
 
 nav a:hover {
-  background: var(--dark);
-  border-bottom: 2px solid var(--accent);
-  color: var(--link-hover);
+  background: var(--teal);
+  border-bottom: 2px solid var(--teal-accent);
 }
 
 nav .machineCount {
@@ -133,6 +134,47 @@ footer {
 }
 
 
+/* -------------------------feed stylin-------------------------g*/
+.feed-item{
+  display:grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows:
+    40px
+    180px
+    40px;
+  grid-template-areas:
+    "label label"
+    "graph table"
+    "info info";
+  padding: 0;
+  margin: 10px;
+}
+
+.feed {
+  padding: 10px;
+  border: 1px solid var(--teal-accent);
+}
+
+.title{
+  grid-area: label;
+  background: var(--teal-accent);
+  border-bottom: 2px solid var(--teal);
+}
+.graph{
+  grid-area: graph;
+  background: white;
+  margin: 0;
+  overflow: hidden;
+}
+.table{
+  grid-area: table;
+  background: white;
+  margin: 0;
+}
+.info{
+  grid-area: info;
+  background: var(--offWhite);
+}
 /* -------------------------button stylin-------------------------g*/
 
 .button {
