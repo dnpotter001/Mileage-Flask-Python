@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, flash,redirect
+from flask import Flask, render_template, url_for, flash, redirect, request 
 from form import SetWorkoutForm
 import pyrow
 app = Flask(__name__)
@@ -19,8 +19,6 @@ workouts = [
 
 
 
-
-
 @app.route("/")
 @app.route("/home")
 @app.route("/feed")
@@ -36,11 +34,18 @@ def about():
 def erg():
   form = SetWorkoutForm()
   if form.validate_on_submit():
-    ergs = list(pyrow.find())
-    pm5 = pyrow.pyrow(ergs[0])
-    pm5.set_workout(distance=form.distance.data)
-    return redirect(url_for('erg'))
+    return redirect(url_for('set_workout'))
   return render_template('erg.html', title='Erg Control', form=form)
+
+@app.route('/set_workout')
+def set_workout():
+  dist = request.form['distance']
+  ergs = list(pyrow.find())
+  if len(ergs) == 0:
+    print('No ergs found')
+  pm5 = pyrow.pyrow(ergs[0])
+  pm5.set_workout(distance=dist)
+  return 'setting workout'
 
 if __name__ == '__main__':
   app.run(debug=True)
