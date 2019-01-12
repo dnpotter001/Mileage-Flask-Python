@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <form method="POST" action="{{ SetWorkout }}">
+    {{ form.hidden_tag() }}
+    <fieldset>
+      <legend>Set a Workout</legend>
+      {{form.distance.label}}
+      {{form.distance}}
+
+      {{form.hours.label}}
+      {{form.hours}}
+
+      {{form.minutes.label}}
+      {{form.minutes}}
+
+      {{form.seconds.label}}
+      {{form.seconds}}
+
+      {{form.split.label}}
+      {{form.split}}
+    </fieldset>
+    
+    {{form.submit(class="button dark small")}}
+
+  </form>
+
+{% endblock content %}
