@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from mileage import app
-from form import SetWorkoutForm
+from mileage.forms import SetWorkoutForm
+from mileage import pyrow
 
 workouts = [
   {

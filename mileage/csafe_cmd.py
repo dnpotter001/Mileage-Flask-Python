@@ -6,7 +6,7 @@
 #   Please report and findings to the author so that they may be addressed in a stable release.
 
 #ToDo: change print statments to proper errors
-import csafe_dic
+from mileage import csafe_dic
 
 def __int2bytes(numbytes, integer):
     if not 0 <= integer <= 2 ** (8 * numbytes):

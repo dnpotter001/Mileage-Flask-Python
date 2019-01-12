@@ -8,7 +8,7 @@
 import usb.core
 import usb.util
 from usb import USBError
-import csafe_cmd
+from mileage import csafe_cmd
 import datetime
 import time
 import sys
