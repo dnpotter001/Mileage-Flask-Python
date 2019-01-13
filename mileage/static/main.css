@@ -207,12 +207,12 @@ footer a:visited {
 }
 
 .contrast {
-  background: var(--contrast);
-  box-shadow: 0 6px var(--contrast-accent);
+  background: var(--teal);
+  box-shadow: 0 6px var(--teal-accent);
 }
 
 .contrast:active {
-  box-shadow: 0 3px var(--contrast);
+  box-shadow: 0 3px var(--teal);
 }
 
 .red {

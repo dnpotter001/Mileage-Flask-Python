@@ -3,16 +3,22 @@ from mileage import app
 from mileage.forms import SetWorkoutForm
 from mileage import pyrow
 
+#dunny test data for the feed
 workouts = [
   {
     'author':'David Potter',
     'title': 'Sunday workout',
-    'date': '11th Jan 2029'
+    'date': '11th Jan 2018'
   },
   {
     'author':'Judith Potter',
     'title': 'Saturday workout',
-    'date': '12th Jan 2029'
+    'date': '12th Jan 2019'
+  },
+  {
+    'author':'Eve Megaw',
+    'title': 'Thursday workout',
+    'date': '14th Aug 2019'
   }
 ]
 
@@ -21,7 +27,8 @@ workouts = [
 @app.route("/feed")
 @app.route("/index")
 def home():
-  return render_template('index.html', posts=workouts, title="Your Feed")
+  form = SetWorkoutForm()
+  return render_template('index.html', posts=workouts, title="Your Feed", form=form)
 
 @app.route("/about")
 def about():
