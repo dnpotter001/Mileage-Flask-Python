@@ -1,11 +1,14 @@
 :root {
   --teal: #4EBABA;
   --teal-accent: #2E9C9C;
-  --offWhite:#ACEDED ;
+  --offWhite: #ACEDED;
   --text: #EEEEEE;
-  --background: #555555;
+  --background: #ddd;
   --my-red: #FF6B6B;
   --my-red-accent: #FF4C4C;
+  --border: #aaa;
+  --link: #666;
+  --link-hover: #222;
 }
 
 body {
@@ -20,18 +23,13 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 60px auto 1fr auto;
-  grid-template-areas: 
-    "header"
-    "subheader"
-    "content "
-    "footer  "
-  ;
+  grid-template-areas: "header" "subheader" "content " "footer  ";
   height: 100vh;
 }
 
 .header {
   grid-area: header;
-  background: black;
+  background: var(--teal);
   font-weight: bold;
   font-size: 40px;
   overflow: hidden;
@@ -41,24 +39,12 @@ body {
   grid-area: subheader;
   background: #333333;
   padding: 10px;
-  color:var(--text);
+  color: var(--text);
 }
 
-.content{
+.content {
   grid-area: content;
   background: var(--background);
-}
-
-.navbutton {
-  overflow: hidden;
-  white-space: nowrap;
-  padding-left: 10px;
-  font-size: 40px;
-  color: white;
-  z-index: 1;
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
-  position: absolute;
 }
 
 #navbutton {
@@ -73,15 +59,15 @@ body {
   position: absolute;
 }
 
-.desktopheader{
-  display:none;
+.desktopheader {
+  display: none;
 }
 
 nav {
   grid-area: nav;
   display: inline-flex;
   flex-direction: column;
-  background: #222222;
+  background: var(--background);
   clear: both;
   transition: all 0.5s ease-in-out;
   width: 0px;
@@ -96,37 +82,33 @@ nav {
 
 nav a {
   padding: 1.25em 1.5em;
-  color:#dddddd;
+  color: var(--link);
   text-decoration: none;
   width: inherit;
   box-sizing: border-box;
   width: 200px;
-  border-bottom: 2px solid #222222;
 }
 
 nav a:hover {
-  background: var(--teal);
-  border-bottom: 2px solid var(--teal-accent);
-  color:#fff;
+  color: var(--link-hover);
 }
 
 nav .machineCount {
   position: absolute;
   white-space: nowrap;
   overflow: hidden;
-  height:auto;
+  height: auto;
   width: 100%;
   bottom: 0px;
   color: var(--text);
-  border-top: 1px var(--text) solid;  
-  padding: 10px;  
+  border-top: 1px var(--text) solid;
+  padding: 10px;
 }
 
-#machineIndicator{
+#machineIndicator {
   width: 10px;
   height: 10px;
 }
-
 
 footer {
   grid-area: footer;
@@ -158,19 +140,13 @@ footer a:visited {
   margin-left: 50vw;
 }
 
-
 /* -------------------------feed stylin-------------------------g*/
-.feed-item{
-  display:grid;
+
+.feed-item {
+  display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows:
-    40px
-    180px
-    40px;
-  grid-template-areas:
-    "label label"
-    "graph table"
-    "info info";
+  grid-template-rows: 40px 180px 40px;
+  grid-template-areas: "label label" "graph table" "info info";
   padding: 0;
   margin: 10px;
 }
@@ -180,26 +156,30 @@ footer a:visited {
   border: 1px solid var(--teal-accent);
 }
 
-.title{
+.title {
   grid-area: label;
   background: var(--teal-accent);
   border-bottom: 2px solid var(--teal);
 }
-.graph{
+
+.graph {
   grid-area: graph;
   background: white;
   margin: 0;
   overflow: hidden;
 }
-.table{
+
+.table {
   grid-area: table;
   background: white;
   margin: 0;
 }
-.info{
+
+.info {
   grid-area: info;
   background: var(--offWhite);
 }
+
 /* -------------------------button stylin-------------------------g*/
 
 .button {
@@ -219,11 +199,11 @@ footer a:visited {
 
 .dark {
   background: var(--dark);
-  box-shadow: 0 6px var(--accent);
+  box-shadow: 0 6px var(--teal);
 }
 
 .dark:active {
-  box-shadow: 0 3px var(--accent);
+  box-shadow: 0 3px var(--teal-accent);
 }
 
 .contrast {
@@ -261,15 +241,49 @@ footer a:visited {
 /* tablet styling */
 
 @media screen and (min-width: 500px) {
-  
-.menu-toggle {
-  width: 200px;
-}
+  .template {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 60px auto 1fr auto;
+    grid-template-areas: "header header " "subheader subheader " "nav content " "footer footer  ";
+    height: 100vh;
+  }
+  .erg-control {
+    grid-area: aside;
+    background: var(--background);
+  }
+  .header {
+    padding-left: 200px
+  }
+  .subheader {
+    padding-left: 210px;
+  }
+  nav {
+    position: relative;
+    width: auto;
+    box-shadow: 0px 0px 0px black;
+    border-right: 1px solid var(--border);
+  }
+  #navbutton {
+    display: none;
+  }
+  .desktopheader {
+    display: inline;
+    color: white;
+    padding: 10px;
+    font-size: 40px;
+  }
 
-.menu-open {
-  margin-left: 200px;
-}
+  .erg-control{
+    display: none;
+  }
 
+  .menu-toggle {
+    width: 200px;
+  }
+  .menu-open {
+    margin-left: 200px;
+  }
 }
 
 /* desktop styling */
@@ -277,29 +291,15 @@ footer a:visited {
 @media screen and (min-width: 1000px) {
   .template {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: 100px auto 1fr auto;
-    grid-template-areas: 
-      "nav header"
-      "nav subheader"
-      "nav content "
-      "nav footer  "
-    ;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: 60px auto 1fr auto;
+    grid-template-areas: "header header header" "subheader subheader subheader" "nav content aside" "footer footer  footer";
     height: 100vh;
   }
-
-  nav{
-    position: relative;
-    width:auto;
+  .erg-control {
+    grid-area: aside;
+    background: var(--background);
   }
 
-  #navbutton {
-    display: none;
-  }
 
-  .desktopheader{
-    display: inline;
-    color: white;
-    padding: 10px;
-  }
 }

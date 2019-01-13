@@ -17,7 +17,7 @@
 <body class="template">
   <header class="header">
     <div id="navbutton">&#9776; Mileage</div>
-    <h1 class="desktopheader">Mileage</h1>
+    <span class='desktopheader'>Mileage</span>
   </header>
 
   <nav id="navbar">
@@ -28,12 +28,6 @@
     <a href="settings">SETTINGS</a>
     <a href="about">ABOUT</a>
 
-    <div class="machineCount">
-      <svg id="machineIndicator">
-        <circle id="erg-indicator" cx="5" cy="5" r="4" fill="red" />
-      </svg>
-      No machines found!
-    </div>
   </nav>
   <article class="subheader">
     {% if title %}
@@ -45,9 +39,14 @@
 
   <section class="content">
 
-    
+
     {% block content %}{% endblock %}
   </section>
+
+  <aside class="erg-control">
+    No ergs connected
+  </aside>
+
 
   <footer>
     <a href="index">Feed</a>

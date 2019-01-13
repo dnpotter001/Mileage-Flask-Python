@@ -36,10 +36,9 @@ def erg():
 
 @app.route('/set_workout')
 def set_workout():
-  dist = request.form['distance']
   ergs = list(pyrow.find())
   if len(ergs) == 0:
     print('No ergs found')
   pm5 = pyrow.pyrow(ergs[0])
-  pm5.set_workout(distance=dist)
+  pm5.set_workout(distance=2000, split=120)
   return 'setting workout'
