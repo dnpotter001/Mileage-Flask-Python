@@ -22,13 +22,36 @@ workouts = [
   }
 ]
 
+ergs = list(pyrow.find())
+if len(ergs) == 0:
+  isConnected = False
+else:
+  isConnected = True
+
+connectedDevices = [
+  {
+  'connection': isConnected,
+  'ergs': ergs,
+  'count': str(len(ergs))
+  }
+]
+
+
+
+
 @app.route("/")
 @app.route("/home")
 @app.route("/feed")
 @app.route("/index")
 def home():
   form = SetWorkoutForm()
-  return render_template('index.html', posts=workouts, title="Your Feed", form=form)
+  return render_template(
+    'index.html', 
+    posts=workouts, 
+    title="Your Feed", 
+    form=form,
+    connectedDevices=connectedDevices
+  )
 
 @app.route("/about")
 def about():
