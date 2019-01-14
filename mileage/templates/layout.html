@@ -44,18 +44,26 @@
   </section>
 
   <article class="erg-control">
-    Erg sidebar
     {% if  ergConnection.connected %}
-      <h1>ergs connected</h1>
       <h2>
-        Number of erg: {{ ergConnection.count }}
+        {{ ergConnection.count }} erg(s) found
       </h2>
-      <h2>
-        Erg information
-      </h2>
-      <p>
-        {{ergConnection.ergData}}
-      </p>
+      <h3>
+        Erg(s) information
+      </h3>
+      {% for erg in ergConnection.ergData %}
+        <ul>
+          <li>Serial No: {{ erg.serial }} </li>
+          <li>Model: {{ erg.model }} </li>
+        </ul>
+        </p>
+        {% for key, value in erg.items(): %}
+          <p> {{key}} : {{value}} </p>
+        {% endfor %}
+
+      {% endfor %}
+      
+      {{ ergConnection.ergData }}
     {% else %}
       <h1>No ergs connected</h1>
     {% endif %}
