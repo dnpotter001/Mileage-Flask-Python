@@ -31,8 +31,6 @@ else:
   erg = pyrow.pyrow(ergs[0])
   ergInfo = erg.get_erg()
 
-
-
 ergConnection = {
   "connected": isConnected,
   "count": len(ergs),
@@ -57,8 +55,8 @@ def home():
 def about():
   return render_template('about.html', title="About")
 
-@app.route('/erg', methods=['GET', 'POST'])
-def erg():
+@app.route('/ergControl', methods=['GET', 'POST'])
+def ergControlg():
   form = SetWorkoutForm()
   if form.validate_on_submit():
     return redirect(url_for('set_workout'))
