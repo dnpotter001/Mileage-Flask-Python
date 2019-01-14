@@ -28,7 +28,8 @@ if len(ergs) == 0:
   ergInfo = 0
 else:
   isConnected = True
-  erg = pyrow.pyrow(ergs[0])
+  for erg in ergs:
+    erg = pyrow.pyrow(erg)
   ergInfo = erg.get_erg()
 
 ergConnection = {
