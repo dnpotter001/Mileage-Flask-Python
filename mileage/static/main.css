@@ -293,12 +293,18 @@ footer a:visited {
     display: grid;
     grid-template-columns: 200px 1fr 200px;
     grid-template-rows: 60px auto 1fr auto;
-    grid-template-areas: "header header header" "subheader subheader subheader" "nav content aside" "footer footer  footer";
+    grid-template-areas: 
+      "header header header"
+       "subheader subheader subheader" 
+       "nav content erg-sidebar" 
+       "footer footer  footer";
     height: 100vh;
   }
   .erg-control {
-    grid-area: aside;
+    display: inline;
+    grid-area: erg-sidebar;
     background: var(--background);
+    color:black;
   }
 
 

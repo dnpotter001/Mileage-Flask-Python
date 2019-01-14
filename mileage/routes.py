@@ -25,19 +25,19 @@ workouts = [
 ergs = list(pyrow.find())
 if len(ergs) == 0:
   isConnected = False
+  ergInfo = 0
 else:
   isConnected = True
-
-connectedDevices = [
-  {
-  'connection': isConnected,
-  'ergs': ergs,
-  'count': str(len(ergs))
-  }
-]
+  erg = pyrow.pyrow(ergs[0])
+  ergInfo = erg.get_erg()
 
 
 
+ergConnection = {
+  "connected": isConnected,
+  "count": len(ergs),
+  "ergData": ergInfo
+}
 
 @app.route("/")
 @app.route("/home")
@@ -50,7 +50,7 @@ def home():
     posts=workouts, 
     title="Your Feed", 
     form=form,
-    connectedDevices=connectedDevices
+    ergConnection=ergConnection
   )
 
 @app.route("/about")

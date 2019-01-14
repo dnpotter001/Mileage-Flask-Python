@@ -43,11 +43,25 @@
     {% block content %}{% endblock %}
   </section>
 
-  <aside class="erg-control">
+  <article class="erg-control">
+    Erg sidebar
+    {% if  ergConnection.connected %}
+      <h1>ergs connected</h1>
+      <h2>
+        Number of erg: {{ ergConnection.count }}
+      </h2>
+      <h2>
+        Erg information
+      </h2>
+      <p>
+        {{ergConnection.ergData}}
+      </p>
+    {% else %}
+      <h1>No ergs connected</h1>
+    {% endif %}
 
-    
 
-  </aside>
+  </article>
 
 
   <footer>
