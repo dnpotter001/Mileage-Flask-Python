@@ -216,7 +216,7 @@ footer a:visited {
 }
 
 .dark {
-  background: var(--dark);
+  background: var(--teal-accent);
   box-shadow: 0 6px var(--teal);
 }
 
@@ -256,6 +256,42 @@ footer a:visited {
   width: 150px;
 }
 
+/* -------------------------form stylin-------------------------g*/
+.invalid{ 
+  border: 1px solid var(--my-red-accent)
+}
+
+.invalid-input{
+  font-size: 12px;
+  color:var(--my-red);
+}
+
+fieldset{
+  border: 1px solid var(--border);
+  margin: 10px;
+
+}
+
+.erg-control-grid {
+  display: grid;
+  grid-template-columns: 33.333% 33.333% 33.333%;
+  grid-template-rows: 1fr;
+  grid-template-areas: "distance-form time-form standard-form"
+}
+
+.distance-form {grid-area: distance-form}
+.time-form {grid-area: time-form}
+.standard-form {grid-area: standard-form}
+
+.distance-form, .time-form, .standard-form{
+  text-align: center
+}
+
+input, select{
+  box-sizing:border-box;
+  padding: 10px;
+  margin: 10px;
+}
 /* tablet styling */
 
 @media screen and (min-width: 500px) {

@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<form method="POST" action="{{ SetDistance }}">
+<div class="erg-control-grid">
+<form method="POST" action="{{ SetDistance }}" class="distance-form">
   {{ formDis.hidden_tag() }}
   <fieldset>
     <legend>Single Distance</legend>
-    {{formDis.distance.label}}
+  
     {% if formDis.distance.errors %}
-      {{formDis.distance(clas="invalid")}}
+      {{formDis.distance(class="invalid") }}
       <div class="invalid-input">
         {% for error in formDis.distance.errors %}
         <span>{{error}}</span>
@@ -16,10 +16,8 @@
     {% else %}
       {{formDis.distance}}
     {% endif %}
-
-    {{formDis.split.label}}
     {% if formDis.split.errors %}
-    {{formDis.split(clas="invalid")}}
+    {{formDis.split(class="invalid")}}
     <div class="invalid-input">
       {% for error in formDis.split.errors %}
       <span>{{error}}</span>
@@ -28,20 +26,21 @@
     {% else %}
       {{formDis.split}}
     {% endif %}
+
+    {{formDis.submitDis(class="button dark small")}}
+
   </fieldset>
 
-  {{formDis.submitDis(class="button dark small")}}
 
 </form>
 
-<form method="POST" action="{{ SetTime }}">
+<form method="POST" action="{{ SetTime }}" class="time-form">
   {{ formTime.hidden_tag() }}
   <fieldset>
     <legend>Single Time</legend>
 
-    {{formTime.hours.label}}
     {% if formTime.hours.errors %}
-    {{formTime.hours(clas="invalid")}}
+    {{formTime.hours(class="invalid")}}
     <div class="invalid-input">
       {% for error in formTime.hours.errors %}
       <span>{{error}}</span>
@@ -51,9 +50,9 @@
       {{formTime.hours}}
     {% endif %}
 
-    {{formTime.minutes.label}}
+  
     {% if formTime.minutes.errors %}
-    {{formTime.minutes(clas="invalid")}}
+    {{formTime.minutes(class="invalid")}}
     <div class="invalid-input">
       {% for error in formTime.minutes.errors %}
       <span>{{error}}</span>
@@ -63,9 +62,9 @@
       {{formTime.minutes}}
     {% endif %}
 
-    {{formTime.seconds.label}}
+  
     {% if formTime.seconds.errors %}
-    {{formTime.seconds(clas="invalid")}}
+    {{formTime.seconds(class="invalid")}}
     <div class="invalid-input">
       {% for error in formTime.seconds.errors %}
       <span>{{error}}</span>
@@ -75,27 +74,31 @@
       {{formTime.seconds}}
     {% endif %}
 
+    {{formTime.submitTime(class="button dark small")}}
+
+
   </fieldset>
 
-  {{formTime.submitTime(class="button dark small")}}
 
 </form>
 
-<form method="POST" action="{{ SetStandardList }}">
+<form method="POST" action="{{ SetStandardList }}" class="standard-form">
   {{ formSL.hidden_tag() }}
   <fieldset>
     <legend>StandardList</legend>
 
-    {{ formSL.standard.label}}
+  
     {{ formSL.standard}}
+
+    {{ formSL.submitSL(class="button dark small") }}
+
 
   </fieldset>
 
-  {{ formSL.submitSL(class="button dark small") }}
 
 
 </form>
 
-
+</div>
 
 {% endblock content %}

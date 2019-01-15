@@ -25,7 +25,7 @@ workouts = [
 ergs = list(pyrow.find())
 if len(ergs) == 0:
   isConnected = False
-  ergData = 0 
+  ergData = []
 else:
   isConnected = True
   for erg in ergs:

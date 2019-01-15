@@ -4,24 +4,29 @@ from wtforms.validators import Length, DataRequired, NumberRange
 
 class SetDistanceWorkout(FlaskForm):
   
-  distance = StringField('distance',
-    validators=[Length(min=1, max=5)])
+  distance = StringField('Distance',
+    validators=[Length(min=1, max=5)],
+    render_kw={"placeholder": "Distance"})
   
-  split = StringField('split', 
-    validators=[Length(min=0, max=3)])
+  split = StringField('Split', 
+    validators=[Length(min=0, max=3)],
+    render_kw={"placeholder": "Split"})
 
   submitDis = SubmitField('Set Workout')
 
 class SetTimeWorkout(FlaskForm):
 
-  hours = IntegerField('hours',
-    validators=[NumberRange(min=0, max=9)])
+  hours = IntegerField('Hours',
+    validators=[NumberRange(min=0, max=9)],
+    render_kw={"placeholder": "Hours"})
   
-  minutes = IntegerField('mintues',
-    validators=[NumberRange(min=0, max=59)])
+  minutes = IntegerField('Mintues',
+    validators=[NumberRange(min=0, max=59)],
+    render_kw={"placeholder": "Minutes"})
 
-  seconds = IntegerField('seconds',
-    validators=[NumberRange(min=0, max=59)])
+  seconds = IntegerField('Seconds',
+    validators=[NumberRange(min=0, max=59)],
+    render_kw={"placeholder": "Seconds"})
 
 
   submitTime = SubmitField('Set Workout')
