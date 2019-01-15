@@ -6,11 +6,10 @@
   <fieldset>
     <legend>Single Distance</legend>
     {{formDis.distance.label}}
-
     {% if formDis.distance.errors %}
       {{formDis.distance(clas="invalid")}}
       <div class="invalid-input">
-        {% for error in formDis.errors %}
+        {% for error in formDis.distance.errors %}
         <span>{{error}}</span>
         {% endfor %}
       </div>
@@ -19,7 +18,16 @@
     {% endif %}
 
     {{formDis.split.label}}
-    {{formDis.split}}
+    {% if formDis.split.errors %}
+    {{formDis.split(clas="invalid")}}
+    <div class="invalid-input">
+      {% for error in formDis.split.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+    {% else %}
+      {{formDis.split}}
+    {% endif %}
   </fieldset>
 
   {{formDis.submit(class="button dark small")}}

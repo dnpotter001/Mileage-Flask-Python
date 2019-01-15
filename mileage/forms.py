@@ -5,7 +5,7 @@ from wtforms.validators import Length, DataRequired, NumberRange
 class SetDistanceWorkout(FlaskForm):
   
   distance = StringField('distance',
-    validators=[Length(min=1, max=5, message='Input is too long')])
+    validators=[Length(min=1, max=5)])
   
   split = StringField('split', 
     validators=[Length(min=0, max=3)])
