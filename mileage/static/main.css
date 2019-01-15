@@ -48,6 +48,23 @@ body {
   padding: 20px;
 }
 
+.alert {
+  width: 100%;
+  padding:10px;
+  box-sizing: border-box;
+  margin-bottom: 20px
+}
+
+.alert-warning{
+  background: #ffccd0 ;
+  border:1px solid #ff6673
+}
+
+.alert-success{
+  background: #b3ffb3;
+  border:1px solid #00cc00
+}
+
 #navbutton {
   overflow: hidden;
   white-space: nowrap;

@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from mileage import app
-from mileage.forms import SetWorkoutForm
+from mileage.forms import SetDistanceWorkout, SetTimeWorkout
 from mileage import pyrow
 
 #dunny test data for the feed
@@ -44,7 +44,6 @@ ergConnection = {
 @app.route("/feed")
 @app.route("/index")
 def home():
-  form = SetWorkoutForm()
   return render_template(
     'index.html', 
     posts=workouts, 
@@ -58,16 +57,26 @@ def about():
 
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():
-  form = SetWorkoutForm()
-  if form.validate_on_submit():
+  formDis = SetDistanceWorkout()
+  formTime = SetTimeWorkout()
+
+  if formDis.validate_on_submit():
     for erg in ergs:
       pm = pyrow.pyrow(erg)
-      pm.set_workout(distance=int(form.distance.data), split=int(form.split.data))
-      flash(f'Setting workout for {form.distance.data}', 'success')
-
+      pm.set_workout(distance=int(formDis.distance.data), split=int(forDis.split.data))
+      flash(f'Setting workout for {formDis.distance.data}', 'success')
+      redirect('erg-control')
   else: 
     flash('Invalid workout', 'warning')
-  return render_template('erg.html', title='Erg Control', form=form, ergConnection=ergConnection)
+    redirect('erg-control') 
+
+  return render_template(
+    'erg.html', 
+    title='Erg Control', 
+    formDis=formDis, 
+    formTime=formTime,
+    ergConnection=ergConnection
+  )
 
 @app.route('/set_workout')
 def set_workout():
