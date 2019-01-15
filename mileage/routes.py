@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from mileage import app
-from mileage.forms import SetDistanceWorkout, SetTimeWorkout
+from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts
 from mileage import pyrow
 
 #dunny test data for the feed
@@ -59,32 +59,34 @@ def about():
 def ergControl():
   formDis = SetDistanceWorkout()
   formTime = SetTimeWorkout()
+  formSL = StandardWorkouts()
 
-  if formDis.validate_on_submit():
+  if formDis.submitDis.data and formDis.validate():
     for erg in ergs:
       pm = pyrow.pyrow(erg)
       pm.set_workout(distance=int(formDis.distance.data), split=int(formDis.split.data))
       flash(f'Setting workout for {formDis.distance.data}m', 'success')
 
-  if formTime.validate_on_submit():
+  if formTime.submitTime.data and formTime.validate():
     for erg in ergs:
       pm = pyrow.pyrow(erg)
       pm.set_workout(workout_time=[formTime.hours.data, formTime.minutes.data, formTime.seconds.data])
       flash(f'Setting workout for {formTime.hours.data}:{formTime.minutes.data}:{formTime.seconds.data}', 'success')
+
+  if formSL.submitSL.data and formSL.validate():
+    for erg in ergs:
+      pm = pyrow.pyrow(erg)
+      pm.set_workout(program=int(formSL.standard.data))
+      flash(f'Setting workout {formSL.standard.data} on the standard list', 'success')
+
 
   return render_template(
     'erg.html', 
     title='Erg Control', 
     formDis=formDis, 
     formTime=formTime,
+    formSL=formSL,
     ergConnection=ergConnection
   )
 
-@app.route('/set_workout')
-def set_workout():
-  ergs = list(pyrow.find())
-  if len(ergs) == 0:
-    print('No ergs found')
-  pm5 = pyrow.pyrow(ergs[0])
-  pm5.set_workout(distance=2000, split=120)
-  return 'setting workout'
+

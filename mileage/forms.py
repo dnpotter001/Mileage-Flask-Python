@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField
+from wtforms import StringField, SubmitField, IntegerField, SelectField
 from wtforms.validators import Length, DataRequired, NumberRange
 
 class SetDistanceWorkout(FlaskForm):
@@ -10,7 +10,7 @@ class SetDistanceWorkout(FlaskForm):
   split = StringField('split', 
     validators=[Length(min=0, max=3)])
 
-  submit = SubmitField('Set Workout')
+  submitDis = SubmitField('Set Workout')
 
 class SetTimeWorkout(FlaskForm):
 
@@ -24,4 +24,16 @@ class SetTimeWorkout(FlaskForm):
     validators=[NumberRange(min=0, max=59)])
 
 
-  submit = SubmitField('Set Workout')
+  submitTime = SubmitField('Set Workout')
+
+class StandardWorkouts(FlaskForm):
+
+  standard = SelectField('Standard List', 
+    choices=[
+      ('1', '2000m'), 
+      ('2', '5000m'),
+      ('3', '10000m'),
+      ('4', '30:00'),
+      ('5', '500m/1:00r')])
+
+  submitSL = SubmitField('Set Workout')
