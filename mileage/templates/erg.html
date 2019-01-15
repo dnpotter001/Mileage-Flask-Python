@@ -40,13 +40,40 @@
     <legend>Single Time</legend>
 
     {{formTime.hours.label}}
-    {{formTime.hours}}
+    {% if formTime.hours.errors %}
+    {{formTime.hours(clas="invalid")}}
+    <div class="invalid-input">
+      {% for error in formTime.hours.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+    {% else %}
+      {{formTime.hours}}
+    {% endif %}
 
     {{formTime.minutes.label}}
-    {{formTime.minutes}}
+    {% if formTime.minutes.errors %}
+    {{formTime.minutes(clas="invalid")}}
+    <div class="invalid-input">
+      {% for error in formTime.minutes.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+    {% else %}
+      {{formTime.minutes}}
+    {% endif %}
 
     {{formTime.seconds.label}}
-    {{formTime.seconds}}
+    {% if formTime.seconds.errors %}
+    {{formTime.seconds(clas="invalid")}}
+    <div class="invalid-input">
+      {% for error in formTime.seconds.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+    {% else %}
+      {{formTime.seconds}}
+    {% endif %}
 
   </fieldset>
 

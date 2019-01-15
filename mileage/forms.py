@@ -14,14 +14,14 @@ class SetDistanceWorkout(FlaskForm):
 
 class SetTimeWorkout(FlaskForm):
 
-  hours = StringField('hours',
-    validators=[Length(min=0, max=1)])
+  hours = IntegerField('hours',
+    validators=[NumberRange(min=0, max=9)])
   
   minutes = IntegerField('mintues',
-    validators=[NumberRange(min=0, max=59, message='Must be between 0 - 59')])
+    validators=[NumberRange(min=0, max=59)])
 
   seconds = IntegerField('seconds',
-    validators=[NumberRange(min=0, max=59, message='Must be between 0 - 59')])
+    validators=[NumberRange(min=0, max=59)])
 
 
   submit = SubmitField('Set Workout')
