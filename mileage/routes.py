@@ -49,7 +49,6 @@ def home():
     'index.html', 
     posts=workouts, 
     title="Your Feed", 
-    form=form,
     ergConnection=ergConnection
   )
 
@@ -57,12 +56,18 @@ def home():
 def about():
   return render_template('about.html', title="About")
 
-@app.route('/ergControl', methods=['GET', 'POST'])
-def ergControlg():
+@app.route('/erg-control', methods=['GET', 'POST'])
+def ergControl():
   form = SetWorkoutForm()
   if form.validate_on_submit():
-    return redirect(url_for('set_workout'))
-  return render_template('erg.html', title='Erg Control', form=form)
+    for erg in ergs:
+      pm = pyrow.pyrow(erg)
+      pm.set_workout(distance=int(form.distance.data), split=int(form.split.data))
+      flash(f'Setting workout for {form.distance.data}', 'success')
+
+  else: 
+    flash('Invalid workout', 'warning')
+  return render_template('erg.html', title='Erg Control', form=form, ergConnection=ergConnection)
 
 @app.route('/set_workout')
 def set_workout():

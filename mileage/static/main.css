@@ -45,6 +45,7 @@ body {
 .content {
   grid-area: content;
   background: var(--background);
+  padding: 20px;
 }
 
 #navbutton {
@@ -148,7 +149,7 @@ footer a:visited {
   grid-template-rows: 40px 180px 40px;
   grid-template-areas: "label label" "graph table" "info info";
   padding: 0;
-  margin: 20px;
+  margin-bottom: 20px;
 }
 
 .feed {
