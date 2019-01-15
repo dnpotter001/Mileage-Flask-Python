@@ -1,51 +1,50 @@
 {% extends "layout.html" %}
 {% block content %}
 
-  <form method="POST" action="{{ SetDistance }}">
-    {{ form.hidden_tag() }}
-    <fieldset>
-      <legend>Single Distance</legend>
-      {{form.distance.label}}
-      {{form.distance}}
+<form method="POST" action="{{ SetDistance }}">
+  {{ formDis.hidden_tag() }}
+  <fieldset>
+    <legend>Single Distance</legend>
+    {{formDis.distance.label}}
 
-      {{form.hours.label}}
-      {{form.hours}}
+    {% if formDis.distance.errors %}
+      {{formDis.distance(clas="invalid")}}
+      <div class="invalid-input">
+        {% for error in formDis.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      {{formDis.distance}}
+    {% endif %}
 
-      {{form.minutes.label}}
-      {{form.minutes}}
+    {{formDis.split.label}}
+    {{formDis.split}}
+  </fieldset>
 
-      {{form.seconds.label}}
-      {{form.seconds}}
+  {{formDis.submit(class="button dark small")}}
 
-      {{form.split.label}}
-      {{form.split}}
-    </fieldset>
-    
-    {{form.submit(class="button dark small")}}
+</form>
 
-  </form>
+<form method="POST" action="{{ SetTime }}">
+  {{ formTime.hidden_tag() }}
+  <fieldset>
+    <legend>Single Time</legend>
 
-  <form method="POST" action="{{ SetTime }}">
-    {{ form.hidden_tag() }}
-    <fieldset>
-      <legend>Single Time</legend>
+    {{formTime.hours.label}}
+    {{formTime.hours}}
 
-      {{form.hours.label}}
-      {{form.hours}}
+    {{formTime.minutes.label}}
+    {{formTime.minutes}}
 
-      {{form.minutes.label}}
-      {{form.minutes}}
+    {{formTime.seconds.label}}
+    {{formTime.seconds}}
 
-      {{form.seconds.label}}
-      {{form.seconds}}
+  </fieldset>
 
-      {{form.split.label}}
-      {{form.split}}
-    </fieldset>
-    
-    {{form.submit(class="button dark small")}}
+  {{formTime.submit(class="button dark small")}}
 
-  </form>
+</form>
 
 
 {% endblock content %}
