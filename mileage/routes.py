@@ -65,20 +65,12 @@ def ergControl():
       pm = pyrow.pyrow(erg)
       pm.set_workout(distance=int(formDis.distance.data), split=int(formDis.split.data))
       flash(f'Setting workout for {formDis.distance.data}m', 'success')
-      #redirect('erg-control')
-  else: 
-    flash('Invalid workout', 'warning')
-    #redirect('erg-control') 
 
   if formTime.validate_on_submit():
     for erg in ergs:
       pm = pyrow.pyrow(erg)
       pm.set_workout(workout_time=[formTime.hours.data, formTime.minutes.data, formTime.seconds.data])
       flash(f'Setting workout for {formTime.hours.data}:{formTime.minutes.data}:{formTime.seconds.data}', 'success')
-      #redirect('erg-control')
-  else: 
-    flash('Invalid workout', 'warning')
-    #redirect('erg-control')
 
   return render_template(
     'erg.html', 
