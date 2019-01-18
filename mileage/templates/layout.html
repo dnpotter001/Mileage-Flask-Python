@@ -5,6 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='main.css')}}" />
+ 
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../static/js/sijax/sijax.js"></script>
+  <script type="text/javascript"> {{ g.sijax.get_js()|safe }} </script>
 
   {% if title %}
   <title>Mileage - {{title}}</title>
@@ -56,7 +60,7 @@
   <article class="erg-control">
     {% if  ergConnection.connected %}
       <h2>
-        {{ ergConnection.count }} erg(s) found
+        {{ ergConnection.count }} Erg found
       </h2>
       <h3>
 
@@ -65,7 +69,7 @@
         <ul>
           <li><b>Serial: </b> {{ erg.serial }} </li>
           <li><b>Model</b>: PM{{erg.model }} </li>
-          <li><b>Status</b> {{erg.status }} </li>
+          <li><b>Status</b>: {{erg.status }} </li>
           <li><b>Software Version</b>: {{erg.swversion}}</li>
         </ul>
 
@@ -74,6 +78,8 @@
     {% else %}
       <h1>No ergs connected</h1>
     {% endif %}
+    
+    <a href="javascript://" onclick="Sijax.request('say_hi');">Click here</a>
 
 
   </article>

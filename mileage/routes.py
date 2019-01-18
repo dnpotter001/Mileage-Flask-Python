@@ -1,7 +1,9 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, g, jsonify
 from mileage import app
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts
 from mileage import pyrow
+import flask_sijax
+
 
 #dunny test data for the feed
 workouts = [
@@ -39,11 +41,18 @@ ergConnection = {
   "ergData": ergData,
 }
 
-@app.route("/")
-@app.route("/home")
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/feed")
-@app.route("/index")
+
 def home():
+
+  def say_hi(obj_response):
+      obj_response.alert('Hi there!')
+
+  if g.sijax.is_sijax_request:
+      g.sijax.register_callback('say_hi', say_hi)
+      return g.sijax.process_request()
+
   return render_template(
     'index.html', 
     posts=workouts, 
@@ -54,6 +63,7 @@ def home():
 @app.route("/about")
 def about():
   return render_template('about.html', title="About")
+
 
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():
