@@ -3,6 +3,7 @@ from mileage import app
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts
 from mileage import pyrow
 import flask_sijax
+import time
 
 
 #dunny test data for the feed
@@ -47,11 +48,18 @@ ergConnection = {
 def home():
 
   def say_hi(obj_response):
-      obj_response.alert('Hi there!')
+
+      ergs = list(pyrow.find())
+      if len(ergs) == 0:
+        obj_response.alert('No ergs found')
+      else:
+        obj_response.alert(f'{len(ergs)} ergs found')
+
 
   if g.sijax.is_sijax_request:
       g.sijax.register_callback('say_hi', say_hi)
       return g.sijax.process_request()
+    
 
   return render_template(
     'index.html', 
