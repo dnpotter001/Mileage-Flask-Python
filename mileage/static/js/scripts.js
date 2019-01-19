@@ -17,3 +17,7 @@ window.addEventListener("mouseup", (event) => {
     navbutton.classList.remove("menu-open")
   }
 })
+
+window.addEventListener("load", () => {
+  Sijax.request('checkForErgs');
+})  

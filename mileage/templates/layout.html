@@ -57,29 +57,9 @@
     {% block content %}{% endblock %}
   </section>
 
-  <article class="erg-control">
-    {% if  ergConnection.connected %}
-      <h2>
-        {{ ergConnection.count }} Erg found
-      </h2>
-      <h3>
+  <article class="erg-control" id="ergSideBar">
 
-      </h3>
-      {% for erg in ergConnection.ergData %}
-        <ul>
-          <li><b>Serial: </b> {{ erg.serial }} </li>
-          <li><b>Model</b>: PM{{erg.model }} </li>
-          <li><b>Status</b>: {{erg.status }} </li>
-          <li><b>Software Version</b>: {{erg.swversion}}</li>
-        </ul>
-
-      {% endfor %}
-
-    {% else %}
-      <h1>No ergs connected</h1>
-    {% endif %}
-    
-    <a href="javascript://" onclick="Sijax.request('say_hi');">Check for ergs</a>
+    <a href="javascript://" onclick="Sijax.request('checkForErgs');">refresh</a>
 
 
   </article>

@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, g, jsonify
 from mileage import app
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts
 from mileage import pyrow
+from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
 import time
 
@@ -25,47 +26,19 @@ workouts = [
   }
 ]
 
-ergs = list(pyrow.find())
-if len(ergs) == 0:
-  isConnected = False
-  ergData = []
-else:
-  isConnected = True
-  for erg in ergs:
-    erg = pyrow.pyrow(erg)
-    ergData = [{'serial': 123},{'serial': 3857345}]
-    ergData.append(erg.get_erg())
-
-ergConnection = {
-  "connected": isConnected,
-  "count": len(ergData),
-  "ergData": ergData,
-}
-
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/feed")
 
 def home():
 
-  def say_hi(obj_response):
-
-      ergs = list(pyrow.find())
-      if len(ergs) == 0:
-        obj_response.alert('No ergs found')
-      else:
-        obj_response.alert(f'{len(ergs)} ergs found')
-
-
   if g.sijax.is_sijax_request:
-      g.sijax.register_callback('say_hi', say_hi)
+      g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
       return g.sijax.process_request()
     
-
   return render_template(
     'index.html', 
     posts=workouts, 
-    title="Your Feed", 
-    ergConnection=ergConnection
+    title="Your Feed"
   )
 
 @app.route("/about")
