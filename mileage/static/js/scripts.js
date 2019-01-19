@@ -21,3 +21,7 @@ window.addEventListener("mouseup", (event) => {
 window.addEventListener("load", () => {
   Sijax.request('checkForErgs');
 })  
+
+document.getElementById('refreshErgPane').addEventListener("click", () => {
+  Sijax.request('checkForErgs');
+})

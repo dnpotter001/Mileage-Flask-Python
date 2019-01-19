@@ -22,7 +22,6 @@ class ErgHandler(object):
           <li><b>Serial: </b> { ergData['serial'] } </li>
           <li><b>Model</b>: PM{ ergData['model'] } </li>
           <li><b>Status</b>: { ergData['status'] } </li>
-          <li><b>Software Version</b>: { ergData['swversion'] }<li>
+          <li><b>Software Version</b>: { ergData['swversion'] }</li>
         </ul>""")
-
 
