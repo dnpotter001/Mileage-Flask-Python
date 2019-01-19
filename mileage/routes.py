@@ -52,11 +52,16 @@ def ergControl():
   formTime = SetTimeWorkout()
   formSL = StandardWorkouts()
 
+  ergs = list(pyrow.find())
   if formDis.submitDis.data and formDis.validate():
     for erg in ergs:
       pm = pyrow.pyrow(erg)
-      pm.set_workout(distance=int(formDis.distance.data), split=int(formDis.split.data))
-      flash(f'Setting workout for {formDis.distance.data}m', 'success')
+      try:
+        pm.set_workout(distance=formDis.distance.data, split=formDis.split.data)
+        flash(f'Setting workout for {formDis.distance.data}m', 'success')
+
+      except ValueError:
+        flash(f'Split value must be less than {formDis.distance.data}', 'warning')
 
   if formTime.submitTime.data and formTime.validate():
     for erg in ergs:
@@ -76,8 +81,7 @@ def ergControl():
     title='Erg Control', 
     formDis=formDis, 
     formTime=formTime,
-    formSL=formSL,
-    ergConnection=ergConnection
+    formSL=formSL
   )
 
 

@@ -1,15 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField
-from wtforms.validators import Length, DataRequired, NumberRange
+from wtforms.validators import Length, DataRequired, NumberRange, EqualTo
 
 class SetDistanceWorkout(FlaskForm):
   
-  distance = StringField('Distance',
-    validators=[Length(min=1, max=5)],
+  distance = IntegerField('Distance',
+    validators=[NumberRange(min=100, max=50000)],
     render_kw={"placeholder": "Distance"})
   
-  split = StringField('Split', 
-    validators=[Length(min=0, max=3)],
+  split = IntegerField('Split',
+    validators=[NumberRange(min=100, max=50000)],
     render_kw={"placeholder": "Split"})
 
   submitDis = SubmitField('Set Workout')

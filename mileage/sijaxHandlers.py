@@ -16,7 +16,7 @@ class ErgHandler(object):
       for erg in ergs:
         erg = pyrow.pyrow(erg)
         ergData = erg.get_erg()
-        obj_response.html_append('#ergSideBar', str(ergData))
+
         obj_response.html_append('#ergSideBar', f"""
         <ul>
           <li><b>Serial: </b> { ergData['serial'] } </li>
@@ -26,19 +26,3 @@ class ErgHandler(object):
         </ul>""")
 
 
-
-# if len(ergs) == 0:
-#   isConnected = False
-#   ergData = []
-# else:
-#   isConnected = True
-#   for erg in ergs:
-#     erg = pyrow.pyrow(erg)
-#     ergData = [{'serial': 123},{'serial': 3857345}]
-#     ergData.append(erg.get_erg())
-
-# ergConnection = {
-#   "connected": isConnected,
-#   "count": len(ergData),
-#   "ergData": ergData,
-# }
