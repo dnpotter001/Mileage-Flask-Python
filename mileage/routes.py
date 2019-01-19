@@ -32,9 +32,9 @@ workouts = [
 def home():
 
   if g.sijax.is_sijax_request:
-      g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
-      return g.sijax.process_request()
-    
+    g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
+    return g.sijax.process_request()
+
   return render_template(
     'index.html', 
     posts=workouts, 
@@ -74,8 +74,11 @@ def ergControl():
       pm = pyrow.pyrow(erg)
       pm.set_workout(program=int(formSL.standard.data))
       flash(f'Setting workout {formSL.standard.data} on the standard list', 'success')
-
-
+ 
+  if g.sijax.is_sijax_request:
+    g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
+    return g.sijax.process_request()
+    
   return render_template(
     'erg.html', 
     title='Erg Control', 
