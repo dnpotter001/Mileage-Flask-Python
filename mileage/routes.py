@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify
 from mileage import app
-from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts
+from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval
 from mileage import pyrow
 from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
@@ -41,10 +41,14 @@ def home():
     title="Your Feed"
   )
 
-@app.route("/about")
-def about():
-  return render_template('about.html', title="About")
-
+@app.route("/upload", methods=['GET', 'POST'])
+def upload():
+  singleInterval= UploadSingleInterval()
+  
+  return render_template(
+    'upload.html', 
+    title="Upload a workout",
+    singleInterval=singleInterval)
 
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():
@@ -88,3 +92,6 @@ def ergControl():
   )
 
 
+@app.route("/about")
+def about():
+  return render_template('about.html', title="About")

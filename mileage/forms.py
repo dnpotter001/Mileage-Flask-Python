@@ -2,6 +2,21 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField
 from wtforms.validators import Length, DataRequired, NumberRange, EqualTo
 
+class UploadSingleInterval(FlaskForm):
+
+  title = StringField('Give your workout a name:',
+    validators=[Length(min=5, max=40)],
+    render_kw={"placeholder": "e.g. Sunday Workout"})
+
+  time = IntegerField('Distance',
+    render_kw={"placeholder":"Distance",
+               "id":"uploadDistance"})
+  
+  distance = IntegerField('Distance',
+    render_kw={"placeholder":"Distance",
+               "id":"uploadTime"})
+
+
 class SetDistanceWorkout(FlaskForm):
   
   distance = IntegerField('Distance',
