@@ -201,6 +201,7 @@ footer a:visited {
 /* -------------------------button stylin-------------------------g*/
 
 .button {
+  display: block;
   padding: 15px 25px;
   text-align: center;
   color: white;
@@ -208,7 +209,7 @@ footer a:visited {
   cursor: pointer;
   font-size: 24px;
   border-radius: 5px;
-  margin: 10px;
+  margin: 10px auto;
 }
 
 .button:active {
@@ -269,7 +270,9 @@ footer a:visited {
 fieldset{
   border: 1px solid var(--border);
   margin: 10px;
-
+  display:flex;
+  justify-content: center;
+  flex-direction:column;
 }
 
 .erg-control-grid {
@@ -284,13 +287,15 @@ fieldset{
 .standard-form {grid-area: standard-form}
 
 .distance-form, .time-form, .standard-form{
-  text-align: center
+  text-align: center;
 }
 
 input, select{
   box-sizing:border-box;
   padding: 10px;
   margin: 10px;
+  display: block;
+  margin: 1em auto;
 }
 /* tablet styling */
 
