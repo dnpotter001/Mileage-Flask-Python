@@ -206,7 +206,7 @@ footer a:visited {
 /* -------------------------button stylin-------------------------g*/
 
 .button {
-  display: block;
+
   padding: 15px 25px;
   text-align: center;
   color: white;
@@ -214,7 +214,7 @@ footer a:visited {
   cursor: pointer;
   font-size: 24px;
   border-radius: 5px;
-  margin: 10px auto;
+  margin: 10px;
 }
 
 .button:active {
@@ -260,6 +260,17 @@ footer a:visited {
 
 .wide {
   width: 150px;
+}
+
+.center{
+  display: block;
+  margin: 10px auto;
+}
+
+.row{
+  display:flex;
+  justify-content: center;
+  flex-basis: row
 }
 
 /* -------------------------form stylin-------------------------g*/
