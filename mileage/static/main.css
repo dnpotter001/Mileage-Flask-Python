@@ -81,6 +81,11 @@ body {
   display: none;
 }
 
+.erg-control{
+  display: none;
+}
+
+
 nav {
   grid-area: nav;
   display: inline-flex;
@@ -277,9 +282,9 @@ fieldset{
 
 .erg-control-grid {
   display: grid;
-  grid-template-columns: 33.333% 33.333% 33.333%;
-  grid-template-rows: 1fr;
-  grid-template-areas: "distance-form time-form standard-form"
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "distance-form" "time-form" "standard-form"
 }
 
 .distance-form {grid-area: distance-form}
@@ -297,6 +302,7 @@ input, select{
   display: block;
   margin: 1em auto;
 }
+
 /* tablet styling */
 
 @media screen and (min-width: 500px) {
@@ -310,6 +316,7 @@ input, select{
   .erg-control {
     grid-area: aside;
     background: var(--background);
+    border-left: 1px solid var(--border);
   }
   .header {
     padding-left: 200px
@@ -331,10 +338,6 @@ input, select{
     color: white;
     padding: 10px;
     font-size: 40px;
-  }
-
-  .erg-control{
-    display: none;
   }
 
   .menu-toggle {
@@ -372,6 +375,13 @@ input, select{
     padding: 10px;
     border: 1px solid var(--border);
     margin: 10px 20px 10px 0px;
+  }
+
+  .erg-control-grid {
+    display: grid;
+    grid-template-columns: 33.333% 33.333% 33.333%;
+    grid-template-rows: 1fr;
+    grid-template-areas: "distance-form time-form standard-form"
   }
 
 
