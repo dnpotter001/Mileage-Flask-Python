@@ -8,13 +8,15 @@ class UploadSingleInterval(FlaskForm):
     validators=[Length(min=5, max=40)],
     render_kw={"placeholder": "e.g. Sunday Workout"})
 
-  time = IntegerField('Distance',
-    render_kw={"placeholder":"Distance",
+  time = IntegerField('Time',
+    render_kw={"placeholder":"Time",
                "id":"uploadDistance"})
   
   distance = IntegerField('Distance',
     render_kw={"placeholder":"Distance",
                "id":"uploadTime"})
+
+  upload = SubmitField('Upload')
 
 
 class SetDistanceWorkout(FlaskForm):

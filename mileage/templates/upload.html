@@ -17,16 +17,48 @@
   </div>
 </section>
 
-<section id="singleIntervalForm" class="row hidden">
-  single interval manual
+<section id="singleIntervalForm" class="column hidden">
+  <form method="POST" action="{{ SetDistance }}" class="distance-form">
+    {{ singleInterval.hidden_tag() }}
+    <fieldset>
+      <legend>Single Interval</legend>
+    
+      {% if singleInterval.distance.errors %}
+        {{singleInterval.distance(class="invalid") }}
+        <div class="invalid-input">
+          {% for error in singleInterval.distance.errors %}
+          <span>{{error}}</span>
+          {% endfor %}
+        </div>
+      {% else %}
+        {{singleInterval.distance(id="distance")}}
+      {% endif %}
+
+      {% if singleInterval.time.errors %}
+      {{singleInterval.time(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in singleInterval.time.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+        {{singleInterval.time(id="time")}}
+      {% endif %}
+      <p class="row">
+        Average split: <span id="split"> number </span> /500m
+      </p>
+      {{singleInterval.upload(class="button dark small center-align")}}
+
+    </fieldset>
+  </form>
 </section>
 
 <section id="intervalFixedForm" class="row hidden">
-  interval fixed form 
+  <h2>Fixed Interval Upload</h2>
 </section>
 
 <section id="intervalVariableForm" class="row hidden">
-  interval variable form
+  <h2>Interval Variable Upload</h2>
 </section>
 
 

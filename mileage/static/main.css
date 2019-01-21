@@ -175,6 +175,12 @@ footer a:visited {
   flex-basis: row;
 }
 
+.column{
+  display:flex;
+  justify-content: center;
+  flex-basis: column;
+}
+
 .b-top {
   border-top:1px solid var(--border)
 }
@@ -223,6 +229,7 @@ footer a:visited {
 .hidden{
   display: none;
 }
+
 
 
 /* -------------------------button stylin-------------------------g*/
