@@ -3,23 +3,31 @@
 
 <div class="row">
   <button class="button contrast wide">.CSV </button>
-  <button class="button red wide">Manual </button>
+  <button class="button red wide" id="manual">Manual </button>
 </div>
 
-<secion id="manual-upload">
+<section id="manual-upload" class="hidden">
   <div class="row">
-    <button class="button red wide">Single Distance</button>
-    <button class="button red wide">Single Time</button>
+    <button class="button red wide" id="singleDist">Single Distance</button>
+    <button class="button red wide" id="singleTime">Single Time</button>
   </div>
   <div class="row">
-    <button class="button red wide">Fixed Intervals</button>
-    <button class="button red wide">Variable Intervals </button>
+    <button class="button red wide" id="intervalFixed">Fixed Intervals</button>
+    <button class="button red wide" id="intervalVariable">Variable Intervals </button>
   </div>
 </section>
 
-<section id="singleInterval">
-
-
-
+<section id="singleIntervalForm" class="row hidden">
+  single interval manual
 </section>
+
+<section id="intervalFixedForm" class="row hidden">
+  interval fixed form 
+</section>
+
+<section id="intervalVariableForm" class="row hidden">
+  interval variable form
+</section>
+
+
 {% endblock content %}

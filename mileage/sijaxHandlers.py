@@ -10,14 +10,14 @@ class ErgHandler(object):
     ergs = list(pyrow.find())
 
     if len(ergs) == 0:
-      obj_response.html_append('#ergSideBar', '<h1>No ergs found</h1>')
+      obj_response.html('#status', 'No ergs found')
     else:
-      obj_response.html_append('#ergSideBar', f'<h1> {len(ergs)} erg found')
+      obj_response.html('#status', f'{len(ergs)} erg found')
       for erg in ergs:
         erg = pyrow.pyrow(erg)
         ergData = erg.get_erg()
 
-        obj_response.html_append('#ergSideBar', f"""
+        obj_response.html('#status-pane', f"""
         <ul>
           <li><b>Serial: </b> { ergData['serial'] } </li>
           <li><b>Model</b>: PM{ ergData['model'] } </li>

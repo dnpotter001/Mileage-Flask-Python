@@ -59,9 +59,16 @@
   </section>
 
   <article class="erg-control" id="ergSideBar">
-  
-    <button href="#" class="small red button" id="refreshErgPane">Refresh</button>
+    <h1 id="status">...</h1>
 
+    <section id="status-pane">
+
+    </section>
+  
+    <div class="row b-top">
+      <button href="#" class="small red button center-align" id="refreshErgPane">Refresh</button>
+      <a href={{url_for('ergControl')}}><button class="small contrast button center-align">Erg Control</button></a>
+    </div>
   </article>
 
 

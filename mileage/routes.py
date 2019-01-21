@@ -45,6 +45,10 @@ def home():
 def upload():
   singleInterval= UploadSingleInterval()
   
+  if g.sijax.is_sijax_request:
+    g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
+    return g.sijax.process_request()
+
   return render_template(
     'upload.html', 
     title="Upload a workout",
