@@ -18,70 +18,76 @@
 </section>
 
 <section id="csvPane" class="column hidden">
-    {{csv.fileUpload(id="csvInput")}}
+    {{csv.fileUpload(id="csvInput", class="hidden")}}
+    <div class="row">
+    <button class="button contrast wide" id="uploadCSV">Upload</button>
+    {{csv.submit(class="button contrast wide")}}
+  </div>
 </section>
 
-<section id="singleIntervalForm" class="column hidden">
-  <form method="POST" action="{{ SetDistance }}" class="distance-form">
-    {{ singleInterval.hidden_tag() }}
-    <fieldset>
-      <legend>Single Interval</legend>
-    
-      {{singleInterval.distance.label}}
-      {% if singleInterval.distance.errors %}
-        {{singleInterval.distance(class="invalid") }}
+<div id="allManualForms" class="hidden">
+  <section id="singleIntervalForm" class="column hidden">
+    <form method="POST" action="{{ SetDistance }}" class="distance-form">
+      {{ singleInterval.hidden_tag() }}
+      <fieldset>
+        <legend>Single Interval</legend>
+      
+        {{singleInterval.distance.label}}
+        {% if singleInterval.distance.errors %}
+          {{singleInterval.distance(class="invalid") }}
+          <div class="invalid-input">
+            {% for error in singleInterval.distance.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{singleInterval.distance(id="distance")}}
+        {% endif %}
+
+        {{singleInterval.minutes.label}}
+
+        {{singleInterval.hours(id="hours")}}
+
+        {% if singleInterval.minutes.errors %}
+        {{singleInterval.minutes(class="invalid")}}
         <div class="invalid-input">
-          {% for error in singleInterval.distance.errors %}
+          {% for error in singleInterval.minutes.errors %}
           <span>{{error}}</span>
           {% endfor %}
         </div>
-      {% else %}
-        {{singleInterval.distance(id="distance")}}
-      {% endif %}
+        {% else %}
+          {{singleInterval.minutes(id="minutes")}}
+        {% endif %}
 
-      {{singleInterval.minutes.label}}
-
-      {{singleInterval.hours(id="hours")}}
-
-      {% if singleInterval.minutes.errors %}
-      {{singleInterval.minutes(class="invalid")}}
-      <div class="invalid-input">
-        {% for error in singleInterval.minutes.errors %}
-        <span>{{error}}</span>
-        {% endfor %}
-      </div>
-      {% else %}
-        {{singleInterval.minutes(id="minutes")}}
-      {% endif %}
-
-      {% if singleInterval.seconds.errors %}
-      {{singleInterval.seconds(class="invalid")}}
-      <div class="invalid-input">
-        {% for error in singleInterval.seconds.errors %}
-        <span>{{error}}</span>
-        {% endfor %}
-      </div>
-      {% else %}
-        {{singleInterval.seconds(id="seconds")}}
-      {% endif %}
+        {% if singleInterval.seconds.errors %}
+        {{singleInterval.seconds(class="invalid")}}
+        <div class="invalid-input">
+          {% for error in singleInterval.seconds.errors %}
+          <span>{{error}}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+          {{singleInterval.seconds(id="seconds")}}
+        {% endif %}
 
 
-      <p class="row">
-        Average split: <span id="split"></span> 
-      </p>
-      {{singleInterval.upload(class="button dark small center-align")}}
+        <p class="row">
+          Average split: <span id="split"></span> 
+        </p>
+        {{singleInterval.upload(class="button dark small center-align")}}
 
-    </fieldset>
-  </form>
-</section>
+      </fieldset>
+    </form>
+  </section>
 
-<section id="intervalFixedForm" class="row hidden">
-  <h2>Fixed Interval Upload</h2>
-</section>
+  <section id="intervalFixedForm" class="row hidden">
+    <h2>Fixed Interval Upload</h2>
+  </section>
 
-<section id="intervalVariableForm" class="row hidden">
-  <h2>Interval Variable Upload</h2>
-</section>
+  <section id="intervalVariableForm" class="row hidden">
+    <h2>Interval Variable Upload</h2>
+  </section>
+</div>
 
 
 {% endblock content %}
