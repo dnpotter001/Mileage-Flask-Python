@@ -2,20 +2,23 @@
 {% block content %}
 
 <div class="row">
-  {{csv.fileUpload(id="csvInput")}}
-  <button class="button contrast wide">.CSV </button>
-  <button class="button red wide" id="manual">Manual </button>
+  <button class="button contrast wide" id="csvWorkout">.CSV </button>
+  <button class="button red wide" id="manualButton">Manual </button>
 </div>
 
-<section id="manual-upload" class="hidden">
+<section id="manualUploadPane" class="hidden">
   <div class="row">
-    <button class="button red wide" id="singleDist">Single Distance</button>
-    <button class="button red wide" id="singleTime">Single Time</button>
+    <button class="button red wide" id="singleDistButton">Single Distance</button>
+    <button class="button red wide" id="singleTimeButton">Single Time</button>
   </div>
   <div class="row">
-    <button class="button red wide" id="intervalFixed">Fixed Intervals</button>
-    <button class="button red wide" id="intervalVariable">Variable Intervals </button>
+    <button class="button red wide" id="intervalFixedButton">Fixed Intervals</button>
+    <button class="button red wide" id="intervalVariableButton">Variable Intervals </button>
   </div>
+</section>
+
+<section id="csvPane" class="column hidden">
+    {{csv.fileUpload(id="csvInput")}}
 </section>
 
 <section id="singleIntervalForm" class="column hidden">

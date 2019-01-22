@@ -28,20 +28,15 @@ document.getElementById('refreshErgPane').addEventListener("click", () => {
 })
 
 //buttons
-const manual = document.getElementById("manual");
-const manualUpload = document.getElementById("manual-upload");
-const manuaForm = document.getElementById("manual");
+const manualUploadPane = document.getElementById("manualUploadPane");
+const manualButton = document.getElementById("manualButton");
 
-const singleDist = document.getElementById("singleDist");
-const singleTime = document.getElementById("singleTime");
-const intervalFixed = document.getElementById("intervalFixed");
-const intervalVariable = document.getElementById("intervalVariable");
-
-//form panes
-const singleIntervalForm = document.getElementById("singleIntervalForm");
-const intervalFixedForm = document.getElementById("intervalFixedForm");
-const intervalVariableForm = document.getElementById("intervalVariableForm");
-
+const csvButton = document.getElementById("csvWorkout");
+const singleDistButton = document.getElementById("singleDistButton");
+const singleTimeButton = document.getElementById("singleTimeButton");
+const intervalFixedButton = document.getElementById("intervalFixedButton");
+const intervalVariableButton = document.getElementById("intervalVariableButton");
+//add csv button
 
 function SwapPanes(oldPane, newPane) {
   oldPane.classList.toggle("hidden");
@@ -53,25 +48,37 @@ function TogglePane(pane) {
   console.log('hide/show');
 }
 
-manual.addEventListener("click", () => {
-  TogglePane(manualUpload)
+//form panes
+const csvPane = document.getElementById("csvPane");
+const singleIntervalForm = document.getElementById("singleIntervalForm");
+const intervalFixedForm = document.getElementById("intervalFixedForm");
+const intervalVariableForm = document.getElementById("intervalVariableForm");
+
+manualButton.addEventListener("click", () => { 
+  TogglePane(manualUploadPane);
+  csvPane.classList.add("hidden");
   singleIntervalForm.classList.add("hidden");
   intervalFixedForm.classList.add("hidden");
   intervalVariableForm.classList.add("hidden");
 })
 
-singleDist.addEventListener("click", () => { 
-  SwapPanes(manualUpload, singleIntervalForm) 
+csvButton.addEventListener("click", () => { 
+  SwapPanes(manualUploadPane, csvPane) 
 })
-singleTime.addEventListener("click", () => { 
-  SwapPanes(manualUpload, singleIntervalForm) 
+singleDistButton.addEventListener("click", () => { 
+  SwapPanes(manualUploadPane, singleIntervalForm) 
 })
-intervalFixed.addEventListener("click", () => { 
-  SwapPanes(manualUpload, intervalFixedForm) 
+singleTimeButton.addEventListener("click", () => { 
+  SwapPanes(manualUploadPane, singleIntervalForm) 
 })
-intervalVariable.addEventListener("click", () => { 
-  SwapPanes(manualUpload, intervalVariableForm) 
+intervalFixedButton.addEventListener("click", () => { 
+  SwapPanes(manualUploadPane, intervalFixedForm) 
 })
+intervalVariableButton.addEventListener("click", () => { 
+  SwapPanes(manualUploadPane, intervalVariableForm) 
+})
+
+
 
 const distance = document.getElementById("distance");
 const hours = document.getElementById("hours");
