@@ -34,18 +34,18 @@
         {{singleInterval.distance(id="distance")}}
       {% endif %}
 
-      {% if singleInterval.time.errors %}
-      {{singleInterval.time(class="invalid")}}
+      {% if singleInterval.minutes.errors %}
+      {{singleInterval.minutes(class="invalid")}}
       <div class="invalid-input">
-        {% for error in singleInterval.time.errors %}
+        {% for error in singleInterval.minutes.errors %}
         <span>{{error}}</span>
         {% endfor %}
       </div>
       {% else %}
-        {{singleInterval.time(id="time")}}
+        {{singleInterval.minutes(id="minutes")}}
       {% endif %}
       <p class="row">
-        Average split: <span id="split"> number </span> /500m
+        Average split: <span id="split"></span> 
       </p>
       {{singleInterval.upload(class="button dark small center-align")}}
 

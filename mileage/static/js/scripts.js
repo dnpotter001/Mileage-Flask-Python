@@ -72,3 +72,27 @@ intervalFixed.addEventListener("click", () => {
 intervalVariable.addEventListener("click", () => { 
   SwapPanes(manualUpload, intervalVariableForm) 
 })
+
+const distance = document.getElementById("distance");
+const minutes = document.getElementById("minutes");
+const split = document.getElementById("split");
+
+function CalcSplit(distance, minutes){
+  let splitDecimal = 500 * (minutes/distance);
+  let splitString = splitDecimal.toString().split('.');
+  let m = splitString[0]
+  console.log(m)
+  let s = (splitString[1] * 60).toString()
+  console.log(s)
+  let split = `0${m}.${s.substr(0,2)}:${s.substr(2,1)}`
+  return split;
+}
+
+console.log(CalcSplit(8049, 30));
+
+distance.addEventListener("change", ()=>{
+  split.innerText = CalcSplit(distance.value, minutes.value)
+})
+minutes.addEventListener("change", ()=>{
+  split.innerText = CalcSplit(distance.value, minutes.value)
+})
