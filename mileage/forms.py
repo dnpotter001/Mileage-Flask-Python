@@ -1,6 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import Length, DataRequired, NumberRange, EqualTo
+
+class CSVUpload(FlaskForm):
+
+  fileUpload = FileField('Upload a CSV', 
+    validators=[FileRequired(),FileAllowed(['.csv'])])
 
 class UploadSingleInterval(FlaskForm):
 

@@ -96,3 +96,4 @@ distance.addEventListener("change", ()=>{
 minutes.addEventListener("change", ()=>{
   split.innerText = CalcSplit(distance.value, minutes.value)
 })
+

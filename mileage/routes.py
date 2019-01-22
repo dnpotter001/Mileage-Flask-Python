@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify
 from mileage import app
-from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval
+from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload
 from mileage import pyrow
 from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
@@ -44,6 +44,7 @@ def home():
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
   singleInterval= UploadSingleInterval()
+  csv = CSVUpload()
   
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -52,7 +53,9 @@ def upload():
   return render_template(
     'upload.html', 
     title="Upload a workout",
-    singleInterval=singleInterval)
+    singleInterval=singleInterval,
+    csv = csv,
+  )
 
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():
