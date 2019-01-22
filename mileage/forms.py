@@ -14,13 +14,26 @@ class UploadSingleInterval(FlaskForm):
     validators=[Length(min=5, max=40)],
     render_kw={"placeholder": "e.g. Sunday Workout"})
 
-  minutes = IntegerField('minutes',
+  distance = IntegerField('Distance',
+    validators=([DataRequired(message="This field is required.")]),
+    render_kw={"placeholder":"Meters",
+               "id":"uploadDistance"})
+  
+  hours = IntegerField('Time',
+  validators=([DataRequired(message="This field is required.")]),
+  render_kw={"placeholder":"Hours",
+              "id":"uploadHours"})
+
+  minutes = IntegerField('Time',
+    validators=([DataRequired(message="This field is required."), NumberRange(min=0, max=59, message='Value Must be between 0 and 59')]),
     render_kw={"placeholder":"Minutes",
                "id":"uploadMinutes"})
-  
-  distance = IntegerField('Distance',
-    render_kw={"placeholder":"Distance",
-               "id":"uploadDistance"})
+
+  seconds = IntegerField('seconds',
+    validators=([DataRequired(message="This field is required."), NumberRange(min=0, max=59, message='Value Must be between 0 and 59')]),
+    render_kw={"placeholder":"Seconds",
+               "id":"uploadSeconds"})
+
 
   upload = SubmitField('Upload')
 

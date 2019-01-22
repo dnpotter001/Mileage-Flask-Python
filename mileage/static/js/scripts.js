@@ -74,26 +74,33 @@ intervalVariable.addEventListener("click", () => {
 })
 
 const distance = document.getElementById("distance");
+const hours = document.getElementById("hours");
 const minutes = document.getElementById("minutes");
+const seconds = document.getElementById("seconds");
 const split = document.getElementById("split");
 
-function CalcSplit(distance, minutes){
-  let splitDecimal = 500 * (minutes/distance);
-  let splitString = splitDecimal.toString().split('.');
-  let m = splitString[0]
-  console.log(m)
-  let s = (splitString[1] * 60).toString()
-  console.log(s)
-  let split = `0${m}.${s.substr(0,2)}:${s.substr(2,1)}`
-  return split;
+function CalcSplit(distance, hours, minutes, seconds){
+  let totalTime = parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds);
+  let splitSeconds = 500*(totalTime/distance);
+  let m = parseInt(splitSeconds / 60);
+  let s = (splitSeconds % 60).toFixed(1);
+  if (s < 10) {
+    s = "0" + s;
+  }
+  let split = `0${m}:${s}`
+  return split
 }
 
-console.log(CalcSplit(8049, 30));
-
 distance.addEventListener("change", ()=>{
-  split.innerText = CalcSplit(distance.value, minutes.value)
+  split.innerText = CalcSplit(distance.value, hours.value, minutes.value, seconds.value)
+})
+hours.addEventListener("change", ()=>{
+  split.innerText = CalcSplit(distance.value, hours.value, minutes.value, seconds.value)
 })
 minutes.addEventListener("change", ()=>{
-  split.innerText = CalcSplit(distance.value, minutes.value)
+  split.innerText = CalcSplit(distance.value, hours.value, minutes.value, seconds.value)
+})
+seconds.addEventListener("change", ()=>{
+  split.innerText = CalcSplit(distance.value, hours.value, minutes.value, seconds.value)
 })
 

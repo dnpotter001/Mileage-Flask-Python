@@ -24,6 +24,7 @@
     <fieldset>
       <legend>Single Interval</legend>
     
+      {{singleInterval.distance.label}}
       {% if singleInterval.distance.errors %}
         {{singleInterval.distance(class="invalid") }}
         <div class="invalid-input">
@@ -35,6 +36,10 @@
         {{singleInterval.distance(id="distance")}}
       {% endif %}
 
+      {{singleInterval.minutes.label}}
+
+      {{singleInterval.hours(id="hours")}}
+
       {% if singleInterval.minutes.errors %}
       {{singleInterval.minutes(class="invalid")}}
       <div class="invalid-input">
@@ -45,6 +50,19 @@
       {% else %}
         {{singleInterval.minutes(id="minutes")}}
       {% endif %}
+
+      {% if singleInterval.seconds.errors %}
+      {{singleInterval.seconds(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in singleInterval.seconds.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+        {{singleInterval.seconds(id="seconds")}}
+      {% endif %}
+
+
       <p class="row">
         Average split: <span id="split"></span> 
       </p>
