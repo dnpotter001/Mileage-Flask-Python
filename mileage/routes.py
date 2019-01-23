@@ -47,8 +47,12 @@ def upload():
   csv = CSVUpload()
 
   if csv.validate_on_submit():
-    flash(f'Success! Please see you workout below...', 'success')
+    flash(f'Tah Dah', 'success')
+    file = csv.fileUpload.data
+    file.stream.read()
     return redirect(url_for('feed'))
+
+
 
   
   if g.sijax.is_sijax_request:
@@ -62,8 +66,11 @@ def upload():
     csv = csv,
   )
 
-@app.route('/workout-review', method=['GET', 'POST'])
+@app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
+
+  workout = [1,2,3]
+
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -71,7 +78,8 @@ def workoutReview():
   
   return render_template(
     'workout-review.html', 
-    title='Erg Control'
+    title='Erg Control',
+    workout=workout
   )
 
 @app.route('/erg-control', methods=['GET', 'POST'])

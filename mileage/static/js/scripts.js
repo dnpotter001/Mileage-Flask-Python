@@ -128,7 +128,7 @@ function validateCSV(input) {
   const fileExt = fileName.split(".").pop().toLowerCase();
   if (fileExt === "csv") {
     fileNameLabel.innerText = csvInput.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
-  } else {
+  } else { 
     fileNameLabel.innerText = "Not a CSV file";
   }
 }
