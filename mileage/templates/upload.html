@@ -18,11 +18,17 @@
 </section>
 
 <section id="csvPane" class="column hidden">
+  <form method="POST" action="{{ csvUpload }}" enctype="multipart/form-data">
+    {{ csv.hidden_tag() }}
     {{csv.fileUpload(id="csvInput", class="hidden")}}
+
     <div class="row">
-    <button class="button contrast wide" id="uploadCSV">Upload</button>
-    {{csv.submit(class="button contrast wide")}}
-  </div>
+      <button class="button contrast wide" id="uploadCSV">Upload</button>
+      {{csv.submitCSV(class="button contrast wide")}}
+    </div>
+  </form>
+  <div id="fileNameLabel" class="row center-align">No file selected.</div>
+  
 </section>
 
 <div id="allManualForms" class="hidden">

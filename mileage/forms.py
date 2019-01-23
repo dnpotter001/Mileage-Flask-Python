@@ -8,7 +8,7 @@ class CSVUpload(FlaskForm):
   fileUpload = FileField('Upload a CSV', 
     validators=[FileRequired(),FileAllowed(['.csv'])])
   
-  submit = SubmitField('Submit')
+  submitCSV = SubmitField('Submit')
 
 class UploadSingleInterval(FlaskForm):
 

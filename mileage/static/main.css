@@ -172,13 +172,13 @@ footer a:visited {
 .row{
   display:flex;
   justify-content: center;
-  flex-basis: row;
+  flex-direction: row;
 }
 
 .column{
   display:flex;
   justify-content: center;
-  flex-basis: column;
+  flex-direction: column;
 }
 
 .b-top {

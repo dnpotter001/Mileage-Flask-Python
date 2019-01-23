@@ -29,7 +29,7 @@ workouts = [
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/feed")
 
-def home():
+def feed():
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -45,6 +45,11 @@ def home():
 def upload():
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
+
+  if csv.validate_on_submit():
+    flash(f'Success! Please see you workout below...', 'success')
+    return redirect(url_for('feed'))
+
   
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -55,6 +60,18 @@ def upload():
     title="Upload a workout",
     singleInterval=singleInterval,
     csv = csv,
+  )
+
+@app.route('/workout-review', method=['GET', 'POST'])
+def workoutReview():
+
+  if g.sijax.is_sijax_request:
+    g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
+    return g.sijax.process_request()
+  
+  return render_template(
+    'workout-review.html', 
+    title='Erg Control'
   )
 
 @app.route('/erg-control', methods=['GET', 'POST'])

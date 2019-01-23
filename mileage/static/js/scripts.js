@@ -119,3 +119,32 @@ seconds.addEventListener("change", ()=>{
   split.innerText = CalcSplit(distance.value, hours.value, minutes.value, seconds.value)
 })
 
+const uploadCSV = document.getElementById("uploadCSV");
+const csvInput = document.getElementById("csvInput")
+const fileNameLabel = document.getElementById("fileNameLabel")
+
+function validateCSV(input) {
+  const fileName = input.value;
+  const fileExt = fileName.split(".").pop().toLowerCase();
+  if (fileExt === "csv") {
+    fileNameLabel.innerText = csvInput.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+  } else {
+    fileNameLabel.innerText = "Not a CSV file";
+  }
+}
+
+uploadCSV.addEventListener("click", () => {
+  csvInput.click();
+})
+
+csvInput.addEventListener("change", e => {
+  if (csvInput.value) {
+    validateCSV(csvInput);
+  }
+  else {
+    fileNameLabel.innerHTML = "No file chosen";
+  }
+});
+
+
+
