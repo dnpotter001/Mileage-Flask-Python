@@ -1,12 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms.validators import Length, DataRequired, NumberRange, EqualTo
+from wtforms.validators import Length, DataRequired, NumberRange, EqualTo, ValidationError
 
 class CSVUpload(FlaskForm):
 
-  fileUpload = FileField('Upload a CSV', 
-    validators=[FileRequired(),FileAllowed(['.csv'])])
+  csvField = FileField('Upload a CSV', 
+    validators=[FileRequired(), FileAllowed(['csv'], '.csv files only!')])
   
   submitCSV = SubmitField('Submit')
 

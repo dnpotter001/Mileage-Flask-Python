@@ -45,7 +45,14 @@ def feed():
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
   singleInterval= UploadSingleInterval()
-  
+  csv = CSVUpload()
+    
+  if csv.validate_on_submit():
+    print(csv.errors)
+    flash(f'Successfully uploaded', 'success')
+    return redirect(url_for('workoutReview'))
+
+
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
@@ -53,7 +60,8 @@ def upload():
   return render_template(
     'upload.html', 
     title="Upload a workout",
-    singleInterval=singleInterval
+    singleInterval=singleInterval,
+    csv=csv
   )
 
 
@@ -64,9 +72,10 @@ def upload():
 def workoutReview():
 
   if request.method == 'POST': 
-    upload = request.files['csv-input']
+    upload = request.files['csvField']
     if not upload: 
-      return flash(f'Please upload a file first', 'warning')
+      flash(f'Please upload a file first', 'warning')
+      return redirect(url_for('upload')) 
     
     stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)
@@ -79,7 +88,7 @@ def workoutReview():
     return render_template(
     'workout-review.html', 
     title='Erg Control',
-    )
+  )
 
 
   if g.sijax.is_sijax_request:

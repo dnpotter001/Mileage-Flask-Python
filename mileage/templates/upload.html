@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
+{% for message in csv.csvField.errors %}
+<div class="alert alert-warning">{{ message }}</div>
+{% endfor %}
 
 <div class="row">
   <button class="button contrast wide" id="csvWorkout">.CSV </button>
@@ -18,15 +21,28 @@
 </section>
 
 <section id="csvPane" class="column hidden">
-  <form method="POST" action="/workout-review" enctype="multipart/form-data">
-    <input type="file" name="csv-input" id="csvInput" class="hidden">
+  <!-- <form method="POST" action="/workout-review" enctype="multipart/form-data">
+    <input type="file" name="csvField" id="csvInput" class="hidden">
     <div class="row">
       <button class="button contrast wide" id="uploadCSV" type="button">Upload</button>
       <input type="submit" class="button contrast wide"/>
     </div>
+  </form> -->
+
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ csv.hidden_tag() }}
+    {{ csv.csrf_token }}
+    {{csv.csvField(id="csvInput", class="hidden")}}
+
+    <div class="row">
+      <button class="button contrast wide" type="button" id="uploadCSV">Upload</button>
+      {{csv.submitCSV(class="button contrast wide", id="csvSubmit")}}
+    </div>
   </form>
-  <div id="fileNameLabel" class="row center-align">No file selected.</div>
-  
+  <div id="fileNameLabel" class="row center-align pad10">No file selected.</div>
+
+ 
+
 </section>
 
 <div id="allManualForms" class="hidden">

@@ -185,6 +185,10 @@ footer a:visited {
   border-top:1px solid var(--border)
 }
 
+.pad10 {
+  padding: 10px;
+}
+
 /* -------------------------feed stylin-------------------------g*/
 
 .feed-item {
@@ -248,6 +252,16 @@ footer a:visited {
 
 .button:active {
   transform: translateY(3px);
+}
+
+.disabled {
+  background: #aaa;
+  box-shadow: 0 6px #666;
+}
+
+.button:disabled, .button[disabled]{
+  background: #aaa;
+  box-shadow: 0 6px #666;
 }
 
 .dark {

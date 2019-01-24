@@ -122,14 +122,21 @@ seconds.addEventListener("change", ()=>{
 const uploadCSV = document.getElementById("uploadCSV");
 const csvInput = document.getElementById("csvInput")
 const fileNameLabel = document.getElementById("fileNameLabel")
+const csvSubmit = document.getElementsByName("csvSubmit")
+csvSubmit.disabled = true;
 
 function validateCSV(input) {
   const fileName = input.value;
   const fileExt = fileName.split(".").pop().toLowerCase();
   if (fileExt === "csv") {
     fileNameLabel.innerText = csvInput.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+    fileNameLabel.classList.add("alert-success")
+    fileNameLabel.classList.remove("alert-warning")
+
   } else { 
     fileNameLabel.innerText = "Not a CSV file";
+    fileNameLabel.classList.remove("alert-success")
+    fileNameLabel.classList.add("alert-warning")
   }
 }
 
