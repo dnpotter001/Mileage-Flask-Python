@@ -5,7 +5,7 @@ from mileage import pyrow
 from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
 import time
-import io, csv
+import io, csv, os
 
 
 #dunny test data for the feed
@@ -70,20 +70,43 @@ def upload():
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
+
+
+  if request.method == 'POST': 
+
+    upload = request.files['csvField']
+    if not upload:
+
+      flash(f'No file present, please retry', 'warning')
+      return redirect(url_for('upload'))
+
+    splitName = upload.filename.split('.')
+    print(splitName)
+    fileExt = splitName[1]
+    print(fileExt)
+    if fileExt != 'csv':
+      flash(f'{upload.filename} is not a .csv', 'warning')
+      return redirect(url_for('upload'))
+    else:
+      flash(f'{upload.filename} successfully uploaded', 'success')
+
+    print(upload.filename)
+    
+
+    stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
+    csv_input = csv.reader(stream)
+
+
+
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
 
-  upload = request.files['csvField']
-
-  stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
-  csv_input = csv.reader(stream)
-
-  print(csv_input)
-  for row in csv_input:
-    print(row)
-    
-  return render_template('workout-review.html', title='Erg Control',)
+  return render_template(
+    'workout-review.html', 
+    title='Erg Control',
+    csv=csv_input,
+  )
 
     
     

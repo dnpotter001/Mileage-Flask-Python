@@ -29,7 +29,7 @@
     </div>
   </form> -->
 
-  <form method="POST" action="" enctype="multipart/form-data">
+  <form method="POST" action="{{ url_for('workoutReview') }}" enctype="multipart/form-data">
     {{ csv.hidden_tag() }}
     {{ csv.csrf_token }}
     {{csv.csvField(id="csvInput", class="hidden")}}
