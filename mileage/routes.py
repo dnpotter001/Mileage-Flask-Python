@@ -47,11 +47,6 @@ def upload():
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
     
-  if csv.validate_on_submit():
-    print(csv.errors)
-    flash(f'Successfully uploaded', 'success')
-    return redirect(url_for('workoutReview'))
-
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -76,26 +71,40 @@ def workoutReview():
 
     upload = request.files['csvField']
     if not upload:
-
       flash(f'No file present, please retry', 'warning')
       return redirect(url_for('upload'))
 
     splitName = upload.filename.split('.')
-    print(splitName)
     fileExt = splitName[1]
-    print(fileExt)
     if fileExt != 'csv':
       flash(f'{upload.filename} is not a .csv', 'warning')
       return redirect(url_for('upload'))
     else:
       flash(f'{upload.filename} successfully uploaded', 'success')
 
-    print(upload.filename)
-    
-
     stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)
+    csvArray = []
+    for row in csv_input:
+      csvArray.append(row)
 
+    intervalCount = csvArray[14][0]
+    intervals = []
+    for x in range(0, int(intervalCount)):
+      intervals.append(csvArray[x + 20])
+  
+    workout = { 
+      'workoutType': csvArray[4][1],
+      'details': csvArray[2][1],
+      'intervalCount': intervalCount,
+      'tableLabels':csvArray[12],
+      'units':csvArray[13],
+      'overview':csvArray[14],
+      'intervalLabels':csvArray[18],
+      'intervals':intervals
+    }
+
+    
 
 
   if g.sijax.is_sijax_request:
@@ -105,7 +114,8 @@ def workoutReview():
   return render_template(
     'workout-review.html', 
     title='Erg Control',
-    csv=csv_input,
+    workout=workout,
+    csv=csvArray,
   )
 
     

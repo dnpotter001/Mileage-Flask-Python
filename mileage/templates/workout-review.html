@@ -1,13 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
 
-  {% for interval in workout %}
+{% for key, value in workout.items() %}
+  <p><b>{{key}}:</b> {{value}}</p>
+{% endfor %}
+
+
+  {% for interval in workout.intervals %}
     <p>{{interval}}</p>
   {% endfor %}
 
-  {% for row in csv_input %}
+  {% for row in csv %}
     <p>{{row}}</p>
   {% endfor %}
+  
 
 
 {% endblock content %}
