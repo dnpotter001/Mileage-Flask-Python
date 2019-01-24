@@ -1,10 +1,11 @@
-from flask import render_template, url_for, flash, redirect, request, g, jsonify
+from flask import render_template, url_for, flash, redirect, request, g, jsonify, request, make_response
 from mileage import app
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload
 from mileage import pyrow
 from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
 import time
+import io, csv
 
 
 #dunny test data for the feed
@@ -44,16 +45,6 @@ def feed():
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
   singleInterval= UploadSingleInterval()
-  csv = CSVUpload()
-
-  if csv.validate_on_submit():
-    flash(f'Tah Dah', 'success')
-    file = csv.fileUpload.data
-    file.stream.read()
-    return redirect(url_for('feed'))
-
-
-
   
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -62,25 +53,40 @@ def upload():
   return render_template(
     'upload.html', 
     title="Upload a workout",
-    singleInterval=singleInterval,
-    csv = csv,
+    singleInterval=singleInterval
   )
+
+
+
+
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
 
-  workout = [1,2,3]
+  if request.method == 'POST': 
+    upload = request.files['csv-input']
+    if not upload: 
+      return flash(f'Please upload a file first', 'warning')
+    
+    stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
+    csv_input = csv.reader(stream)
+
+    print(csv_input)
+    for row in csv_input:
+      print(row)
+    
+    flash(f'Successful upload', 'success')
+    return render_template(
+    'workout-review.html', 
+    title='Erg Control',
+    )
 
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
   
-  return render_template(
-    'workout-review.html', 
-    title='Erg Control',
-    workout=workout
-  )
+  
 
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():

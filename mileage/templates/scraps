@@ -18,3 +18,14 @@
     {% else %}
       <h1>No ergs connected</h1>
     {% endif %}
+
+    /////old stuf 
+     <form method="POST" action="/upload" enctype="multipart/form-data">
+    {{ csv.hidden_tag() }}
+    {{csv.fileUpload(id="csvInput", class="hidden")}}
+
+    <div class="row">
+      <button class="button contrast wide" id="uploadCSV">Upload</button>
+      {{csv.submitCSV(class="button contrast wide")}}
+    </div>
+  </form>
