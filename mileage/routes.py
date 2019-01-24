@@ -70,30 +70,28 @@ def upload():
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
-
-  if request.method == 'POST': 
-    upload = request.files['csvField']
-    if not upload: 
-      flash(f'Please upload a file first', 'warning')
-      return redirect(url_for('upload')) 
-    
-    stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
-    csv_input = csv.reader(stream)
-
-    print(csv_input)
-    for row in csv_input:
-      print(row)
-    
-    flash(f'Successful upload', 'success')
-    return render_template(
-    'workout-review.html', 
-    title='Erg Control',
-  )
-
-
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
+
+  upload = request.files['csvField']
+
+  stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
+  csv_input = csv.reader(stream)
+
+  print(csv_input)
+  for row in csv_input:
+    print(row)
+    
+  return render_template('workout-review.html', title='Erg Control',)
+
+    
+    
+
+  
+
+
+
   
   
 
