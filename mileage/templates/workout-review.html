@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
 <script src="../static/js/svgCharts.js"></script>
-
+<meta id="workout" data-intervals={{ workout.intervals|tojson|safe }}>
 <article class="workoutReview">
   <article class="overview">
     overview
   </article>
-  <article class="reviewGraph">
-    <script>BarChart("hello")</script>
+  <article class="reviewGraph" id="graph">
+    <script>BarChart({{workout.intervals|tojson|safe}});</script>
   </article>
   <article class="intervalOverview">
     <table>
