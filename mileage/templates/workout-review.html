@@ -1,14 +1,44 @@
 {% extends "layout.html" %}
 {% block content %}
+<script src="../static/js/svgCharts.js"></script>
+
+<article class="workoutReview">
+  <article class="overview">
+    overview
+  </article>
+  <article class="reviewGraph">
+    <script>BarChart("hello")</script>
+  </article>
+  <article class="intervalOverview">
+    <table>
+      <tr>
+        {% for label, unit in zip(workout.tableLabels, workout.units) %}
+          <td>{{label}} {{unit}}</td>
+        {% endfor %}
+      </tr>
+    {% for interval in workout.intervals %}
+      <tr>
+        {% for cell in interval %}
+          <td>{{cell}}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </table>
+
+  </article>
+  <div class="row submitRow">
+    <button class="button red small ">Cancel</button>
+    <button class="button contrast small">Submit</button>
+  </div> 
+
+</article>
 
 {% for key, value in workout.items() %}
   <p><b>{{key}}:</b> {{value}}</p>
 {% endfor %}
 
 
-  {% for interval in workout.intervals %}
-    <p>{{interval}}</p>
-  {% endfor %}
+
 
   {% for row in csv %}
     <p>{{row}}</p>

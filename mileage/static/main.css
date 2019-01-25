@@ -233,6 +233,31 @@ footer a:visited {
 .hidden{
   display: none;
 }
+/* -------------------------workout rewview-------------------------g*/
+
+.workoutReview {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:"overview overview" "reviewGraph intervals" "submitRow submitRow";
+  height: 100%;
+}
+
+.overview{
+  grid-area: overview;
+}
+.reviewGraph{
+  grid-area: reviewGraph;
+}
+.intervalOverview{
+  grid-area: intervals
+}
+.submitRow {
+  grid-area: submitRow;
+
+}
+
+
 
 
 

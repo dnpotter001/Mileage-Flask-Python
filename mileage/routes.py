@@ -66,7 +66,6 @@ def upload():
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
 
-
   if request.method == 'POST': 
 
     upload = request.files['csvField']
@@ -116,6 +115,7 @@ def workoutReview():
     title='Erg Control',
     workout=workout,
     csv=csvArray,
+    zip=zip
   )
 
     
