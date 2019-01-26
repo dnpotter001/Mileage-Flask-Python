@@ -11,26 +11,30 @@ function BarChart(intervals) {
   chartArea.appendChild(svg)
 
   let barCount = intervals.length
-  console.log(chartArea.getBoundingClientRect())
-  let barInc = 90 / barCount
-  let barHeight = 90 / barCount;
+  let barHeight = 100/barCount;
+  let maxValue= 0;
+  //calc times and max value
+  intervals.forEach(x => {
+    let split = x[1].split(/./ && /:/)
+    let totalTime = (split[0] * 60) + parseFloat(split[1]);
+    if (totalTime > maxValue){
+      maxValue = totalTime
+    }
+    x.push(totalTime);
+  })
+
+  let barInc = 100 / maxValue
+  console.log(barCount, barHeight, maxValue, barInc)
 
   intervals.forEach(x => {
-    let barNumber = 0;
+    let totalTime = x.pop()
     let rect = document.createElementNS(ns, 'rect')
-    rect.setAttributeNS(null, 'width', barInc * x[0] + "%")
-    rect.setAttributeNS(null, 'height', barHeight + "%")
-    rect.setAttributeNS(null, 'y', (barHeight * x[0]) -2 + "%")
-
+    rect.setAttributeNS(null, 'width', barInc * totalTime + "%")
+    rect.setAttributeNS(null, 'height', barHeight -2 + "%")
+    rect.setAttributeNS(null, 'y', (x[0] -1) * barHeight +2+ "%")
     rect.setAttributeNS(null, 'fill', '#f06')
     svg.appendChild(rect) 
   })
   chartArea.appendChild(svg)
-
-
-
-
-
 }
 
-function TableFull(inervals) { }
