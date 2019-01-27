@@ -3,16 +3,17 @@
 <script src="../static/js/svgCharts.js"></script>
 <article class="workoutReview">
   <article class="overview">
-    overview
+    <h3>Overview</h3>
   </article>
   <article class="reviewGraph" id="barChart">
+    <h3>Total Time</h3>
     <script>BarChart({{workout.intervals|tojson|safe}});</script>
   </article>
   <article class="intervalOverview">
     <table>
       <tr>
         {% for label, unit in zip(workout.tableLabels, workout.units) %}
-          <td>{{label}} {{unit}}</td>
+          <td class="firstRow"><b>{{label}}<br> {{unit}}</b></td>
         {% endfor %}
       </tr>
     {% for interval in workout.intervals %}
@@ -32,17 +33,10 @@
 
 </article>
 
-{% for key, value in workout.items() %}
+<!-- {% for key, value in workout.items() %}
   <p><b>{{key}}:</b> {{value}}</p>
 {% endfor %}
-
-
-
-
-  {% for row in csv %}
-    <p>{{row}}</p>
-  {% endfor %}
-  
+ -->
 
 
 {% endblock content %}
