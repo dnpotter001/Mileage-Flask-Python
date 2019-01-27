@@ -4,39 +4,53 @@
 <article class="workoutReview">
   <article class="overview">
     <h3>Overview</h3>
+    <ul>
+      <li><b>Workout Type: </b> {{workout.type}}</li>
+      <li><b>Details: </b> {{ workout.details }}</li>
+      <li><b>Interval Count: </b> {{workout.intervalCount}}</li>
+      <li><b>Total Time: </b>{{workout.overview[1]}}</li>
+      <li><b>Total Distance: </b>{{workout.overview[2]}}</li>
+    </ul>
   </article>
   <article class="reviewGraph" id="barChart">
     <h3>Total Time</h3>
-    <script>BarChart({{workout.intervals|tojson|safe}});</script>
+    <script>BarChart({{ workout.intervals | tojson | safe }});</script>
   </article>
   <article class="intervalOverview">
     <table>
       <tr>
-        {% for label, unit in zip(workout.tableLabels, workout.units) %}
-          <td class="firstRow"><b>{{label}}<br> {{unit}}</b></td>
+        {% for label, unit in zip(workout.overviewLabels, workout.units) %}
+        <td class="firstRow"><b>{{label}}<br> {{unit}}</b></td>
         {% endfor %}
       </tr>
-    {% for interval in workout.intervals %}
+      <tr>
+        {% for cell in workout.overview %}
+        <td>{{cell}}</td>
+        {% endfor %}
+      </tr>
+    </table>
+    <table>
+      <tr>
+        {% for label, unit in zip(workout.intervalLabels, workout.units) %}
+        <td class="firstRow"><b>{{label}}<br> {{unit}}</b></td>
+        {% endfor %}
+      </tr>
+      {% for interval in workout.intervals %}
       <tr>
         {% for cell in interval %}
-          <td>{{cell}}</td>
+        <td>{{cell}}</td>
         {% endfor %}
       </tr>
-    {% endfor %}
+      {% endfor %}
     </table>
 
   </article>
   <div class="row submitRow">
     <button class="button red small ">Cancel</button>
     <button class="button contrast small">Submit</button>
-  </div> 
+  </div>
 
 </article>
-
-<!-- {% for key, value in workout.items() %}
-  <p><b>{{key}}:</b> {{value}}</p>
-{% endfor %}
- -->
 
 
 {% endblock content %}

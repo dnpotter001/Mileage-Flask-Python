@@ -245,7 +245,6 @@ rect.bar{
   height: 100%;
 }
 
-
 /* -------------------------workout rewview-------------------------g*/
 
 .workoutReview {
@@ -268,6 +267,15 @@ h3{
   border: 1px solid var(--border);
   background: #EEE;
 }
+.overview ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  
+}
+.overview ul li{ 
+  padding: 5px 0px;
+}
 .reviewGraph{
   grid-area: reviewGraph;
  border: 1px solid var(--border);
@@ -277,13 +285,14 @@ h3{
 }
 .intervalOverview{
   grid-area: intervals;
-  padding: 20px 0px;
+  padding: 20px 0 0 0px;
 }
 .intervalOverview table {
   width: 100%;
   text-align: center;
   border: 1px solid var(--border);
-  background: #EEEEEE
+  background: #EEEEEE;
+  margin-bottom: 20px;
 }
 .firstRow{
   background: #EEEEEE;
@@ -296,9 +305,10 @@ h3{
 .intervalOverview tr:nth-child(even){background-color: var(--background);}
 
 
+
 .submitRow {
   grid-area: submitRow;
-
+  pa
 }
 
 /* -------------------------button stylin-------------------------g*/
