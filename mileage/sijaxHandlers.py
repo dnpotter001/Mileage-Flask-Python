@@ -1,7 +1,7 @@
 import os
 from flask import Flask, g
 import flask_sijax
-from mileage import pyrow
+from . import pyrow
 
 class ErgHandler(object):
 

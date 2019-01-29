@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify, request, make_response
 from mileage import app
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload
-from mileage import pyrow
+from . import pyrow
 from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
 import time
@@ -119,15 +119,6 @@ def workoutReview():
   )
 
     
-    
-
-  
-
-
-
-  
-  
-
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():
   formDis = SetDistanceWorkout()
@@ -135,6 +126,7 @@ def ergControl():
   formSL = StandardWorkouts()
 
   ergs = list(pyrow.find())
+
   if formDis.submitDis.data and formDis.validate():
     for erg in ergs:
       pm = pyrow.pyrow(erg)
