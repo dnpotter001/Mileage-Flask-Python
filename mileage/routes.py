@@ -2,12 +2,13 @@ from flask import render_template, url_for, flash, redirect, request, g, jsonify
 from mileage import app
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload
 from . import pyrow
+#from . import plot_tipping_problem_newapi
 from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
 import time
 import io, csv, os
 
-
+#print(plot_tipping_problem_newapi.CalcTip(10, 10))
 #dunny test data for the feed
 workouts = [
   {
@@ -135,7 +136,7 @@ def ergControl():
         flash(f'Setting workout for {formDis.distance.data}m', 'success')
 
       except ValueError:
-        flash(f'Split value must be less than {formDis.distance.data}', 'warning')
+        flash(f'Minimum of 1 split and maximum of 50, you entered: {int(formDis.distance.data / formDis.split.data)}', 'warning')
 
   if formTime.submitTime.data and formTime.validate():
     for erg in ergs:
