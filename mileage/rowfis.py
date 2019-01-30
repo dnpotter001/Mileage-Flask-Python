@@ -170,6 +170,9 @@ class FemaleFIS(object):
 
     self.rowingFis = ctrl.ControlSystemSimulation(rowingFIS_ctrl)
 
+  def FisPlot(self):
+    return self.quality.view(sim=self.rowingFis)
+
   def EvalStroke(self, catch, finish, slip, wash, length):
     self.rowingFis.input['Catch'] = catch
     self.rowingFis.input['Finish'] = finish
@@ -177,7 +180,7 @@ class FemaleFIS(object):
     self.rowingFis.input['Wash'] = wash
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
-    self.quality.view(sim=self.rowingFis)
+    self.FisPlot()
     return self.rowingFis.output['Quality']
 
   def ViewPlots(self):
@@ -185,14 +188,13 @@ class FemaleFIS(object):
 
 
 
-male = MaleFIS()
-female = FemaleFIS()
-female.ViewPlots()
-#fis.ViewPlots()
-print(male.EvalStroke(69,46,2,12,111))
-print(female.EvalStroke(69,46,2,12,111))
+# male = MaleFIS()
+# female = FemaleFIS()
 
-wait = input("PRESS ENTER TO CONTINUE.")
+# print(male.EvalStroke(60,41,3,13,101))
+# print(female.EvalStroke(60,41,3,13,101))
+
+#wait = input("PRESS ENTER TO CONTINUE.")
 
 
 

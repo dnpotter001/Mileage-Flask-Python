@@ -286,6 +286,8 @@ h3{
 .intervalOverview{
   grid-area: intervals;
   padding: 20px 0 0 0px;
+  overflow: auto;
+  white-space: nowrap;
 }
 .intervalOverview table {
   width: 100%;
@@ -300,9 +302,10 @@ h3{
 
 .intervalOverview table tr td{
   padding: 7px 5px;
+  white-space: nowrap
   
 }
-.intervalOverview tr:nth-child(even){background-color: var(--background);}
+.intervalOverview tr:nth-child(odd){background-color: var(--background);}
 
 
 

@@ -29,7 +29,7 @@ let BarChart = function (area, intervals) {
       return;
     }
     intervals.forEach(x => {
-      let split = x[1].split(/./ && /:/)
+      let split = x[3].split(/./ && /:/)
       let totalTime = 0;
       if (split.length == 2) {
         totalTime = (split[0] * 60) + parseFloat(split[1]);
@@ -42,7 +42,7 @@ let BarChart = function (area, intervals) {
       x.push(totalTime);
     })
 
-    let barInc = 80 / maxValue
+    let barInc = 70 / maxValue
 
     intervals.forEach(x => {
       let totalTime = x.pop()

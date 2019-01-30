@@ -7,7 +7,9 @@ from mileage.sijaxHandlers import ErgHandler
 import flask_sijax
 import time
 import io, csv, os
+from io import StringIO
 import json
+from mileage.rowfis import MaleFIS, FemaleFIS
 
 #print(plot_tipping_problem_newapi.CalcTip(10, 10))
 #dunny test data for the feed
@@ -89,22 +91,43 @@ def workoutReview():
     for row in csv_input:
       csvArray.append(row)
 
-    intervalCount = csvArray[14][0]
+
+    intervalCount = csvArray[15][0]
     intervals = []
     for x in range(0, int(intervalCount)):
-      intervals.append(csvArray[x + 20])
+      intervals.append(csvArray[x + 22])
   
     workout = { 
       'type': csvArray[4][1],
       'details': csvArray[2][1],
       'intervalCount': intervalCount,
-      'units':csvArray[13],
-      'overviewLabels':csvArray[12],
-      'overview':csvArray[14],
-      'intervalLabels':csvArray[18],
+      'units':csvArray[14],
+      'overviewLabels':csvArray[13],
+      'overview':csvArray[15],
+      'intervalLabels':csvArray[20],
       'intervals':intervals
     }
+    if (csvArray[15][14] != None):
+      catch = -int(csvArray[15][14])
+      finish = int(csvArray[15][16])
+      slip = int(csvArray[15][15])
+      wash = int(csvArray[15][17])
+      length = (catch - slip) + (finish - wash)
 
+      print(catch,finish,slip,wash,length)
+
+      maleFIS = MaleFIS()
+      maleFisQuality = maleFIS.EvalStroke(catch, finish, slip, wash, length)
+      femaleFIS = FemaleFIS()
+      femaleFISQuality = femaleFIS.EvalStroke(catch, finish, slip, wash, length)
+    else:
+      maleFisQuality = "FIS score not available"
+      femaleFISQuality = "FIS score not available"
+
+    #plot = maleFIS.FisPlot()
+    # img = StringIO()
+    # plot.savefig(img)
+    # img.seek(0)
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -115,8 +138,19 @@ def workoutReview():
     title='Erg Control',
     workout=workout,
     zip=zip,
-    intervals = workout['intervals']
+    intervals = workout['intervals'],
+    manFiz=maleFisQuality,
+    womanFiz=femaleFISQuality,
+    #plot=plot
     )
+
+# @app.route('/plot')
+# def fig():
+#     fig = draw_polygons(cropzonekey)
+#     img = StringIO()
+#     fig.savefig(img)
+#     img.seek(0)
+#     return send_file(img, mimetype='image/png')
 
     
 @app.route('/erg-control', methods=['GET', 'POST'])

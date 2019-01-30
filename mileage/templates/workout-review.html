@@ -27,7 +27,7 @@
     <table>
       <tr>
         {% for label, unit in zip(workout.overviewLabels, workout.units) %}
-        <td class="firstRow"><b>{{label}}<br> {{unit}}</b></td>
+        <td class=""><b>{{label}}<br> {{unit}}</b></td>
         {% endfor %}
       </tr>
       <tr>
@@ -35,11 +35,9 @@
         <td>{{cell}}</td>
         {% endfor %}
       </tr>
-    </table>
-    <table>
       <tr>
         {% for label, unit in zip(workout.intervalLabels, workout.units) %}
-        <td class="firstRow"><b>{{label}}<br> {{unit}}</b></td>
+        <td class=""><b>{{label}}<br> {{unit}}</b></td>
         {% endfor %}
       </tr>
       {% for interval in workout.intervals %}
@@ -50,7 +48,9 @@
       </tr>
       {% endfor %}
     </table>
-
+    {{manFiz}}
+    {{womanFiz}}
+    <img src="{{img}}">
   </article>
   <div class="row submitRow">
     <button class="button red small ">Cancel</button>
