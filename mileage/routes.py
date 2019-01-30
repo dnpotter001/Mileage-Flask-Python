@@ -7,6 +7,7 @@ from mileage.sijaxHandlers import ErgHandler
 import flask_sijax
 import time
 import io, csv, os
+import json
 
 #print(plot_tipping_problem_newapi.CalcTip(10, 10))
 #dunny test data for the feed
@@ -104,8 +105,6 @@ def workoutReview():
       'intervals':intervals
     }
 
-    
-
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -115,9 +114,9 @@ def workoutReview():
     'workout-review.html', 
     title='Erg Control',
     workout=workout,
-    csv=csvArray,
-    zip=zip
-  )
+    zip=zip,
+    intervals = workout['intervals']
+    )
 
     
 @app.route('/erg-control', methods=['GET', 'POST'])

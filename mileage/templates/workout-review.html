@@ -14,7 +14,14 @@
   </article>
   <article class="reviewGraph" id="barChart">
     <h3>Total Time</h3>
-    <script>BarChart({{ workout.intervals | tojson | safe }});</script>
+    <script>
+      // let intervals = {{intervals|tojson|safe}};
+      // BarChart(intervals);
+      const chartArea = document.getElementById("barChart");
+      let barChart = new BarChart(chartArea, {{intervals|tojson|safe}});
+      barChart.createSVG()
+      barChart.drawSeries()
+    </script>
   </article>
   <article class="intervalOverview">
     <table>
