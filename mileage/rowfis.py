@@ -2,6 +2,7 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
+from io import StringIO
 
 class MaleFIS(object):
   def __init__(self):
@@ -88,7 +89,7 @@ class MaleFIS(object):
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
     self.quality.view(sim=self.rowingFis)
-    return self.rowingFis.output['Quality']
+    return round(self.rowingFis.output['Quality'], 1)
 
   def ViewPlots(self):
     return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()
@@ -170,8 +171,7 @@ class FemaleFIS(object):
 
     self.rowingFis = ctrl.ControlSystemSimulation(rowingFIS_ctrl)
 
-  def FisPlot(self):
-    return self.quality.view(sim=self.rowingFis)
+
 
   def EvalStroke(self, catch, finish, slip, wash, length):
     self.rowingFis.input['Catch'] = catch
@@ -180,8 +180,8 @@ class FemaleFIS(object):
     self.rowingFis.input['Wash'] = wash
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
-    self.FisPlot()
-    return self.rowingFis.output['Quality']
+    self.quality.view(sim=self.rowingFis)
+    return round(self.rowingFis.output['Quality'],1)
 
   def ViewPlots(self):
     return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()

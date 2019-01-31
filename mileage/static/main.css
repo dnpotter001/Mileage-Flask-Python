@@ -250,8 +250,12 @@ rect.bar{
 .workoutReview {
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:"overview reviewGraph" "intervals intervals" "submitRow submitRow";
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-areas:
+    "overview reviewBarGraph"
+    "rowingFis reviewLineGraph"
+    "intervals intervals" 
+    "submitRow submitRow";
   height: 100%; 
 
 }
@@ -267,22 +271,40 @@ h3{
   border: 1px solid var(--border);
   background: #EEE;
 }
-.overview ul {
+article ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   
 }
-.overview ul li{ 
+article ul li{ 
   padding: 5px 0px;
 }
-.reviewGraph{
-  grid-area: reviewGraph;
- border: 1px solid var(--border);
- background: #EEE;
- padding: 20px;
- margin-left: 10px;
+.reviewBarGraph{
+  grid-area: reviewBarGraph;
+  border: 1px solid var(--border);
+  background: #EEE;
+  padding: 20px;
+  margin-left: 10px;
+  
 }
+.rowingFis{
+  grid-area: rowingFis;
+  border: 1px solid var(--border);
+  background: #EEE;
+  padding: 20px;
+  margin-right: 10px;
+  margin-top:20px;
+}
+.reviewLineGraph{
+  grid-area: reviewLineGraph;
+  border: 1px solid var(--border);
+  background: #EEE;
+  padding: 20px;
+  margin-left: 10px;
+  margin-top:20px;
+}
+
 .intervalOverview{
   grid-area: intervals;
   padding: 20px 0 0 0px;
@@ -309,9 +331,9 @@ h3{
 
 
 
+
 .submitRow {
   grid-area: submitRow;
-  pa
 }
 
 /* -------------------------button stylin-------------------------g*/
@@ -319,7 +341,6 @@ h3{
 /* -------------------------button stylin-------------------------g*/
 
 .button {
-
   padding: 15px 25px;
   text-align: center;
   color: white;
@@ -482,7 +503,7 @@ input, select{
 
 /* desktop styling */
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
   .template {
     display: grid;
     grid-template-columns: 200px 1fr 200px;

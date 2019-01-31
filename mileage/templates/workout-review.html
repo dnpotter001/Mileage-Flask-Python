@@ -12,17 +12,45 @@
       <li><b>Total Distance: </b>{{workout.overview[2]}}</li>
     </ul>
   </article>
-  <article class="reviewGraph" id="barChart">
+
+  <article class="reviewBarGraph" id="barChart">
     <h3>Total Time</h3>
     <script>
       // let intervals = {{intervals|tojson|safe}};
       // BarChart(intervals);
-      const chartArea = document.getElementById("barChart");
-      let barChart = new BarChart(chartArea, {{intervals|tojson|safe}});
+      const barChartArea = document.getElementById("barChart");
+      let barChart = new BarChart(barChartArea, {{intervals|tojson|safe}});
       barChart.createSVG()
       barChart.drawSeries()
     </script>
   </article>
+
+  <article class="rowingFis">
+    <h3>Fuzzy Analysis</h3>
+    <ul>
+      <li><b>Male rowing quality: </b>{{manFis}}%</li>
+      <li><b>Female rowing quality: </b>{{womanFis}}%</li>
+      <li>
+        These values are generated from a fuzzy inference system that 
+        compare your average catch, finish, slip, wash and length
+        to sample data provided by NK rowing.
+      </li>
+    </ul>
+  </article>
+
+  <article class="reviewLineGraph" id="lineGraph">
+    <h3>Interval Overview</h3>
+    <script>
+      // let intervals = {{intervals|tojson|safe}};
+      // BarChart(intervals);
+      const lineGraphArea = document.getElementById("lineGraph");
+      let lineGraph = new LineGraph(lineGraphArea, {{intervals|tojson|safe}});
+      lineGraph.createSVG()
+      lineGraph.drawSeries(8, "red")
+      lineGraph.drawSeries(13, "green")
+    </script>
+  </article>
+
   <article class="intervalOverview">
     <table>
       <tr>
@@ -48,10 +76,9 @@
       </tr>
       {% endfor %}
     </table>
-    {{manFiz}}
-    {{womanFiz}}
-    <img src="{{img}}">
   </article>
+
+
   <div class="row submitRow">
     <button class="button red small ">Cancel</button>
     <button class="button contrast small">Submit</button>

@@ -124,11 +124,6 @@ def workoutReview():
       maleFisQuality = "FIS score not available"
       femaleFISQuality = "FIS score not available"
 
-    #plot = maleFIS.FisPlot()
-    # img = StringIO()
-    # plot.savefig(img)
-    # img.seek(0)
-
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
@@ -139,18 +134,10 @@ def workoutReview():
     workout=workout,
     zip=zip,
     intervals = workout['intervals'],
-    manFiz=maleFisQuality,
-    womanFiz=femaleFISQuality,
-    #plot=plot
+    manFis=maleFisQuality,
+    womanFis=femaleFISQuality,
     )
 
-# @app.route('/plot')
-# def fig():
-#     fig = draw_polygons(cropzonekey)
-#     img = StringIO()
-#     fig.savefig(img)
-#     img.seek(0)
-#     return send_file(img, mimetype='image/png')
 
     
 @app.route('/erg-control', methods=['GET', 'POST'])

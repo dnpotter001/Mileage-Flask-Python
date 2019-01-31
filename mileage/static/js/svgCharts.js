@@ -68,7 +68,7 @@ let BarChart = function (area, intervals) {
   }
 }
 
-let LineGraph = function (area) {
+let LineGraph = function (area, intervals) {
 
   this.createSVG = function () {
     this.ns = 'http://www.w3.org/2000/svg'
@@ -78,7 +78,55 @@ let LineGraph = function (area) {
     area.appendChild(this.svg)
   }
 
-  this.drawSeries = function(intervals, series) {
+  this.drawSeries = function(series, colour) {
+    let dotCount = intervals.length
+    let dotWidth = 95 / dotCount;
+    let maxValue = 0;
+    let minValue = intervals[0][series];
+
+    if (dotCount == 1) {
+      chartArea.innerHTML = "More intervals needed for a line graph. "
+      return;
+    }
+
+    intervals.forEach(x => {
+      if (x[series] > maxValue) {
+        maxValue = x[series]
+      }
+      if (x[series] < minValue) {
+        minValue = x[series]
+      }
+
+      console.log(maxValue, minValue)
+    })
+
+    let dotInc = 200 / maxValue
+    console.log(dotInc, dotWidth)
+
+    intervals.forEach(x => {
+
+      let dot = document.createElementNS(this.ns, 'circle');
+      let line = document.createElementNS(this.ns, 'line');
+
+      dot.setAttributeNS(null, 'r', 2)
+      dot.setAttributeNS(null, 'cx', (x[0]-0.5) * dotWidth + "%")
+      dot.setAttributeNS(null, 'cy', x[series] * dotInc - 130 + "%")
+      dot.setAttributeNS(null, 'fill', colour)
+      this.svg.appendChild(dot)
+    
+      line.setAttributeNS(null, 'x1', x[0] * dotWidth + "%")
+      line.setAttributeNS(null, 'x2', x[0] * dotWidth + "%")
+      line.setAttributeNS(null, 'y1', x[series] * dotInc + "%")
+      line.setAttributeNS(null, 'y2', x[series] * dotInc + "%")
+      line.setAttributeNS(null, 'style', `stroke:${colour};stroke-width:2`)
+      
+
+    })
+
+
+
+
+
     return;
   }
 }
