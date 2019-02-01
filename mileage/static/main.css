@@ -253,7 +253,8 @@ rect.bar{
   grid-template-rows: auto 1fr auto auto;
   grid-template-areas:
     "overview reviewBarGraph"
-    "rowingFis reviewLineGraph"
+    "reviewLineGraph reviewLineGraph"
+    "rowingFis angleView"
     "intervals intervals" 
     "submitRow submitRow";
   height: 100%; 
@@ -288,6 +289,15 @@ article ul li{
   margin-left: 10px;
   
 }
+
+.reviewLineGraph{
+  grid-area: reviewLineGraph;
+  border: 1px solid var(--border);
+  background: #EEE;
+  padding: 20px;
+  margin-top:20px;
+}
+
 .rowingFis{
   grid-area: rowingFis;
   border: 1px solid var(--border);
@@ -296,13 +306,14 @@ article ul li{
   margin-right: 10px;
   margin-top:20px;
 }
-.reviewLineGraph{
-  grid-area: reviewLineGraph;
+
+.angleView { 
+  grid-area: angleView;
   border: 1px solid var(--border);
   background: #EEE;
   padding: 20px;
-  margin-left: 10px;
   margin-top:20px;
+  margin-left: 10px;
 }
 
 .intervalOverview{
@@ -328,6 +339,7 @@ article ul li{
   
 }
 .intervalOverview tr:nth-child(odd){background-color: var(--background);}
+
 
 
 

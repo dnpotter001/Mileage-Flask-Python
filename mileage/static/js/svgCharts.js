@@ -7,7 +7,6 @@ chars.forEach(c => {
   colours.push(`#${c}${c}${c}${c}${c}${c}`)
 })
 
-console.log(colours)
 
 let BarChart = function (area, intervals) {
 
@@ -29,7 +28,7 @@ let BarChart = function (area, intervals) {
       return;
     }
     intervals.forEach(x => {
-      let split = x[3].split(/./ && /:/)
+      let split = x[4].split(/./ && /:/)
       let totalTime = 0;
       if (split.length == 2) {
         totalTime = (split[0] * 60) + parseFloat(split[1]);
@@ -56,7 +55,7 @@ let BarChart = function (area, intervals) {
       let label = document.createElementNS(this.ns, 'text')
       label.setAttributeNS(null, 'y', (x[0] - 0.5) * barHeight + 2.75 + "%");
       label.setAttributeNS(null, 'x', (barInc * totalTime) + 1 + "%");
-      label.innerHTML = x[1]
+      label.innerHTML = x[3]
 
       let g = document.createElementNS(this.ns, 'g');
       g.appendChild(rect)
@@ -69,6 +68,7 @@ let BarChart = function (area, intervals) {
 }
 
 let LineGraph = function (area, intervals) {
+  this.seriesCount = 0
 
   this.createSVG = function () {
     this.ns = 'http://www.w3.org/2000/svg'
@@ -78,16 +78,25 @@ let LineGraph = function (area, intervals) {
     area.appendChild(this.svg)
   }
 
-  this.drawSeries = function(series, colour) {
+  this.drawSeries = function (series, colour, seriesName) {
+
     let dotCount = intervals.length
-    let dotWidth = 95 / dotCount;
+    let dotWidth = 75 / dotCount;
     let maxValue = 0;
-    let minValue = intervals[0][series];
 
     if (dotCount == 1) {
       chartArea.innerHTML = "More intervals needed for a line graph. "
       return;
     }
+    intervals.forEach(x => {
+      //console.log(x[series])
+      if (x[series] < 0){
+        x[series] = x[series] * - 1
+        // /console.log(x[series])
+      }
+    })
+    let minValue = intervals[0][series];
+
 
     intervals.forEach(x => {
       if (x[series] > maxValue) {
@@ -97,34 +106,52 @@ let LineGraph = function (area, intervals) {
         minValue = x[series]
       }
 
-      console.log(maxValue, minValue)
     })
+    console.log("max and min ", maxValue, minValue)
 
-    let dotInc = 200 / maxValue
-    console.log(dotInc, dotWidth)
+    let dotInc = -300 / maxValue
+    console.log("dot inc and width", dotInc, dotWidth)
 
     intervals.forEach((interval) => {
       let dot = document.createElementNS(this.ns, 'circle');
       dot.setAttributeNS(null, 'r', 2)
-      dot.setAttributeNS(null, 'cx', (interval[0]-0.5) * dotWidth + "%")
-      dot.setAttributeNS(null, 'cy', interval[series] * dotInc - 130 + "%")
+      dot.setAttributeNS(null, 'cx', (interval[0] - 0.5) * dotWidth + "%")
+      dot.setAttributeNS(null, 'cy', (interval[series]) * dotInc + 330 + "%")
+      console.trace(interval[series], dotInc )
       dot.setAttributeNS(null, 'fill', colour)
       this.svg.appendChild(dot)
     })
 
     let lineNo = 1
     let index = 0
-    while (lineNo < dotCount){
+    while (lineNo < dotCount) {
       let line = document.createElementNS(this.ns, 'line');
-      line.setAttributeNS(null, 'x1', (intervals[index][0]-0.5) * dotWidth + "%")
-      line.setAttributeNS(null, 'y1', intervals[index][series] * dotInc - 130 + "%")
-      line.setAttributeNS(null, 'x2', (intervals[index+1][0] -0.5) * dotWidth + "%")
-      line.setAttributeNS(null, 'y2', intervals[index+1][series] * dotInc - 130 + "%")
+      line.setAttributeNS(null, 'x1', (intervals[index][0] - 0.5) * dotWidth + "%")
+      line.setAttributeNS(null, 'y1', intervals[index][series] * dotInc + 330 + "%")
+      line.setAttributeNS(null, 'x2', (intervals[index + 1][0] - 0.5) * dotWidth + "%")
+      line.setAttributeNS(null, 'y2', intervals[index + 1][series] * dotInc + 330 + "%")
       line.setAttributeNS(null, 'style', `stroke:${colour};stroke-width:2`)
       this.svg.appendChild(line)
       lineNo = lineNo + 1
       index = index + 1
     }
+
+    let key = document.createElementNS(this.ns, 'line');
+    key.setAttributeNS(null, 'x1', 75 + "%")
+    key.setAttributeNS(null, 'y1', 5 + (this.seriesCount * 15) + "%")
+    key.setAttributeNS(null, 'x2', 80 + "%")
+    key.setAttributeNS(null, 'y2', 5 + (this.seriesCount * 15) + "%")
+    key.setAttributeNS(null, 'style', `stroke:${colour};stroke-width:2`)
+    this.svg.appendChild(key)
+
+    let keyText = document.createElementNS(this.ns, 'text');
+    keyText.setAttributeNS(null, 'x', 81 + "%")
+    keyText.setAttributeNS(null, 'y', 9 + (this.seriesCount * 15) + "%")
+    keyText.innerHTML = seriesName;
+    this.svg.appendChild(keyText)
+
+    this.seriesCount = this.seriesCount + 1
+
 
     return;
   }

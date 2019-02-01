@@ -25,6 +25,23 @@
     </script>
   </article>
 
+  
+  <article class="reviewLineGraph" id="lineGraph">
+    <h3>Interval Overview</h3>
+    <script>
+      // let intervals = {{intervals|tojson|safe}};
+      // BarChart(intervals);
+      const lineGraphArea = document.getElementById("lineGraph");
+      let lineGraph = new LineGraph(lineGraphArea, {{intervals|tojson|safe}});
+      lineGraph.createSVG()
+      //lineGraph.drawSeries(21, "Blue", "Force Max Angle") 
+      lineGraph.drawSeries(8, "red", "Stroke Rate") 
+      lineGraph.drawSeries(14, "green", "Catch Angle") 
+      lineGraph.drawSeries(13, "orange", "Power") 
+      lineGraph.drawSeries(5, "black", "Speed") 
+      </script>
+  </article>
+  
   <article class="rowingFis">
     <h3>Fuzzy Analysis</h3>
     <ul>
@@ -38,18 +55,10 @@
     </ul>
   </article>
 
-  <article class="reviewLineGraph" id="lineGraph">
-    <h3>Interval Overview</h3>
-    <script>
-      // let intervals = {{intervals|tojson|safe}};
-      // BarChart(intervals);
-      const lineGraphArea = document.getElementById("lineGraph");
-      let lineGraph = new LineGraph(lineGraphArea, {{intervals|tojson|safe}});
-      lineGraph.createSVG()
-      lineGraph.drawSeries(8, "red") //rating
-      lineGraph.drawSeries(13, "green") //catch
-    </script>
+  <article class="angleView">
+    <h3>Angle View</h3>
   </article>
+  
 
   <article class="intervalOverview">
     <table>
