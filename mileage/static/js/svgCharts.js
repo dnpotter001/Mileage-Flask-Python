@@ -103,29 +103,28 @@ let LineGraph = function (area, intervals) {
     let dotInc = 200 / maxValue
     console.log(dotInc, dotWidth)
 
-    intervals.forEach(x => {
-
+    intervals.forEach((interval) => {
       let dot = document.createElementNS(this.ns, 'circle');
-      let line = document.createElementNS(this.ns, 'line');
-
       dot.setAttributeNS(null, 'r', 2)
-      dot.setAttributeNS(null, 'cx', (x[0]-0.5) * dotWidth + "%")
-      dot.setAttributeNS(null, 'cy', x[series] * dotInc - 130 + "%")
+      dot.setAttributeNS(null, 'cx', (interval[0]-0.5) * dotWidth + "%")
+      dot.setAttributeNS(null, 'cy', interval[series] * dotInc - 130 + "%")
       dot.setAttributeNS(null, 'fill', colour)
       this.svg.appendChild(dot)
-    
-      line.setAttributeNS(null, 'x1', x[0] * dotWidth + "%")
-      line.setAttributeNS(null, 'x2', x[0] * dotWidth + "%")
-      line.setAttributeNS(null, 'y1', x[series] * dotInc + "%")
-      line.setAttributeNS(null, 'y2', x[series] * dotInc + "%")
-      line.setAttributeNS(null, 'style', `stroke:${colour};stroke-width:2`)
-      
-
     })
 
-
-
-
+    let lineNo = 1
+    let index = 0
+    while (lineNo < dotCount){
+      let line = document.createElementNS(this.ns, 'line');
+      line.setAttributeNS(null, 'x1', (intervals[index][0]-0.5) * dotWidth + "%")
+      line.setAttributeNS(null, 'y1', intervals[index][series] * dotInc - 130 + "%")
+      line.setAttributeNS(null, 'x2', (intervals[index+1][0] -0.5) * dotWidth + "%")
+      line.setAttributeNS(null, 'y2', intervals[index+1][series] * dotInc - 130 + "%")
+      line.setAttributeNS(null, 'style', `stroke:${colour};stroke-width:2`)
+      this.svg.appendChild(line)
+      lineNo = lineNo + 1
+      index = index + 1
+    }
 
     return;
   }

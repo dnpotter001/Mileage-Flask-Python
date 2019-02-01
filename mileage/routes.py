@@ -98,7 +98,7 @@ def workoutReview():
       intervals.append(csvArray[x + 22])
   
     workout = { 
-      'type': csvArray[4][1],
+      'ty pe': csvArray[4][1],
       'details': csvArray[2][1],
       'intervalCount': intervalCount,
       'units':csvArray[14],
