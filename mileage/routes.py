@@ -39,20 +39,31 @@ def welcome():
 
   )
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
 
   login = LoginForm()
+
+  if login.submit.data and login.validate():
+      if login.email.data == 'dave@mileage.com' and login.password.data == 'password':
+          flash('You have been logged in!', 'success')
+          return redirect(url_for('feed'))
+      else:
+          flash('Login Unsuccessful. Please check username and password', 'danger')
 
   return render_template(
     'login.html',
     login=login
   )
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
 
   register= RegistrationForm()
+
+  if register.submit.data and register.validate():
+    flash('You have been registered please log in', 'success')
+    return redirect(url_for('login'))
 
   return render_template(
     'register.html',

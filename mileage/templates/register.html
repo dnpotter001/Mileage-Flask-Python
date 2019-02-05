@@ -1,26 +1,26 @@
 {% extends "plain.html" %}
 {% block content %}
 
-<form method="POST" action="">
+<form method="POST" action="" novalidate>
   {{register.hidden_tag()}}
   <fieldset>
     <legend>register</legend>
 
     {{register.username.label}}
-    {%if register.username.errors %}
-      {{form.username(class="invalid")}}
-      <div class="invalid-input">
-        {% for error in register.username.errors %}
-        <span>{{error}}</span>
-        {% endfor %}
-      </div>
-    {% else %}
-      {{register.username}}
-    {% endif %}
+    {% if register.username.errors %}
+    {{register.username(class="invalid") }}
+    <div class="invalid-input">
+      {% for error in register.username.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+  {% else %}
+    {{register.username}}
+  {% endif %}
 
     {{register.email.label}}
     {%if register.email.errors %}
-      {{form.email(class="invalid")}}
+      {{register.email(class="invalid")}}
       <div class="invalid-input">
         {% for error in register.email.errors %}
         <span>{{error}}</span>
@@ -32,7 +32,7 @@
     
     {{register.password.label}}
     {%if register.password.errors %}
-    {{form.password(class="invalid")}}
+    {{register.password(class="invalid")}}
       <div class="invalid-input">
         {% for error in register.password.errors %}
         <span>{{error}}</span>
@@ -44,7 +44,7 @@
 
     {{register.confirmPassword.label}}
     {%if register.confirmPassword.errors %}
-    {{form.confirmPassword(class="invalid")}}
+    {{register.confirmPassword(class="invalid")}}
       <div class="invalid-input">
         {% for error in register.confirmPassword.errors %}
         <span>{{error}}</span>
@@ -54,8 +54,6 @@
       {{register.confirmPassword}}
     {% endif %}
 
-
-    
     {{ register.submit(class="button light small")}}
   </fieldset>
 </form>

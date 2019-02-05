@@ -1,32 +1,32 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, BooleanField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms.validators import Length, DataRequired, NumberRange, EqualTo, ValidationError, Email
+from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, ValidationError, Email
 
 class RegistrationForm(FlaskForm):
   username = StringField('UserName',
-    validators=[DataRequired(), Length(min=2, max=30)])
+    validators=[InputRequired(), Length(min=2, max=30)])
   
   email = StringField('Email',
-    validators=[DataRequired(), Email()])
+    validators=[InputRequired(), Email()])
 
   password = PasswordField('Password', 
-    validators= [DataRequired()])
+    validators= [InputRequired()])
 
   confirmPassword = PasswordField('Confirm Password',
-    validators=[DataRequired(), EqualTo('password')])
+    validators=[InputRequired(), EqualTo('password')])
 
   submit = SubmitField('Sign Up')
 
 class LoginForm(FlaskForm):
   email = StringField('Email',
-    validators=[DataRequired(), Email()])
+    validators=[InputRequired(), Email()])
 
   password = PasswordField('Password', 
-    validators= [DataRequired()])
+    validators=[InputRequired()])
 
   remember = BooleanField('Remember Me')
-
+  
   submit = SubmitField('Login')
 
 class CSVUpload(FlaskForm):
@@ -43,22 +43,22 @@ class UploadSingleInterval(FlaskForm):
     render_kw={"placeholder": "e.g. Sunday Workout"})
 
   distance = IntegerField('Distance',
-    validators=([DataRequired(message="This field is required.")]),
+    validators=[InputRequired(message="This field is required.")],
     render_kw={"placeholder":"Meters",
                "id":"uploadDistance"})
   
   hours = IntegerField('Time',
-  validators=([DataRequired(message="This field is required.")]),
+  validators=[InputRequired(message="This field is required.")],
   render_kw={"placeholder":"Hours",
               "id":"uploadHours"})
 
   minutes = IntegerField('Time',
-    validators=([DataRequired(message="This field is required."), NumberRange(min=0, max=59, message='Value Must be between 0 and 59')]),
+    validators=[InputRequired(message="This field is required."), NumberRange(min=0, max=59, message='Value Must be between 0 and 59')],
     render_kw={"placeholder":"Minutes",
                "id":"uploadMinutes"})
 
   seconds = IntegerField('seconds',
-    validators=([DataRequired(message="This field is required."), NumberRange(min=0, max=59, message='Value Must be between 0 and 59')]),
+    validators=[InputRequired(message="This field is required."), NumberRange(min=0, max=59, message='Value Must be between 0 and 59')],
     render_kw={"placeholder":"Seconds",
                "id":"uploadSeconds"})
 

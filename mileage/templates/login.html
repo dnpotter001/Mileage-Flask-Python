@@ -1,14 +1,14 @@
 {% extends "plain.html" %}
 {% block content %}
 
-<form method="POST" action="">
+<form method="POST" action="{{ LoginUser }}" novalidate>
   {{login.hidden_tag()}}
   <fieldset>
     <legend>Login</legend>
 
     {{login.email.label}}
     {%if login.email.errors %}
-      {{form.email(class="invalid")}}
+    {{login.email(class="invalid")}}
       <div class="invalid-input">
         {% for error in login.email.errors %}
         <span>{{error}}</span>
@@ -17,10 +17,11 @@
     {% else %}
       {{login.email}}
     {% endif %}
+   
     
     {{login.password.label}}
     {%if login.password.errors %}
-    {{form.password(class="invalid")}}
+    {{login.password(class="invalid")}}
       <div class="invalid-input">
         {% for error in login.password.errors %}
         <span>{{error}}</span>
@@ -29,6 +30,7 @@
     {% else %}
       {{login.password}}
     {% endif %}
+    
     {{login.remember.label}}
     {{ login.remember }}
     
