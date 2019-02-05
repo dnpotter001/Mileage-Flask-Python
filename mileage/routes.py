@@ -31,9 +31,32 @@ workouts = [
   }
 ]
 
-@app.route("/", methods=['GET', 'POST'])
-@app.route("/feed")
+@app.route("/")
+def welcome():
 
+  return render_template(
+    'welcome.html',
+    title="Welcome",
+
+  )
+
+@app.route("/login")
+def login():
+
+  return render_template(
+    'login.html',
+    title="Login"
+  )
+
+@app.route("/register")
+def Register():
+
+  return render_template(
+    'register.html',
+    title="Register"
+  )
+
+@app.route("/feed")
 def feed():
 
   if g.sijax.is_sijax_request:

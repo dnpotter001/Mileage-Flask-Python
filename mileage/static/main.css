@@ -30,6 +30,14 @@ a {
   height: 100vh;
 }
 
+.splashScreen {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px auto 1fr auto;
+  grid-template-areas: "header" "subheader" "content " "footer  ";
+  height: 100vh;
+}
+
 .header {
   grid-area: header;
   background: var(--teal);
@@ -477,6 +485,7 @@ input, select{
     grid-template-areas: "header header " "subheader subheader " "nav content " "footer footer  ";
     height: 100vh;
   }
+  
   .erg-control {
     padding: 20px;
     grid-area: aside;

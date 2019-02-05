@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static', filename='main.css')}}" />
+
+  {% if title %}
+  <title>Mileage - {{title}}</title>
+  {% else %}
+  <title>Mileage</title>
+  {% endif %}
+</head>
+
+<body class="splashScreen">
+  <header class="header">
+    <div id="navbutton">&#9776; Mileage</div>
+    <span class='desktopheader'>Mileage</span>
+  </header>
+
+  <article class="subheader">
+    {% if title %}
+       {{title}}
+    {% else %}
+    {% endif %}
+  </article>
+
+  <section class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {%for category, message in messages %}
+            <article class="alert alert-{{category}}">
+              {{message}}
+            </article>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+  
+      {% block content %}{% endblock %}
+  </section>
+
+
+  <footer>
+    <a href={{url_for('feed')}}>Your Feed</a>
+    <a href="upload">Upload</a>
+    <a href="squads">Squads</a>
+    <a href="profile">Your Profile</a>
+    <a href={{url_for('ergControl')}}>Erg Control</a>
+    <a href="settings">Settings</a>
+    <a href="about">About Site</a>
+  </footer>
+
+  <script src="../static/js/scripts.js"></script>
+
+</body>
+</html>
