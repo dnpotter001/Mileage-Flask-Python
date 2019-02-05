@@ -30,14 +30,6 @@ a {
   height: 100vh;
 }
 
-.splashScreen {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 60px calc(100vh - 60px) auto;
-  grid-template-areas: "header" "centerPane " "footer  ";
-  height: 100vh;  
-}
-
 .header {
   grid-area: header;
   background: var(--teal);
@@ -58,6 +50,41 @@ a {
   background: var(--background);
   padding: 20px;
 }
+
+h1 {
+  color: #eee;
+  text-align: center;
+  font-size: 60px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  
+}
+
+.splashScreen {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20vh 80vh auto;
+  grid-template-areas: "bigHeader" "centerPane " "footer  ";
+  height: 100vh;  
+}
+
+.bigHeader{
+  grid-area: bigHeader ;
+  background: #333;
+  color: #eee;
+  text-align: center;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+
 
 .center-pane {
   grid-area: centerPane;
@@ -133,22 +160,6 @@ nav a:hover {
   color: var(--link-hover);
 }
 
-nav .machineCount {
-  position: absolute;
-  white-space: nowrap;
-  overflow: hidden;
-  height: auto;
-  width: 100%;
-  bottom: 0px;
-  color: var(--text);
-  border-top: 1px var(--text) solid;
-  padding: 10px;
-}
-
-#machineIndicator {
-  width: 10px;
-  height: 10px;
-}
 
 footer {
   grid-area: footer;
@@ -193,6 +204,12 @@ footer a:visited {
   display:flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.verticle-align {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .b-top {
@@ -381,11 +398,6 @@ article ul li{
 }
 
 .disabled {
-  background: #aaa;
-  box-shadow: 0 6px #666;
-}
-
-.button:disabled, .button[disabled]{
   background: #aaa;
   box-shadow: 0 6px #666;
 }

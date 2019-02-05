@@ -50,7 +50,7 @@ def login():
   )
 
 @app.route("/register")
-def Register():
+def register():
 
   register= RegistrationForm()
 

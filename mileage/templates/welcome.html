@@ -2,12 +2,19 @@
 {% block content %}
 
 <section class="center-align">
-  <h3>
-    Welcome to mileage
-  </h3>
-  <p>
-    The smarter way of tracking your training
-  </p>
+  
+  <h2>
+    Training Tracking Tool
+  </h2>
+  <div class="row">
+    <a href={{url_for('login')}} class="verticle-align" >
+      Already have an account? Sign in here.
+    </a>
+  
+    <a href={{url_for('register')}}>
+      <button class="button light" >Register</button>
+    </a>
+  </div>
 
 </section>
 
