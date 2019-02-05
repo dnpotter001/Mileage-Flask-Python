@@ -46,7 +46,6 @@ def login():
 
   return render_template(
     'login.html',
-    title="Login",
     login=login
   )
 
@@ -57,7 +56,6 @@ def Register():
 
   return render_template(
     'register.html',
-    title="Register",
     register=register
   )
 

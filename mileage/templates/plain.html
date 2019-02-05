@@ -19,14 +19,7 @@
     <span class='desktopheader'>Mileage</span>
   </header>
 
-  <article class="subheader">
-    {% if title %}
-       {{title}}
-    {% else %}
-    {% endif %}
-  </article>
-
-  <section class="content">
+  <section class="center-pane">
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {%for category, message in messages %}
@@ -39,7 +32,6 @@
   
       {% block content %}{% endblock %}
   </section>
-
 
   <footer>
     <a href={{url_for('feed')}}>Your Feed</a>

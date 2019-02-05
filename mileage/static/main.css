@@ -33,9 +33,9 @@ a {
 .splashScreen {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 60px auto 1fr auto;
-  grid-template-areas: "header" "subheader" "content " "footer  ";
-  height: 100vh;
+  grid-template-rows: 60px calc(100vh - 60px) auto;
+  grid-template-areas: "header" "centerPane " "footer  ";
+  height: 100vh;  
 }
 
 .header {
@@ -56,6 +56,12 @@ a {
 .content {
   grid-area: content;
   background: var(--background);
+  padding: 20px;
+}
+
+.center-pane {
+  grid-area: centerPane;
+  background: var(--teal);
   padding: 20px;
 }
 
@@ -356,7 +362,6 @@ article ul li{
   grid-area: submitRow;
 }
 
-/* -------------------------button stylin-------------------------g*/
 
 /* -------------------------button stylin-------------------------g*/
 
@@ -410,6 +415,16 @@ article ul li{
 
 .red:active {
   box-shadow: 0 3px var(--my-red-accent);
+}
+
+.light {
+  background: mintcream;
+  box-shadow: 0 6px lightgrey;
+  color: black;
+}
+
+.light:active {
+  box-shadow: 0 3px darkslategrey;
 }
 
 .square {

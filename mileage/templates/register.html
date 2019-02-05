@@ -1,6 +1,63 @@
 {% extends "plain.html" %}
 {% block content %}
 
-<h2>Register</h2>
+<form method="POST" action="">
+  {{register.hidden_tag()}}
+  <fieldset>
+    <legend>register</legend>
+
+    {{register.username.label}}
+    {%if register.username.errors %}
+      {{form.username(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in register.username.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      {{register.username}}
+    {% endif %}
+
+    {{register.email.label}}
+    {%if register.email.errors %}
+      {{form.email(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in register.email.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      {{register.email}}
+    {% endif %}
+    
+    {{register.password.label}}
+    {%if register.password.errors %}
+    {{form.password(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in register.password.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      {{register.password}}
+    {% endif %}
+
+    {{register.confirmPassword.label}}
+    {%if register.confirmPassword.errors %}
+    {{form.confirmPassword(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in register.confirmPassword.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      {{register.confirmPassword}}
+    {% endif %}
+
+
+    
+    {{ register.submit(class="button light small")}}
+  </fieldset>
+</form>
 
 {% endblock content %}

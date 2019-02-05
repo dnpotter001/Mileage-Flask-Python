@@ -1,7 +1,39 @@
 {% extends "plain.html" %}
 {% block content %}
 
-<h2>
-  Login
-</h2>
+<form method="POST" action="">
+  {{login.hidden_tag()}}
+  <fieldset>
+    <legend>Login</legend>
+
+    {{login.email.label}}
+    {%if login.email.errors %}
+      {{form.email(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in login.email.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      {{login.email}}
+    {% endif %}
+    
+    {{login.password.label}}
+    {%if login.password.errors %}
+    {{form.password(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in login.password.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      {{login.password}}
+    {% endif %}
+    {{login.remember.label}}
+    {{ login.remember }}
+    
+    {{ login.submit(class="button contrast small")}}
+  </fieldset>
+</form>
+
 {% endblock content %}
