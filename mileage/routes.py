@@ -1,8 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify, request, make_response
 from mileage import app
-from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload
+from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm
 from . import pyrow
-#from . import plot_tipping_problem_newapi
 from mileage.sijaxHandlers import ErgHandler 
 import flask_sijax
 import time
@@ -43,17 +42,23 @@ def welcome():
 @app.route("/login")
 def login():
 
+  login = LoginForm()
+
   return render_template(
     'login.html',
-    title="Login"
+    title="Login",
+    login=login
   )
 
 @app.route("/register")
 def Register():
 
+  register= RegistrationForm()
+
   return render_template(
     'register.html',
-    title="Register"
+    title="Register",
+    register=register
   )
 
 @app.route("/feed")
@@ -85,10 +90,6 @@ def upload():
     singleInterval=singleInterval,
     csv=csv
   )
-
-
-
-
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
