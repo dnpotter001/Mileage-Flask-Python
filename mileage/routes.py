@@ -9,6 +9,8 @@ import io, csv, os
 from io import StringIO
 import json
 from mileage.rowfis import MaleFIS, FemaleFIS
+from flask_pymongo import PyMongo
+
 
 #print(plot_tipping_problem_newapi.CalcTip(10, 10))
 #dunny test data for the feed
@@ -29,6 +31,14 @@ workouts = [
     'date': '14th Aug 2019'
   }
 ]
+mongoDB = PyMongo(app)
+
+@app.route("/mongo")
+def mongo():
+  users = mongoDB.db.users
+  users.insert({"name": "David Potter"})
+
+  return "Added user"
 
 @app.route("/")
 def welcome():
