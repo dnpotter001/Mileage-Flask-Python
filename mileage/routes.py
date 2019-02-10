@@ -1,15 +1,19 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify, request, make_response
-from mileage import app, bcrypy, mongo
-from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm
-from . import pyrow
-from mileage.sijaxHandlers import ErgHandler 
-import flask_sijax
-import time
-import io, csv, os
-from io import StringIO
-import json
-from mileage.rowfis import MaleFIS, FemaleFIS
+from flask_login import login_user, logout_user
 from flask_pymongo import PyMongo
+import flask_sijax
+
+from bson import Binary, Code, json_util
+
+from mileage import app, bcrypt, mongo, login_manager
+from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm
+from mileage.sijaxHandlers import ErgHandler 
+from mileage.rowfis import MaleFIS, FemaleFIS
+from . import pyrow
+from mileage.user import User
+
+import io, csv, os, json, time
+from io import StringIO
 
 
 #print(plot_tipping_problem_newapi.CalcTip(10, 10))
@@ -34,6 +38,12 @@ workouts = [
 
 users = mongo.db.users
 
+@login_manager.user_loader
+def load_user(email):
+    user = mongo.db.users.find_one({"_id": email})
+    if not user:
+      return None
+    return User(user['_id'])
 
 @app.route("/dbtest")
 def dbtest():
@@ -51,45 +61,52 @@ def welcome():
 
   )
 
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-
-  login = LoginForm()
-
-  if login.submit.data and login.validate():
-      if login.email.data == 'dave@mileage.com' and login.password.data == 'password':
-          flash('You have been logged in!', 'success')
-          return redirect(url_for('feed'))
-      else:
-          flash('Login Unsuccessful. Please check username and password', 'danger')
-
-  return render_template(
-    'login.html',
-    login=login
-  )
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
 
   register= RegistrationForm()
 
   if register.submit.data and register.validate():
-    hashedPW = bcrypy.generate_password_hash(register.password.data).decode('utf-8')
-    if (users.find_one({"email": register.email.data}) != None):
-      flash(f'Email address {register.email.data}, already has an account!', 'warning')
-    else: 
-      users.insert({
-        "displayName": register.username.data,
-        "email": register.email.data,
-        "password": hashedPW
-      })
-      flash(f'Account created for {register.email.data}, your are now able to log in!', 'success')
-      return redirect(url_for('login'))
+    hashedPW = bcrypt.generate_password_hash(register.password.data).decode('utf-8')
+    users.insert({
+      "name": register.username.data,
+      "email": register.email.data,
+      "password": hashedPW
+    })
+    flash(f'Account created for {register.email.data}, your are now able to log in!', 'success')
+    return redirect(url_for('login'))
+    
 
   return render_template(
     'register.html',
     register=register
   )
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+
+  login = LoginForm()
+
+  if login.submit.data and login.validate():
+      user = users.find_one({"email": login.email.data})
+      if user and User.validate_login(user['password'], login.password.data):
+        user_obj = User(json_util.dumps(user['_id']))
+        login_user(user_obj, remember=login.remember.data)
+        flash(f'Login Successful, welcome {user["name"]}.', 'success')
+        return redirect(url_for('feed'))
+      else:
+        flash('Login Unsuccessful. Please check email and password', 'warning')
+
+  return render_template(
+    'login.html',
+    login=login
+  )
+
+@app.route('/logout')
+def logout():
+  logout_user()
+  flash('Successfully logged out.','success')
+  return redirect(url_for('welcome'))
 
 @app.route("/feed")
 def feed():

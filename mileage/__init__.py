@@ -3,6 +3,7 @@ from flask import Flask
 from flask_pymongo import PyMongo
 import flask_sijax
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 path = os.path.join('.', os.path.dirname(__file__), 'static/js/sijax/')
 
@@ -14,7 +15,8 @@ app.config["MONGO_DBNAME"] = 'mileagedb'
 app.config["MONGO_URI"] = "mongodb://localhost:27017/mileagedb"
 flask_sijax.Sijax(app)
 
-bcrypy = Bcrypt(app)
+bcrypt = Bcrypt(app)
 mongo = PyMongo(app)
+login_manager = LoginManager(app)
 
 from mileage import routes
