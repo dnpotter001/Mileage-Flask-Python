@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify, request, make_response
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from flask_pymongo import PyMongo
 import flask_sijax
 
@@ -39,11 +39,12 @@ workouts = [
 users = mongo.db.users
 
 @login_manager.user_loader
-def load_user(email):
-    user = mongo.db.users.find_one({"_id": email})
+def load_user(user_id):
+    user = mongo.db.users.find_one({"_id": user_id})
     if not user:
       return None
-    return User(user['_id'])
+    return User(json_util.dumps(user[user_id]))
+  
 
 @app.route("/dbtest")
 def dbtest():
@@ -66,6 +67,9 @@ def register():
 
   register= RegistrationForm()
 
+  if current_user.is_authenticated:
+    return redirect(url_for('feed'))
+
   if register.submit.data and register.validate():
     hashedPW = bcrypt.generate_password_hash(register.password.data).decode('utf-8')
     users.insert({
@@ -86,6 +90,9 @@ def register():
 def login():
 
   login = LoginForm()
+  
+  if current_user.is_authenticated:
+    return redirect(url_for('feed'))
 
   if login.submit.data and login.validate():
       user = users.find_one({"email": login.email.data})
