@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify, request, make_response
-from mileage import app
+from mileage import app, bcrypy, mongo
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm
 from . import pyrow
 from mileage.sijaxHandlers import ErgHandler 
@@ -31,11 +31,13 @@ workouts = [
     'date': '14th Aug 2019'
   }
 ]
-mongoDB = PyMongo(app)
 
-@app.route("/mongo")
-def mongo():
-  users = mongoDB.db.users
+users = mongo.db.users
+
+
+@app.route("/dbtest")
+def dbtest():
+  
   users.insert({"name": "David Potter"})
 
   return "Added user"
@@ -72,8 +74,17 @@ def register():
   register= RegistrationForm()
 
   if register.submit.data and register.validate():
-    flash('You have been registered please log in', 'success')
-    return redirect(url_for('login'))
+    hashedPW = bcrypy.generate_password_hash(register.password.data).decode('utf-8')
+    if (users.find_one({"email": register.email.data}) != None):
+      flash(f'Email address {register.email.data}, already has an account!', 'warning')
+    else: 
+      users.insert({
+        "displayName": register.username.data,
+        "email": register.email.data,
+        "password": hashedPW
+      })
+      flash(f'Account created for {register.email.data}, your are now able to log in!', 'success')
+      return redirect(url_for('login'))
 
   return render_template(
     'register.html',
