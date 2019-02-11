@@ -41,9 +41,7 @@ users = mongo.db.users
 @login_manager.user_loader
 def load_user(user_id):
     user = mongo.db.users.find_one({"_id": user_id})
-    if not user:
-      return None
-    return User(json_util.dumps(user[user_id]))
+    return User(user)
   
 
 @app.route("/dbtest")
