@@ -93,9 +93,6 @@ h2 {
   font-size: 60px;
   font-weight: bold;
 }
-
-
-
 .center-pane {
   grid-area: centerPane;
   background: var(--teal);
@@ -235,12 +232,9 @@ footer a:visited {
 
 /* -------------------------login register stylin-------------------------g*/
 .login{
-  display: block;
-  margin: auto auto auto auto;
+  margin:auto;
   text-align: center;
-  border: 1px solid var(--border);
-  background: #eee;
-  width: auto;
+   width: auto;
 }
 
 .login fieldset{
@@ -259,6 +253,15 @@ footer a:visited {
 .rememberMe input{
   margin: auto 0px auto 10px;
 }
+
+.register_clear { 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+
 /* -------------------------feed stylin-------------------------g*/
 
 .feed-item {

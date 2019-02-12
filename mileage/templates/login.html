@@ -16,7 +16,7 @@
     {% else %}
       {{login.email}}
     {% endif %}
-   
+  
     {%if login.password.errors %}
     {{login.password(class="invalid")}}
       <div class="invalid-input">
@@ -34,8 +34,13 @@
     </div>
     
     
-    {{ login.submit(class="button contrast small center-align")}}
+    {{ login.submit(class="button light small center-align")}}
+
+    <span>
+        <a href={{url_for('register')}}>Don't have an account?</a>
+      </span>
   </fieldset>
 </form>
+
 
 {% endblock content %}

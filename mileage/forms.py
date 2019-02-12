@@ -5,17 +5,21 @@ from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, Vali
 from mileage import mongo
 
 class RegistrationForm(FlaskForm):
-  username = StringField('UserName',
-    validators=[InputRequired(), Length(min=2, max=30)])
+  username = StringField('Display Name',
+    validators=[InputRequired(), Length(min=2, max=30)],
+    render_kw={"placeholder": "Display Name"})
   
   email = StringField('Email',
-    validators=[InputRequired(), Email()])
+    validators=[InputRequired(), Email()],
+    render_kw={"placeholder": "Email"})
 
   password = PasswordField('Password', 
-    validators= [InputRequired()])
+    validators= [InputRequired()],
+    render_kw={"placeholder": "Password"})
 
   confirmPassword = PasswordField('Confirm Password',
-    validators=[InputRequired(), EqualTo('password')])
+    validators=[InputRequired(), EqualTo('password')],
+    render_kw={"placeholder": "Confirm Password"})
 
   submit = SubmitField('Sign Up')
 
