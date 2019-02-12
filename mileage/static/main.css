@@ -18,6 +18,7 @@ body {
 }
 a {
   text-decoration: none;
+  color: var(--text);
 }
 
 /* template styling */
@@ -36,6 +37,15 @@ a {
   font-weight: bold;
   font-size: 40px;
   overflow: hidden;
+}
+
+.loginHeader, .logoutHeader{
+  display: block;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  float: right;
+  margin: 8px 0px auto 0px;
 }
 
 .subheader {
@@ -223,6 +233,32 @@ footer a:visited {
   padding: 20px 0px;
 }
 
+/* -------------------------login register stylin-------------------------g*/
+.login{
+  display: block;
+  margin: auto auto auto auto;
+  text-align: center;
+  border: 1px solid var(--border);
+  background: #eee;
+  width: auto;
+}
+
+.login fieldset{
+  border: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rememberMe{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+}
+.rememberMe input{
+  margin: auto 0px auto 10px;
+}
 /* -------------------------feed stylin-------------------------g*/
 
 .feed-item {
@@ -371,10 +407,6 @@ article ul li{
 }
 .intervalOverview tr:nth-child(odd){background-color: var(--background);}
 
-
-
-
-
 .submitRow {
   grid-area: submitRow;
 }
@@ -520,7 +552,7 @@ input, select{
     border-left: 1px solid var(--border);
   }
   .header {
-    padding-left: 200px
+    padding-left: 200px;
   }
   .subheader {
     padding-left: 210px;
@@ -540,6 +572,8 @@ input, select{
     padding: 10px;
     font-size: 40px;
   }
+
+
 
   .menu-toggle {
     width: 200px;
@@ -568,6 +602,10 @@ input, select{
     grid-area: erg-sidebar;
     background: var(--background);
     color:black;
+  }
+
+  .header{
+    padding-right: 200px;
   }
 
   .erg-control ul{
