@@ -116,6 +116,9 @@ def logout():
 @app.route("/feed")
 def feed():
 
+  if not current_user.is_authenticated:
+    return redirect(url_for('welcome'))
+
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
@@ -130,7 +133,9 @@ def feed():
 def upload():
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
-    
+  
+  if not current_user.is_authenticated:
+    return redirect(url_for('welcome'))
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -145,6 +150,9 @@ def upload():
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
+
+  if not current_user.is_authenticated:
+    return redirect(url_for('welcome'))
 
   if request.method == 'POST': 
 
@@ -218,6 +226,10 @@ def workoutReview():
     
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():
+
+  if not current_user.is_authenticated:
+    return redirect(url_for('welcome'))
+
   formDis = SetDistanceWorkout()
   formTime = SetTimeWorkout()
   formSL = StandardWorkouts()
@@ -261,4 +273,6 @@ def ergControl():
 
 @app.route("/about")
 def about():
+
+  
   return render_template('about.html', title="About")
