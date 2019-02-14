@@ -7,60 +7,69 @@
     <legend><h3>Register</h3></legend>
 
     
-    {% if register.username.errors %}
-    {{register.username(class="invalid") }}
+  {% if register.firstName.errors %}
+    {{register.firstName(class="invalid") }}
     <div class="invalid-input">
-      {% for error in register.username.errors %}
+      {% for error in register.firstName.errors %}
       <span>{{error}}</span>
       {% endfor %}
     </div>
   {% else %}
-    {{register.username}}
+    {{register.firstName}}
   {% endif %}
 
-    {%if register.email.errors %}
-      {{register.email(class="invalid")}}
-      <div class="invalid-input">
-        {% for error in register.email.errors %}
-        <span>{{error}}</span>
-        {% endfor %}
-      </div>
-    {% else %}
-      {{register.email}}
-    {% endif %}
-    
-    {%if register.password.errors %}
-    {{register.password(class="invalid")}}
-      <div class="invalid-input">
-        {% for error in register.password.errors %}
-        <span>{{error}}</span>
-        {% endfor %}
-      </div>
-    {% else %}
-      {{register.password}}
-    {% endif %}
-
-    {%if register.confirmPassword.errors %}
-    {{register.confirmPassword(class="invalid")}}
-      <div class="invalid-input">
-        {% for error in register.confirmPassword.errors %}
-        <span>{{error}}</span>
-        {% endfor %}
-      </div>
-    {% else %}
-      {{register.confirmPassword}}
-    {% endif %}
-    <div class="register_clear">
-      <button type="reset" value="Reset" class="button red small ">Clear</button>
-      {{ register.submit(class="button light small")}}
+  {% if register.lastName.errors %}
+    {{register.lastName(class="invalid") }}
+    <div class="invalid-input">
+      {% for error in register.lastName.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
     </div>
+  {% else %}
+    {{register.lastName}}
+  {% endif %}
 
-    <span>
-      <a href={{url_for('login')}}>Already have an account? Sign in here.</a>
-    </span>
+  {%if register.email.errors %}
+    {{register.email(class="invalid")}}
+    <div class="invalid-input">
+      {% for error in register.email.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+  {% else %}
+    {{register.email}}
+  {% endif %}
   
+  {%if register.password.errors %}
+  {{register.password(class="invalid")}}
+    <div class="invalid-input">
+      {% for error in register.password.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+  {% else %}
+    {{register.password}}
+  {% endif %}
 
+  {%if register.confirmPassword.errors %}
+  {{register.confirmPassword(class="invalid")}}
+    <div class="invalid-input">
+      {% for error in register.confirmPassword.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+  {% else %}
+    {{register.confirmPassword}}
+  {% endif %}
+  <div class="register_clear">
+    <button type="reset" value="Reset" class="button red small ">Clear</button>
+    {{ register.submit(class="button light small")}}
+  </div>
 
+  <span>
+    <a href={{url_for('login')}}>Already have an account? Sign in here.</a>
+  </span>
+  </fieldset>
 </form>
 
 {% endblock content %}

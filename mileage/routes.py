@@ -43,7 +43,7 @@ def load_user(user_id):
     user = users.find_one({"_id": ObjectId(user_id)})
     if not user:
         return None
-    return User(str(user['_id']), user['name'])
+    return User(str(user['_id']), user['firstName'])
 
 @app.route("/dbtest")
 def dbtest():
@@ -72,8 +72,9 @@ def register():
   if register.submit.data and register.validate():
     hashedPW = bcrypt.generate_password_hash(register.password.data).decode('utf-8')
     users.insert({
-      "name": register.username.data,
       "email": register.email.data,
+      "firstName": register.firstName.data,
+      "lastName": register.lastName.data,
       "password": hashedPW
     })
     flash(f'Account created for {register.email.data}, your are now able to log in!', 'success')
@@ -96,9 +97,9 @@ def login():
   if login.submit.data and login.validate():
       user = users.find_one({"email": login.email.data})
       if user and User.validate_login(user['password'], login.password.data):
-        user_obj = User(str(user['_id']), user['name'])
+        user_obj = User(str(user['_id']), user['firstName'])
         login_user(user_obj, remember=login.remember.data)
-        flash(f'Login Successful, welcome {user["name"]}.', 'success')
+        flash(f'Login Successful, welcome {user["firstName"]}', 'success')
         return redirect(url_for('feed'))
       else:
         flash('Login Unsuccessful. Please check email and password', 'warning')
