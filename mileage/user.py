@@ -3,9 +3,9 @@ from flask_login import UserMixin
 
 class User():
 
-    def __init__(self, _id):
-        self._id = _id
-        
+    def __init__(self, username):
+        self.username = username
+
     def is_authenticated(self):
         return True
 
@@ -16,7 +16,7 @@ class User():
         return False
 
     def get_id(self):
-        return self._id
+        return self.username
         
     @staticmethod
     def validate_login(password_hash, password):

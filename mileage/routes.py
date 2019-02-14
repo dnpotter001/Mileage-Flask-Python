@@ -39,12 +39,11 @@ workouts = [
 users = mongo.db.users
 
 @login_manager.user_loader
-def load_user(_id):
-  try:
-    user = users.find_one({'_id': _id})
-    return User(user['_id'])
-  except:
-    None
+def load_user(username):
+    u = users.find_one({"_id": username})
+    if not u:
+        return None
+    return User(u['_id'])
 
 @app.route("/dbtest")
 def dbtest():
@@ -119,7 +118,7 @@ def logout():
 def feed():
 
   if not current_user.is_authenticated:
-    #flash(f'{current_user.is_authenticated} {current_user.username}', 'warning')
+    #flash(f'{current_user.is_authenticated} {current_user._id}', 'warning')
     return redirect(url_for('welcome'))
 
   if g.sijax.is_sijax_request:
