@@ -43,7 +43,7 @@ def load_user(user_id):
     user = users.find_one({"_id": ObjectId(user_id)})
     if not user:
         return None
-    return User(user)
+    return User(str(user['_id']), user['name'])
 
 @app.route("/dbtest")
 def dbtest():
@@ -96,7 +96,7 @@ def login():
   if login.submit.data and login.validate():
       user = users.find_one({"email": login.email.data})
       if user and User.validate_login(user['password'], login.password.data):
-        user_obj = User(user)
+        user_obj = User(str(user['_id']), user['name'])
         login_user(user_obj, remember=login.remember.data)
         flash(f'Login Successful, welcome {user["name"]}.', 'success')
         return redirect(url_for('feed'))
