@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user
 from flask_pymongo import PyMongo
 import flask_sijax
 
-from bson import Binary, Code, json_util
+from bson import Binary, Code, json_util, ObjectId
 
 from mileage import app, bcrypt, mongo, login_manager
 from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm
@@ -39,11 +39,11 @@ workouts = [
 users = mongo.db.users
 
 @login_manager.user_loader
-def load_user(email):
-    user = users.find_one({"email": email})
+def load_user(user_id):
+    user = users.find_one({"_id": ObjectId(user_id)})
     if not user:
         return None
-    return User(user['email'])
+    return User(user)
 
 @app.route("/dbtest")
 def dbtest():
@@ -96,7 +96,7 @@ def login():
   if login.submit.data and login.validate():
       user = users.find_one({"email": login.email.data})
       if user and User.validate_login(user['password'], login.password.data):
-        user_obj = User(user['email'])
+        user_obj = User(user)
         login_user(user_obj, remember=login.remember.data)
         flash(f'Login Successful, welcome {user["name"]}.', 'success')
         return redirect(url_for('feed'))
@@ -133,11 +133,9 @@ def feed():
 
 @app.route('/profile')
 def profile():
-  user = current_user.username
   return render_template(
     'profile.html',
     title='Your Profile',
-    user=user
   )
 
 @app.route("/upload", methods=['GET', 'POST'])
