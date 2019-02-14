@@ -39,11 +39,11 @@ workouts = [
 users = mongo.db.users
 
 @login_manager.user_loader
-def load_user(username):
-    u = users.find_one({"_id": username})
-    if not u:
+def load_user(email):
+    user = users.find_one({"email": email})
+    if not user:
         return None
-    return User(u['_id'])
+    return User(user['email'])
 
 @app.route("/dbtest")
 def dbtest():
@@ -96,7 +96,7 @@ def login():
   if login.submit.data and login.validate():
       user = users.find_one({"email": login.email.data})
       if user and User.validate_login(user['password'], login.password.data):
-        user_obj = User(json_util.dumps(user['_id']))
+        user_obj = User(user['email'])
         login_user(user_obj, remember=login.remember.data)
         flash(f'Login Successful, welcome {user["name"]}.', 'success')
         return redirect(url_for('feed'))
