@@ -39,10 +39,12 @@ workouts = [
 users = mongo.db.users
 
 @login_manager.user_loader
-def load_user(user_id):
-    user = mongo.db.users.find_one({"_id": user_id})
-    return User(user)
-  
+def load_user(_id):
+  try:
+    user = users.find_one({'_id': _id})
+    return User(user['_id'])
+  except:
+    None
 
 @app.route("/dbtest")
 def dbtest():
@@ -117,6 +119,7 @@ def logout():
 def feed():
 
   if not current_user.is_authenticated:
+    #flash(f'{current_user.is_authenticated} {current_user.username}', 'warning')
     return redirect(url_for('welcome'))
 
   if g.sijax.is_sijax_request:
@@ -127,6 +130,15 @@ def feed():
     'index.html', 
     posts=workouts, 
     title="Your Feed"
+  )
+
+@app.route('/profile')
+def profile():
+  user = current_user.username
+  return render_template(
+    'profile.html',
+    title='Your Profile',
+    user=user
   )
 
 @app.route("/upload", methods=['GET', 'POST'])

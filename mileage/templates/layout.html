@@ -25,6 +25,7 @@
     <span class='desktopheader'>Mileage</span>
     {% if current_user.is_authenticated %}
       <span class='logoutHeader'>
+        <a href={{url_for('profile')}}>Profile | </a>
         <a href={{url_for('logout')}}>Logout</a>
       </span> 
     {% else %}
