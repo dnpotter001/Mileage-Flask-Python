@@ -193,8 +193,20 @@ def fixed():
   return render_template(
     'fixed_intervals.html',
     title="Fixed Intervals",
-    form=fixedInterval
+    form=fixedInterval,
+    intervals=intervals
   )
+
+@app.route("/uploading", methods=['GET','POST'])
+def uploading():
+
+  if request.method == 'POST':
+    form = request.form
+  
+  workout = Workout(form['title'])
+  workout.add_Interval(form['distance'],form['time'], form['rest'])
+
+  return str(workout.__dict__)
   
 
 @app.route("/workout-review", methods=['GET', 'POST'])

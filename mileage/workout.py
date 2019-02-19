@@ -22,7 +22,7 @@ class Workout(object):
     return locals()
 
 
-interval = Workout.createInterval(2000, '6.39', 0, 32)
-print(f'creating intervals {interval}')
+# interval = Workout.createInterval(2000, '6.39', 0, 32)
+# print(f'creating intervals {interval}')
 
 

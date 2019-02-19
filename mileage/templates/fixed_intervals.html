@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<form method="POST" action="{{ SetDistance }}" class="distance-form" novalidate>
-
+<form method="POST" action="{{url_for('uploading')}}" class="distance-form" novalidate>
+  {{ form.hidden_tag() }}
   {{form.title.label}}
   {% if form.title.errors %}
     {{form.title(class="invalid") }}
@@ -15,13 +15,27 @@
     {{form.title(id="title")}}
   {% endif %}
 
-  {% for interval in form.intervals %}
-    {{ form.hidden_tag() }}
-    {{ form.intervals}}
+  {{form.rest.label}}
+  {{form.rest(id="restInput")}}
+
+  {% for interval in intervals %}
+  <div class="row">
+    {{form.distance.label}}
+    <input id="distance{{interval}}" name="distance" placeholder="Meters" class="intervalInput" required>
+    {{form.time.label}}
+    <input id="time{{interval}}" name="time" placeholder="e.g. 1:30" class="intervalInput" required>
+    {{form.rest.label}}
+    <input id="rest{{interval}}" name="rest" placeholder="e.g. 1:30" class="intervalInput rest" readonly required>
+  </div>
   {% endfor %}
 
+
+  {{form.upload(class="button dark small center-align")}}
 </form>
 
+
+
+<script type="text/javascript" src="../static/js/dynamicForms.js"></script>
 
 
 {% endblock content %}

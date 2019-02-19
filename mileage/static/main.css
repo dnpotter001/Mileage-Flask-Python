@@ -205,6 +205,7 @@ footer a:visited {
   display:flex;
   justify-content: center;
   flex-direction: row;
+
 }
 
 .column{
@@ -306,6 +307,12 @@ footer a:visited {
 .hidden{
   display: none;
 }
+
+.table_cell{
+  display: table-cell;
+  vertical-align: middle;
+}
+
 /* -------------------------chart and graph-------------------------g*/
 rect.bar{ 
   transition: all 0.5ms;
