@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, BooleanField, FieldList, FormField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, ValidationError, Email
 from mileage import mongo
@@ -81,19 +81,7 @@ class UploadSingleInterval(FlaskForm):
 
   upload = SubmitField('Upload')
 
-class UploadIntervalFixed(FlaskForm):
-
-  title = StringField('Give your workout a name:',
-  validators=[Length(min=5, max=40)],
-  render_kw={"placeholder": "e.g. Sunday Workout"})
-
-  intervalCount = IntegerField('Interval Count',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"e.g. 4"})
-
-  rest = StringField('Rest (Minutes)',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"e.g. 1:30"})
+class IntervalEntry(FlaskForm): 
 
   distance = IntegerField('Distance',
   validators=[InputRequired(message="This field is required.")],
@@ -103,8 +91,23 @@ class UploadIntervalFixed(FlaskForm):
   validators=[InputRequired(message="This field is required.")],
   render_kw={"placeholder":"e.g. 1:30"})
 
-  upload = SubmitField('Upload')
+  rest = StringField('Rest (Minutes)',
+  validators=[InputRequired(message="This field is required.")],
+  render_kw={"placeholder":"e.g. 1:30"})
 
+class UploadIntervalFixed(FlaskForm):
+
+  title = StringField('Give your workout a name:',
+  validators=[Length(min=5, max=40)],
+  render_kw={"placeholder": "e.g. Sunday Workout"})
+
+class NumberOfIntervals(FlaskForm):
+
+  count = IntegerField('Interval Count',
+  validators=[InputRequired(message="This field is required.")],
+  render_kw={"placeholder":"e.g. 4"})
+
+  next_step = SubmitField('Next')
 
 class SetDistanceWorkout(FlaskForm):
   

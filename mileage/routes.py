@@ -6,7 +6,9 @@ import flask_sijax
 from bson import Binary, Code, json_util, ObjectId
 
 from mileage import app, bcrypt, mongo, login_manager
-from mileage.forms import SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm
+from mileage.forms import (SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, 
+                           UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm, 
+                           UploadIntervalFixed, NumberOfIntervals)
 from mileage.sijaxHandlers import ErgHandler 
 from mileage.rowfis import MaleFIS, FemaleFIS
 from . import pyrow
@@ -143,6 +145,7 @@ def profile():
 def upload():
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
+  intervalCount = NumberOfIntervals()
   if not current_user.is_authenticated:
     return redirect(url_for('welcome'))
 
@@ -161,17 +164,28 @@ def upload():
       {'$addToSet': {'workouts':workout.__dict__}}
     )
   
-
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
+
 
   return render_template(
     'upload.html', 
     title="Upload a workout",
     singleInterval=singleInterval,
-    csv=csv
+    csv=csv,
+    intervalCount=intervalCount
   )
+
+@app.route("/upload/fixed", methods=['GET','POST'])
+def fixed():
+
+  return render_template(
+    'fixed_intervals.html',
+    title="Fixed Intervals"
+
+  )
+  
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():

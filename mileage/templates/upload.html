@@ -112,10 +112,15 @@
     </form>
   </section>
 
-  <section id="intervalFixedForm" class="row hidden">
-    
-    
+  <section id="intervalFixedForm" action="{{url_for('fixed')}}" class="row hidden">
+    <form method="POST">
 
+      {{intervalCount.count.label}}
+      {{intervalCount.count}}
+      {{intervalCount.next_step(class="button dark small center-align")}}
+
+
+    </form>
   </section>
 
   <section id="intervalVariableForm" class="row hidden">
