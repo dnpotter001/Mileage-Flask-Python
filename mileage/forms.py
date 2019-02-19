@@ -101,6 +101,10 @@ class UploadIntervalFixed(FlaskForm):
   validators=[Length(min=5, max=40)],
   render_kw={"placeholder": "e.g. Sunday Workout"})
 
+  intervals = FieldList(FormField(IntervalEntry), min_entries=1)
+
+  upload = SubmitField('Upload')
+
 class NumberOfIntervals(FlaskForm):
 
   count = IntegerField('Interval Count',

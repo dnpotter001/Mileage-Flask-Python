@@ -180,10 +180,20 @@ def upload():
 @app.route("/upload/fixed", methods=['GET','POST'])
 def fixed():
 
+  if request.method == 'POST':
+    intervalCount = request.form['count']
+  else :
+    flash('Invalid interval count.', 'warning')
+    return redirect(url_for("upload"))
+
+  intervals = range(1,int(intervalCount)+1)
+  
+  fixedInterval = UploadIntervalFixed(intervals=intervals)
+
   return render_template(
     'fixed_intervals.html',
-    title="Fixed Intervals"
-
+    title="Fixed Intervals",
+    form=fixedInterval
   )
   
 

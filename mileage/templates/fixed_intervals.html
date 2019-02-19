@@ -1,8 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<form method="POST" action="{{ SetDistance }}" class="distance-form" novalidate>
+
+  {{form.title.label}}
+  {% if form.title.errors %}
+    {{form.title(class="invalid") }}
+    <div class="invalid-input">
+      {% for error in form.title.errors %}
+      <span>{{error}}</span>
+      {% endfor %}
+    </div>
+  {% else %}
+    {{form.title(id="title")}}
+  {% endif %}
+
+  {% for interval in form.intervals %}
+    {{ form.hidden_tag() }}
+    {{ form.intervals}}
+  {% endfor %}
+
+</form>
 
 
 
-<script type="text/javascript" src="../static/js/dynamicForms.js"></script>
 {% endblock content %}
