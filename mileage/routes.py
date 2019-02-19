@@ -11,10 +11,10 @@ from mileage.sijaxHandlers import ErgHandler
 from mileage.rowfis import MaleFIS, FemaleFIS
 from . import pyrow
 from mileage.user import User
+from mileage.workout import Workout
 
 import io, csv, os, json, time
 from io import StringIO
-
 
 #print(plot_tipping_problem_newapi.CalcTip(10, 10))
 #dunny test data for the feed
@@ -43,7 +43,7 @@ def load_user(user_id):
     user = users.find_one({"_id": ObjectId(user_id)})
     if not user:
         return None
-    return User(str(user['_id']), user['firstName'])
+    return User(str(user['_id']))
 
 @app.route("/dbtest")
 def dbtest():
@@ -97,7 +97,7 @@ def login():
   if login.submit.data and login.validate():
       user = users.find_one({"email": login.email.data})
       if user and User.validate_login(user['password'], login.password.data):
-        user_obj = User(str(user['_id']), user['firstName'])
+        user_obj = User(str(user['_id']))
         login_user(user_obj, remember=login.remember.data)
         flash(f'Login Successful, welcome {user["firstName"]}', 'success')
         return redirect(url_for('feed'))
@@ -143,9 +143,24 @@ def profile():
 def upload():
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
-  
   if not current_user.is_authenticated:
     return redirect(url_for('welcome'))
+
+  if singleInterval.data and singleInterval.validate():
+    workout = Workout(
+      title= singleInterval.title.data
+    )
+    totalTime = (
+      singleInterval.hours.data * 3600 +
+      singleInterval.minutes.data * 60 +
+      singleInterval.seconds.data
+    )
+    workout.add_Interval(singleInterval.distance.data, totalTime, None)
+    users.update_one(
+      {'_id': ObjectId(current_user._id)},
+      {'$addToSet': {'workouts':workout.__dict__}}
+    )
+  
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)

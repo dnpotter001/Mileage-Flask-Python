@@ -3,9 +3,9 @@ from flask_login import UserMixin
 
 class User():
 
-    def __init__(self, user_id, displayName):
+    def __init__(self, user_id):
         self._id  = user_id
-        self.displayName = displayName
+        #self.displayName = displayName
 
     def is_authenticated(self):
         return True

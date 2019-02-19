@@ -1,14 +1,13 @@
+import datetime
+from bson import ObjectId
 
 class Workout(object):
 
-  def __init__(self, date, time, title):
+  def __init__(self, title):
+    self._id = ObjectId()
     self.title = title
-    self.date = date
-    self.time = time
     self.intervals = []
-
-  def singleInterval(self, distance, workoutTime, spm):
-    self.intervals = (distance, workoutTime, spm)
+    self.dateTime = datetime.datetime.today().strftime('%Y-%m-%d')
 
   def add_Interval(self, distance, totalTime, rest):
     interval = {
@@ -20,14 +19,10 @@ class Workout(object):
   
   @staticmethod
   def createInterval(distance, time, rest, spm):
-    keys = locals()
-    values = (distance, time, rest, spm)
-    interval = dict(zip(keys, values))
-    return interval
+    return locals()
+
 
 interval = Workout.createInterval(2000, '6.39', 0, 32)
-print(interval)
+print(f'creating intervals {interval}')
 
-workout = Workout('today', 'now', 'workout')
-workout.singleInterval(2000, '6.39', 32)
-print(workout.__dict__)
+

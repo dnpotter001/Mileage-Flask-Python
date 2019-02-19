@@ -47,11 +47,23 @@
 
 <div id="allManualForms" class="hidden">
   <section id="singleIntervalForm" class="column hidden">
-    <form method="POST" action="{{ SetDistance }}" class="distance-form">
+    <form method="POST" action="{{ SetDistance }}" class="distance-form" novalidate>
       {{ singleInterval.hidden_tag() }}
       <fieldset>
         <legend>Single Interval</legend>
-      
+
+        {{singleInterval.title.label}}
+        {% if singleInterval.title.errors %}
+          {{singleInterval.title(class="invalid") }}
+          <div class="invalid-input">
+            {% for error in singleInterval.title.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{singleInterval.title(id="title")}}
+        {% endif %}
+    
         {{singleInterval.distance.label}}
         {% if singleInterval.distance.errors %}
           {{singleInterval.distance(class="invalid") }}
@@ -101,7 +113,9 @@
   </section>
 
   <section id="intervalFixedForm" class="row hidden">
-    <h2>Fixed Interval Upload</h2>
+    
+    
+
   </section>
 
   <section id="intervalVariableForm" class="row hidden">
@@ -109,5 +123,5 @@
   </section>
 </div>
 
-
+<script type="text/javascript" src="../static/js/dynamicForms.js"></script>
 {% endblock content %}
