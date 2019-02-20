@@ -1,47 +1,27 @@
-const intervalCount = document.getElementById("intervalCount")
-const incremement = document.getElementById("increment")
-const decremement = document.getElementById("decrement")
+const addInterval = document.getElementById("addInterval")
+const remove = document.getElementById("remove")
+let count = 0
 
-incremement.addEventListener("click",() => {
-  intervalCount.value++
+addInterval.addEventListener("click", () => {
+  console.log("add")
+  count++
+  let newForm = document.createElement('div');
+  newForm.classList.add("row")
+  newForm.id = "interval" + count
+  newForm.innerHTML = 
+    `<label for="distance">Distance</label>
+    <input id="distance" name="distance${count}" placeholder="Meters" required>
+    <label for="time">Time (Minutes)</label>
+    <input id="time" name="time${count}" placeholder="e.g. 1:30" required>
+    <label for="rest">Rest (Minutes)</label>
+    <input id="rest" name="rest${count}" placeholder="e.g. 1:30" required readonly>
+    `//<button id="remove" class="button red small">Remove</button>
+  document.getElementById("intervalForms").appendChild(newForm);
 })
 
-decremement.addEventListener("click",() => {
-  if(intervalCount.value != 0) {
-    intervalCount.value--
-  }
+remove.addEventListener("click", () => {
+  console.log("remove")
+  let toRemove = document.getElementById("interval" + count)
+  toRemove.remove()
+  count--
 })
-
-intervalCount.addEventListener("input", () => {
-  console.log("change")
-  for(let i = 0; i <= intervalCount.value; i++){
-    let distanceLabel = document.createElement("label")
-    let TimeLabel = document.createElement("label")
-    let RestLabel = document.createElement("label")
-    distanceLabel.innerText = "Distance";
-    TimeLabel.innerText = "Total Time (Minutes)";
-    RestLabel.innerText = "Distance (Rest)";
-
-    let distance = document.createElement("input")
-    distance.name = "distance" + i
-    distance.placeholder = "Meters"
-    distance.required = "required" 
-    
-    let holder = document.createElement("div")
-    holder.classList.add("row")
-    holder.appendChild(distanceLable, distance)
-    let intervalForm = document.getElementById("intervalForm")
-    intervalForm.appendChild(holder)
-  }
-})
-
-
-// const restInput = document.getElementById("restInput")
-// const rest = document.getElementsByClassName("rest")
-// restInput.addEventListener("change", () => {
-//   console.log("change")
-//   for (var i = 0; i < rest.length; i++) {
-//     rest[i].value = restInput.value
-//   }
-// })
-

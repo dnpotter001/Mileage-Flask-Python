@@ -112,14 +112,34 @@
     </form>
   </section>
 
-  <section id="intervalFixedForm" class="row hidden">
-    <div class="row">
-      <button id="decrement" class="button dark small big_text">-</button>
-      {{fixedInterval.count(id="intervalCount", readonly="readonly")}}
-      <button id="increment" class="button red small big_text">+</button>
-      {{fixedInterval.distance}}
-    </div>
-    <div id="intervalForm"></div>
+  <section id="intervalFixedForm" class="hidden">
+    <form method="POST" action="{{url_for('uploading')}}" class="distance-form" novalidate>
+
+      {{fixedInterval.hidden_tag()}}
+      <div class="row">
+        {{fixedInterval.title.label}}
+        {% if fixedInterval.title.errors %}
+          {{fixedInterval.title(class="invalid") }}
+          <div class="invalid-input">
+            {% for error in fixedInterval.title.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{fixedInterval.title(id="title")}}
+        {% endif %}
+        {{fixedInterval.rest.label}}
+        {{fixedInterval.rest}}
+      </div>
+      <div class="row">
+        <button type="button" id="addInterval" class="button dark small">Add Interval</button>
+        <button type="button" id="remove" class="button red small">Remove</button>
+      </div>
+      <div id="intervalForms" class="column">
+      </div>
+
+      {{fixedInterval.upload}}
+    </form>
   </section>
 
   <section id="intervalVariableForm" class="row hidden">

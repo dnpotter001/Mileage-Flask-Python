@@ -206,7 +206,8 @@ def uploading():
     form = request.form
   
   workout = Workout(form['title'])
-  workout.add_Interval(form['distance'],form['time'], form['rest'])
+  workout.add_Interval(form['distance1'],form['time1'], form['rest1'])
+  workout.add_Interval(form['distance2'],form['time2'], form['rest2'])
 
   return str(workout.__dict__)
   
