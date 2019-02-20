@@ -5,6 +5,7 @@ const decremement = document.getElementById("decrement")
 incremement.addEventListener("click",() => {
   intervalCount.value++
 })
+
 decremement.addEventListener("click",() => {
   if(intervalCount.value != 0) {
     intervalCount.value--
