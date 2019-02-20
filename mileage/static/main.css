@@ -313,6 +313,10 @@ footer a:visited {
   vertical-align: middle;
 }
 
+#intervalFixedForm input {
+  text-align:center;
+}
+
 /* -------------------------chart and graph-------------------------g*/
 rect.bar{ 
   transition: all 0.5ms;
@@ -498,6 +502,10 @@ article ul li{
 .center-align{
   display: block;
   margin: 20px auto;
+}
+
+.big_text{
+  font-size: 30px;
 }
 
 

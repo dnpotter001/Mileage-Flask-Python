@@ -100,6 +100,10 @@ class UploadIntervalFixed(FlaskForm):
   title = StringField('Give your workout a name:',
   validators=[Length(min=5, max=40), InputRequired(message="This field is required")],
   render_kw={"placeholder": "e.g. Sunday Workout"})
+   
+  count = IntegerField('Interval Count',
+  validators=[InputRequired(message="This field is required.")],
+  render_kw={"placeholder":"0"})
 
   intervals = FieldList(FormField(IntervalEntry), min_entries=1)
 

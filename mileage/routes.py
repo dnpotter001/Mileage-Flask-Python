@@ -146,6 +146,7 @@ def upload():
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
   intervalCount = NumberOfIntervals()
+  fixedInterval = UploadIntervalFixed()
   if not current_user.is_authenticated:
     return redirect(url_for('welcome'))
 
@@ -174,7 +175,8 @@ def upload():
     title="Upload a workout",
     singleInterval=singleInterval,
     csv=csv,
-    intervalCount=intervalCount
+    intervalCount=intervalCount,
+    fixedInterval=fixedInterval
   )
 
 @app.route("/upload/fixed", methods=['GET','POST'])

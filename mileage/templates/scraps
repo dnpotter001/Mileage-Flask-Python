@@ -29,3 +29,18 @@
       {{csv.submitCSV(class="button contrast wide")}}
     </div>
   </form>
+_________________________________________________________________________
+      <form method="POST" action="{{url_for('fixed')}}">
+      {{intervalCount.count.label}}
+      {% if intervalCount.count.errors %}
+      {{intervalCount.count(class="invalid")}}
+      <div class="invalid-input">
+        {% for error in intervalCount.count.errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+        {{intervalCount.count(id="seconds")}}
+      {% endif %}
+      {{intervalCount.next_step(class="button dark small center-align")}}
+    </form>

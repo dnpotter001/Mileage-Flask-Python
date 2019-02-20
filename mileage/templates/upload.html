@@ -113,23 +113,13 @@
   </section>
 
   <section id="intervalFixedForm" class="row hidden">
-    <form method="POST" action="{{url_for('fixed')}}">
-
-      {{intervalCount.count.label}}
-      {% if intervalCount.count.errors %}
-      {{intervalCount.count(class="invalid")}}
-      <div class="invalid-input">
-        {% for error in intervalCount.count.errors %}
-        <span>{{error}}</span>
-        {% endfor %}
-      </div>
-      {% else %}
-        {{intervalCount.count(id="seconds")}}
-      {% endif %}
-      {{intervalCount.next_step(class="button dark small center-align")}}
-
-
-    </form>
+    <div class="row">
+      <button id="decrement" class="button dark small big_text">-</button>
+      {{fixedInterval.count(id="intervalCount", readonly="readonly")}}
+      <button id="increment" class="button red small big_text">+</button>
+      {{fixedInterval.distance}}
+    </div>
+    <div id="intervalForm"></div>
   </section>
 
   <section id="intervalVariableForm" class="row hidden">
