@@ -68,33 +68,42 @@ class UploadSingleInterval(FlaskForm):
       "id":"singleDistance",
       "required": "required",
       "type":"number"})
+
+  time = StringField('Time',
+    validators=[DataRequired()],
+    render_kw={
+      "placeholder":"H:MM:SS",
+      "id":"singleTime",
+      "required":"required",
+      "pattern": r"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$",
+      "title":"Hours:Minutes:Seconds"})
   
-  hours = IntegerField('Time',
-  render_kw={
-    "placeholder":"Hours",
-    "id":"singleHours",
-    "required":"required",
-    "type":"number"})
+  # hours = IntegerField('Time',
+  # render_kw={
+  #   "placeholder":"Hours",
+  #   "id":"singleHours",
+  #   "required":"required",
+  #   "type":"number"})
 
-  minutes = IntegerField('Time',
-  validators=[NumberRange(min=0, max=59)],
-    render_kw={
-      "placeholder":"Minutes",
-      "id":"singleMinutes",
-      "required":"required",
-      "min": "0",
-      "max": "59",
-      "type":"number"})
+  # minutes = IntegerField('Time',
+  # validators=[NumberRange(min=0, max=59)],
+  #   render_kw={
+  #     "placeholder":"Minutes",
+  #     "id":"singleMinutes",
+  #     "required":"required",
+  #     "min": "0",
+  #     "max": "59",
+  #     "type":"number"})
 
-  seconds = IntegerField('seconds',
-  validators=[NumberRange(min=0, max=59)],
-    render_kw={
-      "placeholder":"Seconds",
-      "id":"singleSeconds",
-      "required":"required",
-      "min": "0",
-      "max": "59",
-      "type":"number"})
+  # seconds = IntegerField('seconds',
+  # validators=[NumberRange(min=0, max=59)],
+  #   render_kw={
+  #     "placeholder":"Seconds",
+  #     "id":"singleSeconds",
+  #     "required":"required",
+  #     "min": "0",
+  #     "max": "59",
+  #     "type":"number"})
 
   upload = SubmitField('Upload')
 

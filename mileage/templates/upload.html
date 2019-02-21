@@ -75,43 +75,22 @@
         {% endif %}
 
         
-        {{singleInterval.minutes.label}}
-        {% if singleInterval.hours.errors %}
-        {{singleInterval.hours(class="invalid")}}
+        {{singleInterval.time.label}}
+        {% if singleInterval.time.errors %}
+        {{singleInterval.time(class="invalid")}}
         <div class="invalid-input">
-          {% for error in singleInterval.hours.errors %}
+          {% for error in singleInterval.time.errors %}
           <span>{{error}}</span>
           {% endfor %}
         </div>
         {% else %}
-          {{singleInterval.hours}}
+          {{singleInterval.time}}
         {% endif %}
-        
-        {% if singleInterval.minutes.errors %}
-        {{singleInterval.minutes(class="invalid")}}
-        <div class="invalid-input">
-          {% for error in singleInterval.minutes.errors %}
-          <span>{{error}}</span>
-          {% endfor %}
-        </div>
-        {% else %}
-          {{singleInterval.minutes}}
-        {% endif %}
-
-        {% if singleInterval.seconds.errors %}
-        {{singleInterval.seconds(class="invalid")}}
-        <div class="invalid-input">
-          {% for error in singleInterval.seconds.errors %}
-          <span>{{error}}</span>
-          {% endfor %}
-        </div>
-        {% else %}
-          {{singleInterval.seconds}}
-        {% endif %}
+  
 
 
         <p class="row">
-          Average split: <span id="split"></span> 
+          Average split: <span id="singleSplit"></span> 
         </p>
         {{singleInterval.upload(class="button dark small center-align")}}
 

@@ -153,16 +153,27 @@ def upload():
 
   if singleInterval.upload.data and singleInterval.validate():
     workout = Workout(title= singleInterval.title.data, workoutType="SINGLE")
-    totalTime = (
-      singleInterval.hours.data * 3600 +
-      singleInterval.minutes.data * 60 +
-      singleInterval.seconds.data
-    )
+
+    timeArray = singleInterval.time.data.split(':')
+
+    if len(timeArray) == 1:
+      totalTime = timeArray[0]
+    if len(timeArray) == 2:
+      totalTime = int(timeArray[0]) * 60 + int(timeArray[1])
+    if len(timeArray) == 3:
+      totalTime = int(timeArray[0]) * 60 * 60 + int(timeArray[1]) * 60 + int(timeArray[0])
+
     workout.add_Interval(singleInterval.distance.data, totalTime, None)
-    users.update_one(
-      {'_id': ObjectId(current_user._id)},
-      {'$addToSet': {'workouts':workout.__dict__}}
-    )
+    
+    try:
+      users.update_one(
+        {'_id': ObjectId(current_user._id)},
+        {'$addToSet': {'workouts':workout.__dict__}}
+      )
+    except:
+      flash('Workout correct but error upload', 'warning')
+      return redirect(url_for("upload"))
+
     flash('Workout Uploaded', 'success')
     return redirect(url_for("feed"))
   

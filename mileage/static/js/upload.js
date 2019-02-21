@@ -66,13 +66,27 @@ intervalVariableButton.addEventListener("click", () => {
 
 //single intervals
 const singleDistance = document.getElementById("singleDistance");
-const singleHours = document.getElementById("singleHours");
-const singleMinutes = document.getElementById("singleMinutes");
-const singleSeconds = document.getElementById("singleSeconds");
+const singleTime = document.getElementById("singleTime");
 const singleSplit = document.getElementById("singleSplit");
 
-function CalcSplit(distance, hours, minutes, seconds){
-  let totalTime = parseInt(hours) * 60 * 60 + parseInt(minutes) * 60 + parseInt(seconds);
+function CalcSplit(distance, timeString){
+  timeArray = timeString.split(":")
+  let totalTime = 0;
+
+  switch (timeArray.length) {
+    case 1:
+      totalTime = parseInt(timeArray[0])
+      break;
+  
+    case 2:
+      totalTime = parseInt(timeArray[0]) * 60 + parseInt(timeArray[1]);
+      break;
+    
+    case 3:
+      totalTime = parseInt(timeArray[0]) * 60 * 60 + parseInt(timeArray[1]) * 60 + parseInt(timeArray[2]);
+      break;
+  }
+
   let splitSeconds = 500*(totalTime/distance);
   let m = parseInt(splitSeconds / 60);
   let s = (splitSeconds % 60).toFixed(1);
@@ -83,19 +97,15 @@ function CalcSplit(distance, hours, minutes, seconds){
   return split
 }
 
-singleDistance.addEventListener("change", ()=>{
-  split.innerText = CalcSplit(singleDistance.value, singleHours.value, singleMinutes.value, singleSeconds.value)
+singleDistance.addEventListener("input", ()=>{
+  singleSplit.innerText = CalcSplit(singleDistance.value, singleTime.value)
 })
-singleHours.addEventListener("change", ()=>{
-  split.innerText = CalcSplit(singleDistance.value, singleHours.value, singleMinutes.value, singleSeconds.value)
-})
-singleMinutes.addEventListener("change", ()=>{
-  split.innerText = CalcSplit(singleDistance.value, singleHours.value, singleMinutes.value, singleSeconds.value)
-})
-singleSeconds.addEventListener("change", ()=>{
-  split.innerText = CalcSplit(singleDistance.value, singleHours.value, singleMinutes.value, singleSeconds.value)
+singleTime.addEventListener("input", ()=>{
+  singleSplit.innerText = CalcSplit(singleDistance.value, singleTime.value)
 })
 
+
+  //cvs upload
 const uploadCSV = document.getElementById("uploadCSV");
 const csvInput = document.getElementById("csvInput")
 const fileNameLabel = document.getElementById("fileNameLabel")
