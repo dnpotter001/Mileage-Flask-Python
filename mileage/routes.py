@@ -202,12 +202,30 @@ def fixed():
 @app.route("/uploading", methods=['GET','POST'])
 def uploading():
 
-  if request.method == 'POST':
+  if request.method == 'POST' and request.form:
     form = request.form
+  else:
+    flash('Invalid Upload', 'warning')
+    return redirect(url_for('upload'))
   
   workout = Workout(form['title'])
-  workout.add_Interval(form['distance1'],form['time1'], form['rest1'])
-  workout.add_Interval(form['distance2'],form['time2'], form['rest2'])
+
+  try:
+    restArray = form['rest'].split(':')
+    rest = (int(restArray[0]) * 60) + int(restArray[1])
+  except:
+    flash('Rest in the wrong format, try Minutes:Seconds.', 'warning')
+    return redirect(url_for("upload"))
+
+  for x in range(1, int(form['count'])+1):
+    try:
+      timeArray = form['time' + str(x)].split(':')
+      time = (int(timeArray[0]) * 60) + int(timeArray[1])
+      workout.add_Interval(form['distance'+ str(x)], time, rest)
+    except:
+      flash('Time in the wrong format, try Minutes:Seconds.', 'warning')
+      return redirect(url_for("upload"))
+      
 
   return str(workout.__dict__)
   

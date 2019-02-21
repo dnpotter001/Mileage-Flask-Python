@@ -47,7 +47,7 @@
 
 <div id="allManualForms" class="hidden">
   <section id="singleIntervalForm" class="column hidden">
-    <form method="POST" action="{{ SetDistance }}" class="distance-form" novalidate>
+    <form method="POST" action="{{ SetDistance }}" class="distance-form">
       {{ singleInterval.hidden_tag() }}
       <fieldset>
         <legend>Single Interval</legend>
@@ -61,7 +61,7 @@
             {% endfor %}
           </div>
         {% else %}
-          {{singleInterval.title(id="title")}}
+          {{singleInterval.title}}
         {% endif %}
     
         {{singleInterval.distance.label}}
@@ -73,12 +73,12 @@
             {% endfor %}
           </div>
         {% else %}
-          {{singleInterval.distance(id="distance")}}
+          {{singleInterval.distance}}
         {% endif %}
 
         {{singleInterval.minutes.label}}
 
-        {{singleInterval.hours(id="hours")}}
+        {{singleInterval.hours}}
 
         {% if singleInterval.minutes.errors %}
         {{singleInterval.minutes(class="invalid")}}
@@ -88,7 +88,7 @@
           {% endfor %}
         </div>
         {% else %}
-          {{singleInterval.minutes(id="minutes")}}
+          {{singleInterval.minutes}}
         {% endif %}
 
         {% if singleInterval.seconds.errors %}
@@ -99,7 +99,7 @@
           {% endfor %}
         </div>
         {% else %}
-          {{singleInterval.seconds(id="seconds")}}
+          {{singleInterval.seconds}}
         {% endif %}
 
 
@@ -128,8 +128,9 @@
         {% else %}
           {{fixedInterval.title(id="title")}}
         {% endif %}
+        {{fixedInterval.count(id="intervalCount", type="hidden")}}
         {{fixedInterval.rest.label}}
-        {{fixedInterval.rest}}
+        {{fixedInterval.rest(id="restInput")}}
       </div>
       <div class="row">
         <button type="button" id="addInterval" class="button dark small">Add Interval</button>
@@ -147,5 +148,5 @@
   </section>
 </div>
 
-<script type="text/javascript" src="../static/js/dynamicForms.js"></script>
+<script type="text/javascript" src="../static/js/upload.js"></script>
 {% endblock content %}
