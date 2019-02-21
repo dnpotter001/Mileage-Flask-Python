@@ -150,12 +150,10 @@ function UpdateIntervalCount(count){
     const timeInput = document.getElementById(`time${x}`)
     const splitInterval = document.getElementById(`split${x}`)
     distInput.addEventListener("change", () => {
-      let timeArray = timeInput.value.split(":")
-      splitInterval.innerText = CalcSplit(distInput.value,0,timeArray[0],timeArray[1])
+      splitInterval.value = CalcSplit(distInput.value, timeInput.value)
     })
     timeInput.addEventListener("change", () => {
-      let timeArray = timeInput.value.split(":")
-      splitInterval.innerText = CalcSplit(distInput.value,0,timeArray[0],timeArray[1])
+      splitInterval.value = CalcSplit(distInput.value, timeInput.value)
     })
   } 
 }
@@ -164,15 +162,23 @@ addInterval.addEventListener("click", () => {
   console.log("add")
   count++
   let newForm = document.createElement('div');
-  newForm.classList.add("row")
+  newForm.classList.add("intervalInput")
   newForm.id = "interval" + count
   newForm.innerHTML = 
-  `<label for="distance">Distance</label>
-  <input id="distance${count}" name="distance${count}" placeholder="Meters" required>
-  <label for="time">Time</label>
-  <input id="time${count}" name="time${count}" placeholder="Minute:Seconds" required pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" title="Minutes:Seconds">
-  <label>Split: <label> 
-  <span id="split${count}"></span>
+  `
+  <h3 class="pad10">Interval ${count}</h3>
+  <div class="fieldRow">
+    <label for="distance">Distance: </label>
+    <input id="distance${count}" name="distance${count}" placeholder="Meters" required>
+  </div>
+  <div class="fieldRow">
+    <label for="time">Time: </label>
+    <input id="time${count}" name="time${count}" placeholder="Minute:Seconds" required pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" title="Minutes:Seconds">
+  </div>
+  <div class="fieldRow">
+    <label>Split: </label> 
+    <input id="split${count}" readonly></input>
+  </div>
   `
   //<label for="rest">Rest</label>
   //<input id="rest" class="rest" name="rest${count}" placeholder="Minute:Seconds" required readonly>

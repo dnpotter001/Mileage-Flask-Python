@@ -109,7 +109,7 @@ class UploadSingleInterval(FlaskForm):
 
 class UploadIntervalFixed(FlaskForm):
 
-  title = StringField('Give your workout a name:',
+  title = StringField('Workout Name: ',
     validators=[DataRequired()],
     render_kw={
       "placeholder": "e.g. Sunday Workout", 
@@ -125,7 +125,7 @@ class UploadIntervalFixed(FlaskForm):
     "max": "100",
     "type":"number"})
 
-  rest = IntegerField('Time',
+  rest = IntegerField('Rest Time: ',
   validators=[DataRequired()],
   render_kw={
     "placeholder":"Minutes:Seconds",

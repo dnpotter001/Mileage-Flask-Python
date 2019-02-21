@@ -308,10 +308,44 @@ footer a:visited {
   display: none;
 }
 
+.workoutDetails{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+
+}
+.fieldRow{
+  width: 100%;
+}
+
+.fieldRow input {
+  left:0;
+  vertical-align: middle; 
+  display: inline-block;
+}
+.fieldRow span {
+  left:0;
+  vertical-align: middle; 
+  display: inline-block;
+}
+.fieldRow label {
+  right:0;
+  width: 33%;
+  vertical-align: middle; 
+  display: inline-block;
+  text-align: right;
+}
+
 .table_cell{
   display: table-cell;
   vertical-align: middle;
 }
+
+.intervalInput{
+  display: flex;
+  flex-direction: column;
+}
+
 
 #intervalFixedForm input {
   text-align:center;
@@ -504,8 +538,9 @@ article ul li{
   margin: 20px auto;
 }
 
-.big_text{
-  font-size: 30px;
+.small_text{
+  font-size: 16px;
+  padding: 10px 20px;
 }
 
 
@@ -591,7 +626,10 @@ input, select{
     font-size: 40px;
   }
 
-
+  .intervalInput{
+    flex-direction: row;
+    width: 100%
+  }
 
   .menu-toggle {
     width: 200px;

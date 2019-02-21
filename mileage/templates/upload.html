@@ -99,32 +99,36 @@
 
   <section id="intervalFixedForm" class="hidden">
     <form method="POST" action="{{url_for('uploading')}}" class="distance-form">
-
+      <h3>Fixed Intervals</h3>
       {{fixedInterval.hidden_tag()}}
-      <div class="row">
-        {{fixedInterval.title.label}}
-        {% if fixedInterval.title.errors %}
-          {{fixedInterval.title(class="invalid") }}
-          <div class="invalid-input">
-            {% for error in fixedInterval.title.errors %}
-            <span>{{error}}</span>
-            {% endfor %}
-          </div>
-        {% else %}
-          {{fixedInterval.title(id="title")}}
-        {% endif %}
-        {{fixedInterval.count(id="intervalCount", type="hidden")}}
-        {{fixedInterval.rest.label}}
-        {{fixedInterval.rest(id="restInput")}}
-      </div>
-      <div class="row">
-        <button type="button" id="addInterval" class="button dark small">Add Interval</button>
-        <button type="button" id="remove" class="button red small">Remove</button>
-      </div>
+      <article class="workoutDetails">
+        <div class="fieldRow">
+          {{fixedInterval.title.label}}
+          {% if fixedInterval.title.errors %}
+            {{fixedInterval.title(class="invalid") }}
+            <div class="invalid-input">
+              {% for error in fixedInterval.title.errors %}
+              <span>{{error}}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{fixedInterval.title(id="title")}}
+          {% endif %}
+          {{fixedInterval.count(id="intervalCount", type="hidden")}}
+        </div>
+        <div class="fieldRow">
+          {{fixedInterval.rest.label}}
+          {{fixedInterval.rest(id="restInput")}}
+        </div>
+      </article>
       <div id="intervalForms" class="column">
       </div>
+      <div class="row">
+        <button type="button" id="addInterval" class="button dark wide small_text">Add Interval</button>
+        <button type="button" id="remove" class="button red wide small_text">Remove Interval</button>
+      </div>
 
-      <input class="button dark small center-align" id="upload" name="upload" type="submit" value="Upload">
+      <input class="button dark wide center-align small_text" id="upload" name="upload" type="submit" value="Upload">
 
     </form>
   </section>
