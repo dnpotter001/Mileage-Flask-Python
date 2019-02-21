@@ -104,7 +104,7 @@
   </section>
 
   <section id="intervalFixedForm" class="hidden">
-    <form method="POST" action="{{url_for('uploading')}}" class="distance-form">
+    <form method="POST" action="{{url_for('uploadFixed')}}" class="distance-form">
       <h3>Fixed Intervals</h3>
       {{fixedInterval.hidden_tag()}}
       <article class="workoutDetails">
@@ -140,7 +140,35 @@
   </section>
 
   <section id="intervalVariableForm" class="row hidden">
-    <h2>Interval Variable Upload</h2>
+    <form method="POST" action="{{url_for('uploadFixed')}}" class="distance-form">
+        <h3>Fixed Intervals</h3>
+        {{variableInterval.hidden_tag()}}
+        <article class="workoutDetails">
+          <div class="fieldRow">
+            {{variableInterval.title.label}}
+            {% if variableInterval.title.errors %}
+              {{variableInterval.title(class="invalid") }}
+              <div class="invalid-input">
+                {% for error in variableInterval.title.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{variableInterval.title(id="title")}}
+            {% endif %}
+            {{variableInterval.count(id="intervalCount", type="hidden")}}
+          </div>
+        </article>
+        <div class="row">
+          <button type="button" id="addVariableInterval" class="button dark wide small_text">Add Interval</button>
+          <button type="button" id="removeVariable" class="button red wide small_text">Remove Interval</button>
+        </div>
+        <div id="intervalForms" class="column">
+        </div>
+
+        <input class="button dark wide center-align small_text" id="upload" name="upload" type="submit" value="Upload">
+
+      </form>
   </section>
 </div>
 

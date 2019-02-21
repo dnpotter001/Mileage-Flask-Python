@@ -109,13 +109,25 @@ class UploadIntervalFixed(FlaskForm):
 
   upload = SubmitField('Upload')
 
-class NumberOfIntervals(FlaskForm):
+class UploadIntervalsVariable(FlaskForm):
 
+  title = StringField('Workout Name: ',
+  validators=[DataRequired()],
+  render_kw={
+    "placeholder": "e.g. Sunday Workout", 
+    "required": "required",
+    "min": "5",
+    "max": "40"})
+   
   count = IntegerField('Interval Count',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"e.g. 4"})
+  validators=[DataRequired()],
+  render_kw={
+    "required":"required",
+    "min": "0",
+    "max": "100",
+    "type":"number"})
 
-  next_step = SubmitField('Next')
+  upload = SubmitField('Upload')
 
 class SetDistanceWorkout(FlaskForm):
   

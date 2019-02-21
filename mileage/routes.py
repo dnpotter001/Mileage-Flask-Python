@@ -8,7 +8,7 @@ from bson import Binary, Code, json_util, ObjectId
 from mileage import app, bcrypt, mongo, login_manager
 from mileage.forms import (SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, 
                            UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm, 
-                           UploadIntervalFixed, NumberOfIntervals)
+                           UploadIntervalFixed, UploadIntervalsVariable)
 from mileage.sijaxHandlers import ErgHandler 
 from mileage.rowfis import MaleFIS, FemaleFIS
 from . import pyrow
@@ -146,8 +146,8 @@ def upload():
 
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
-  intervalCount = NumberOfIntervals()
   fixedInterval = UploadIntervalFixed()
+  variableInterval = UploadIntervalsVariable()
   if not current_user.is_authenticated:
     return redirect(url_for('welcome'))
 
@@ -187,13 +187,13 @@ def upload():
     title="Upload a workout",
     singleInterval=singleInterval,
     csv=csv,
-    intervalCount=intervalCount,
-    fixedInterval=fixedInterval
+    fixedInterval=fixedInterval,
+    variableInterval=variableInterval
   )
 
 
-@app.route("/uploading", methods=['GET','POST'])
-def uploading():
+@app.route("/upload/fixed", methods=['GET','POST'])
+def uploadFixed():
 
   if request.method == 'POST' and request.form:
     form = request.form

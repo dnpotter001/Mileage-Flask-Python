@@ -198,13 +198,13 @@ remove.addEventListener("click", () => {
   headerRemove.remove()
   count--
   UpdateIntervalCount(count)
-})
+}) 
 
-restInput.addEventListener("input", () => {
-  console.log("rest")
-  for (let x of rest){
-    x.value = restInput.value
-  }
-})  
+//intervals variable
+const addVarInt = document.getElementById("addVariableInterval")
+const removeVarInt = document.getElementById("removeVariable")
 
-
+//need a new counter 
+//refactor old one first 
+//event listeners and interval fields 
+//route for upload
