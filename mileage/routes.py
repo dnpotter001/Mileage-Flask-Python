@@ -211,6 +211,10 @@ def uploading():
   
   workout = Workout(form['title'])
 
+  if not form['count']:
+    flash("You didn't add any intervals", 'warning')
+    return redirect(url_for('upload'))
+
   try:
     restArray = form['rest'].split(':')
     rest = (int(restArray[0]) * 60) + int(restArray[1])

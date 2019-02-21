@@ -147,9 +147,7 @@ function UpdateIntervalCount(count){
       let timeArray = timeInput.value.split(":")
       splitInterval.innerText = CalcSplit(distInput.value,0,timeArray[0],timeArray[1])
     })
-
   } 
-
 }
 
 addInterval.addEventListener("click", () => {
@@ -162,7 +160,7 @@ addInterval.addEventListener("click", () => {
   `<label for="distance">Distance</label>
   <input id="distance${count}" name="distance${count}" placeholder="Meters" required>
   <label for="time">Time</label>
-  <input id="time${count}" name="time${count}" placeholder="Minute:Seconds" required>
+  <input id="time${count}" name="time${count}" placeholder="Minute:Seconds" required pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" title="Minutes:Seconds">
   <label>Split: <label> 
   <span id="split${count}"></span>
   `

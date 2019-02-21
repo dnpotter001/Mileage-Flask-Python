@@ -99,33 +99,32 @@ class UploadSingleInterval(FlaskForm):
 
   upload = SubmitField('Upload')
 
-class IntervalEntry(FlaskForm): 
-
-  distance = IntegerField('Distance',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"Meters"})
-
-  time = StringField('Time (Minutes)',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"e.g. 1:30"})
-
-  rest = StringField('Rest (Minutes)',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"e.g. 1:30"})
-
 class UploadIntervalFixed(FlaskForm):
 
   title = StringField('Give your workout a name:',
-  validators=[Length(min=5, max=40), InputRequired(message="This field is required")],
-  render_kw={"placeholder": "e.g. Sunday Workout"})
+    validators=[DataRequired()],
+    render_kw={
+      "placeholder": "e.g. Sunday Workout", 
+      "required": "required",
+      "min": "5",
+      "max": "40"})
    
   count = IntegerField('Interval Count',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"0"})
+  validators=[DataRequired()],
+  render_kw={
+    "required":"required",
+    "min": "0",
+    "max": "100",
+    "type":"number"})
 
-  rest = StringField('Rest',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"Minute:Seconds"})
+  rest = IntegerField('Time',
+  validators=[DataRequired()],
+  render_kw={
+    "placeholder":"Minutes:Seconds",
+    "id":"restInput",
+    "required":"required",
+    "pattern":"^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+    "title":"Minutes:Seconds"})
 
   upload = SubmitField('Upload')
 
