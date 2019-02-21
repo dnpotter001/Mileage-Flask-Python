@@ -316,21 +316,18 @@ footer a:visited {
 }
 .fieldRow{
   width: 100%;
+  align-content: center;
 }
 
 .fieldRow input {
-  left:0;
+  width: 40%;
   vertical-align: middle; 
   display: inline-block;
 }
-.fieldRow span {
-  left:0;
-  vertical-align: middle; 
-  display: inline-block;
-}
+
 .fieldRow label {
-  right:0;
-  width: 33%;
+  
+  width: 40%;
   vertical-align: middle; 
   display: inline-block;
   text-align: right;
@@ -589,7 +586,7 @@ input, select{
 
 /* tablet styling */
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 800px) {
   .template {
     display: grid;
     grid-template-columns: 200px 1fr;
@@ -626,9 +623,36 @@ input, select{
     font-size: 40px;
   }
 
+
+
   .intervalInput{
     flex-direction: row;
     width: 100%
+  }
+  .workoutDetails{
+    flex-direction: column;
+    align-content: center;
+  }
+  .fieldRow {
+    align-content: center;
+  }
+
+  .fieldRow input {
+    width: 150px
+  }
+  .fieldRow label {
+    width: 150px;
+  }
+
+  .intervalInput .fieldRow{
+    width: 33%;
+  }
+  .intervalInput .fieldRow label{
+    text-align: center;
+    width: 70px;
+  }
+  .intervalInput .fieldRow input{
+    width: 120px;
   }
 
   .menu-toggle {

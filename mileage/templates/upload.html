@@ -49,7 +49,8 @@
   <section id="singleIntervalForm" class="column hidden">
     <form method="POST" action="{{ SetDistance }}" class="distance-form">
       {{ singleInterval.hidden_tag() }}
-        <h3 class="pad10">Single Interval</h3>
+      <h3 class="pad10">Single Interval</h3>
+      <div class="fieldRow">
         {{singleInterval.title.label}}
         {% if singleInterval.title.errors %}
           {{singleInterval.title(class="invalid") }}
@@ -61,7 +62,9 @@
         {% else %}
           {{singleInterval.title}}
         {% endif %}
-    
+      </div>
+  
+      <div class="fieldRow">
         {{singleInterval.distance.label}}
         {% if singleInterval.distance.errors %}
           {{singleInterval.distance(class="invalid") }}
@@ -73,8 +76,9 @@
         {% else %}
           {{singleInterval.distance}}
         {% endif %}
+      </div>
 
-        
+      <div class="fieldRow">
         {{singleInterval.time.label}}
         {% if singleInterval.time.errors %}
         {{singleInterval.time(class="invalid")}}
@@ -86,13 +90,15 @@
         {% else %}
           {{singleInterval.time}}
         {% endif %}
-  
+      </div>
 
 
-        <p class="row">
-          Average split: <span id="singleSplit"></span> 
-        </p>
-        {{singleInterval.upload(class="button dark small center-align")}}
+
+      <p class="row">
+        Average Split <span id=""></span> 
+      </p>
+      <h3 id="singleSplit"></h3>
+      {{singleInterval.upload(class="button dark small center-align")}}
 
     </form>
   </section>
@@ -121,11 +127,11 @@
           {{fixedInterval.rest(id="restInput")}}
         </div>
       </article>
-      <div id="intervalForms" class="column">
-      </div>
       <div class="row">
         <button type="button" id="addInterval" class="button dark wide small_text">Add Interval</button>
         <button type="button" id="remove" class="button red wide small_text">Remove Interval</button>
+      </div>
+      <div id="intervalForms" class="column">
       </div>
 
       <input class="button dark wide center-align small_text" id="upload" name="upload" type="submit" value="Upload">

@@ -166,7 +166,6 @@ addInterval.addEventListener("click", () => {
   newForm.id = "interval" + count
   newForm.innerHTML = 
   `
-  <h3 class="pad10">Interval ${count}</h3>
   <div class="fieldRow">
     <label for="distance">Distance: </label>
     <input id="distance${count}" name="distance${count}" placeholder="Meters" required>
@@ -180,8 +179,11 @@ addInterval.addEventListener("click", () => {
     <input id="split${count}" readonly></input>
   </div>
   `
-  //<label for="rest">Rest</label>
-  //<input id="rest" class="rest" name="rest${count}" placeholder="Minute:Seconds" required readonly>
+  let header = document.createElement('h3')
+  header.id = "intervalHeader"+count
+  header.classList.add("pad10")
+  header.innerText = `Interval ${count}`
+  document.getElementById("intervalForms").appendChild(header);
   document.getElementById("intervalForms").appendChild(newForm);
   UpdateIntervalCount(count)
 })
@@ -191,7 +193,9 @@ addInterval.addEventListener("click", () => {
 remove.addEventListener("click", () => {
   console.log("remove")
   let toRemove = document.getElementById("interval" + count)
+  let headerRemove = document.getElementById("intervalHeader"+count)
   toRemove.remove()
+  headerRemove.remove()
   count--
   UpdateIntervalCount(count)
 })

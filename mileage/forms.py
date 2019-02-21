@@ -53,7 +53,7 @@ class CSVUpload(FlaskForm):
 
 class UploadSingleInterval(FlaskForm):
 
-  title = StringField('Give your workout a name:',
+  title = StringField('Workout Name: ',
     validators=[DataRequired()],
     render_kw={
       "placeholder": "e.g. Sunday Workout", 
@@ -61,7 +61,7 @@ class UploadSingleInterval(FlaskForm):
       "min": "5",
       "max": "40"})
 
-  distance = IntegerField('Distance',
+  distance = IntegerField('Distance: ',
     validators=[DataRequired()],
     render_kw={
       "placeholder":"Meters",
@@ -69,7 +69,7 @@ class UploadSingleInterval(FlaskForm):
       "required": "required",
       "type":"number"})
 
-  time = StringField('Time',
+  time = StringField('Time: ',
     validators=[DataRequired()],
     render_kw={
       "placeholder":"H:MM:SS",
@@ -77,33 +77,6 @@ class UploadSingleInterval(FlaskForm):
       "required":"required",
       "pattern": r"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$",
       "title":"Hours:Minutes:Seconds"})
-  
-  # hours = IntegerField('Time',
-  # render_kw={
-  #   "placeholder":"Hours",
-  #   "id":"singleHours",
-  #   "required":"required",
-  #   "type":"number"})
-
-  # minutes = IntegerField('Time',
-  # validators=[NumberRange(min=0, max=59)],
-  #   render_kw={
-  #     "placeholder":"Minutes",
-  #     "id":"singleMinutes",
-  #     "required":"required",
-  #     "min": "0",
-  #     "max": "59",
-  #     "type":"number"})
-
-  # seconds = IntegerField('seconds',
-  # validators=[NumberRange(min=0, max=59)],
-  #   render_kw={
-  #     "placeholder":"Seconds",
-  #     "id":"singleSeconds",
-  #     "required":"required",
-  #     "min": "0",
-  #     "max": "59",
-  #     "type":"number"})
 
   upload = SubmitField('Upload')
 
