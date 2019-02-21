@@ -70,7 +70,6 @@ class UploadSingleInterval(FlaskForm):
       "type":"number"})
   
   hours = IntegerField('Time',
-  validators=[DataRequired()],
   render_kw={
     "placeholder":"Hours",
     "id":"singleHours",
@@ -78,7 +77,7 @@ class UploadSingleInterval(FlaskForm):
     "type":"number"})
 
   minutes = IntegerField('Time',
-  validators=[DataRequired(), NumberRange(min=0, max=59)],
+  validators=[NumberRange(min=0, max=59)],
     render_kw={
       "placeholder":"Minutes",
       "id":"singleMinutes",
@@ -88,7 +87,7 @@ class UploadSingleInterval(FlaskForm):
       "type":"number"})
 
   seconds = IntegerField('seconds',
-  validators=[DataRequired(), NumberRange(min=0, max=59)],
+  validators=[NumberRange(min=0, max=59)],
     render_kw={
       "placeholder":"Seconds",
       "id":"singleSeconds",

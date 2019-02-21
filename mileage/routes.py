@@ -152,9 +152,7 @@ def upload():
     return redirect(url_for('welcome'))
 
   if singleInterval.upload.data and singleInterval.validate():
-    workout = Workout(
-      title= singleInterval.title.data
-    )
+    workout = Workout(title= singleInterval.title.data, workoutType="SINGLE")
     totalTime = (
       singleInterval.hours.data * 3600 +
       singleInterval.minutes.data * 60 +
@@ -165,6 +163,8 @@ def upload():
       {'_id': ObjectId(current_user._id)},
       {'$addToSet': {'workouts':workout.__dict__}}
     )
+    flash('Workout Uploaded', 'success')
+    return redirect(url_for("feed"))
   
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -180,25 +180,6 @@ def upload():
     fixedInterval=fixedInterval
   )
 
-@app.route("/upload/fixed", methods=['GET','POST'])
-def fixed():
-
-  if request.method == 'POST':
-    intervalCount = request.form['count']
-  else :
-    flash('Invalid interval count.', 'warning')
-    return redirect(url_for("upload"))
-
-  intervals = range(1,int(intervalCount)+1)
-  
-  fixedInterval = UploadIntervalFixed(intervals=intervals)
-
-  return render_template(
-    'fixed_intervals.html',
-    title="Fixed Intervals",
-    form=fixedInterval,
-    intervals=intervals
-  )
 
 @app.route("/uploading", methods=['GET','POST'])
 def uploading():
@@ -209,7 +190,7 @@ def uploading():
     flash('Invalid Upload', 'warning')
     return redirect(url_for('upload'))
   
-  workout = Workout(form['title'])
+  workout = Workout(form['title'], "FIXED")
 
   if not form['count']:
     flash("You didn't add any intervals", 'warning')
@@ -230,9 +211,18 @@ def uploading():
     except:
       flash('Time in the wrong format, try Minutes:Seconds.', 'warning')
       return redirect(url_for("upload"))
-      
 
-  return str(workout.__dict__)
+  try:
+    users.update_one(
+      {'_id': ObjectId(current_user._id)},
+      {'$addToSet': {'workouts':workout.__dict__}}
+    )
+  except:
+    flash('Workout correct but error upload', 'warning')
+    return redirect(url_for("upload"))
+
+  flash('Workout uploaded', 'success')
+  return redirect(url_for("feed"))
   
 
 @app.route("/workout-review", methods=['GET', 'POST'])

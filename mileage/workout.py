@@ -3,9 +3,10 @@ from bson import ObjectId
 
 class Workout(object):
 
-  def __init__(self, title):
+  def __init__(self, title, workoutType):
     self._id = ObjectId()
     self.title = title
+    self.workoutType = workoutType
     self.intervals = []
     self.dateTime = datetime.datetime.today().strftime('%Y-%m-%d')
 
