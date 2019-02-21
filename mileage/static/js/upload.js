@@ -134,25 +134,44 @@ csvInput.addEventListener("change", e => {
 let count = 0
 function UpdateIntervalCount(count){
   intervalCount.value = count
+
+  for(let x = 1; x <= count; x++){
+    const distInput = document.getElementById(`distance${x}`)
+    const timeInput = document.getElementById(`time${x}`)
+    const splitInterval = document.getElementById(`split${x}`)
+    distInput.addEventListener("change", () => {
+      let timeArray = timeInput.value.split(":")
+      splitInterval.innerText = CalcSplit(distInput.value,0,timeArray[0],timeArray[1])
+    })
+    timeInput.addEventListener("change", () => {
+      let timeArray = timeInput.value.split(":")
+      splitInterval.innerText = CalcSplit(distInput.value,0,timeArray[0],timeArray[1])
+    })
+
+  } 
+
 }
 
 addInterval.addEventListener("click", () => {
   console.log("add")
   count++
-  UpdateIntervalCount(count)
   let newForm = document.createElement('div');
   newForm.classList.add("row")
   newForm.id = "interval" + count
   newForm.innerHTML = 
-    `<label for="distance">Distance</label>
-    <input id="distance" name="distance${count}" placeholder="Meters" required>
-    <label for="time">Time</label>
-    <input id="time" name="time${count}" placeholder="mm:ss" required>
-    <label for="rest">Rest</label>
-    <input id="rest" class="rest" name="rest${count}" placeholder="mm:ss" required readonly>
-    `//<button id="remove" class="button red small">Remove</button>
+  `<label for="distance">Distance</label>
+  <input id="distance${count}" name="distance${count}" placeholder="Meters" required>
+  <label for="time">Time</label>
+  <input id="time${count}" name="time${count}" placeholder="Minute:Seconds" required>
+  <label>Split: <label> 
+  <span id="split${count}"></span>
+  `
+  //<label for="rest">Rest</label>
+  //<input id="rest" class="rest" name="rest${count}" placeholder="Minute:Seconds" required readonly>
   document.getElementById("intervalForms").appendChild(newForm);
+  UpdateIntervalCount(count)
 })
+
 
 
 remove.addEventListener("click", () => {

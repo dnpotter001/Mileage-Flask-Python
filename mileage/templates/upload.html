@@ -49,9 +49,7 @@
   <section id="singleIntervalForm" class="column hidden">
     <form method="POST" action="{{ SetDistance }}" class="distance-form">
       {{ singleInterval.hidden_tag() }}
-      <fieldset>
-        <legend>Single Interval</legend>
-
+        <h3 class="pad10">Single Interval</h3>
         {{singleInterval.title.label}}
         {% if singleInterval.title.errors %}
           {{singleInterval.title(class="invalid") }}
@@ -76,10 +74,19 @@
           {{singleInterval.distance}}
         {% endif %}
 
+        
         {{singleInterval.minutes.label}}
-
-        {{singleInterval.hours}}
-
+        {% if singleInterval.hours.errors %}
+        {{singleInterval.hours(class="invalid")}}
+        <div class="invalid-input">
+          {% for error in singleInterval.hours.errors %}
+          <span>{{error}}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+          {{singleInterval.hours}}
+        {% endif %}
+        
         {% if singleInterval.minutes.errors %}
         {{singleInterval.minutes(class="invalid")}}
         <div class="invalid-input">
@@ -108,7 +115,6 @@
         </p>
         {{singleInterval.upload(class="button dark small center-align")}}
 
-      </fieldset>
     </form>
   </section>
 

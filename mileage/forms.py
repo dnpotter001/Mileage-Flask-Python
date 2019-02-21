@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, BooleanField, FieldList, FormField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, ValidationError, Email
+from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, ValidationError, Email, DataRequired
 from mileage import mongo
 
 class RegistrationForm(FlaskForm):
@@ -54,30 +54,48 @@ class CSVUpload(FlaskForm):
 class UploadSingleInterval(FlaskForm):
 
   title = StringField('Give your workout a name:',
-    validators=[Length(min=5, max=40)],
-    render_kw={"placeholder": "e.g. Sunday Workout"})
+    validators=[DataRequired()],
+    render_kw={
+      "placeholder": "e.g. Sunday Workout", 
+      "required": "required",
+      "min": "5",
+      "max": "40"})
 
   distance = IntegerField('Distance',
-    validators=[InputRequired(message="This field is required.")],
-    render_kw={"placeholder":"Meters",
-               "id":"singleDistance"})
+    validators=[DataRequired()],
+    render_kw={
+      "placeholder":"Meters",
+      "id":"singleDistance",
+      "required": "required",
+      "type":"number"})
   
   hours = IntegerField('Time',
-  validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"Hours",
-              "id":"singleHours"})
+  validators=[DataRequired()],
+  render_kw={
+    "placeholder":"Hours",
+    "id":"singleHours",
+    "required":"required",
+    "type":"number"})
 
   minutes = IntegerField('Time',
-    validators=[InputRequired(message="This field is required."),
-                NumberRange(min=0, max=59, message='Value Must be between 0 and 59')],
-    render_kw={"placeholder":"Minutes",
-               "id":"singleMinutes"})
+  validators=[DataRequired(), NumberRange(min=0, max=59)],
+    render_kw={
+      "placeholder":"Minutes",
+      "id":"singleMinutes",
+      "required":"required",
+      "min": "0",
+      "max": "59",
+      "type":"number"})
 
   seconds = IntegerField('seconds',
-    validators=[InputRequired(message="This field is required."), 
-                NumberRange(min=0, max=59, message='Value Must be between 0 and 59')],
-    render_kw={"placeholder":"Seconds",
-               "id":"singleSeconds"})
+  validators=[DataRequired(), NumberRange(min=0, max=59)],
+    render_kw={
+      "placeholder":"Seconds",
+      "id":"singleSeconds",
+      "required":"required",
+      "min": "0",
+      "max": "59",
+      "type":"number"})
 
   upload = SubmitField('Upload')
 
@@ -107,7 +125,7 @@ class UploadIntervalFixed(FlaskForm):
 
   rest = StringField('Rest',
   validators=[InputRequired(message="This field is required.")],
-  render_kw={"placeholder":"mm:ss"})
+  render_kw={"placeholder":"Minute:Seconds"})
 
   upload = SubmitField('Upload')
 

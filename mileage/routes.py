@@ -143,6 +143,7 @@ def profile():
 
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
+
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
   intervalCount = NumberOfIntervals()
@@ -150,7 +151,7 @@ def upload():
   if not current_user.is_authenticated:
     return redirect(url_for('welcome'))
 
-  if singleInterval.data and singleInterval.validate():
+  if singleInterval.upload.data and singleInterval.validate():
     workout = Workout(
       title= singleInterval.title.data
     )
