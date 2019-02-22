@@ -124,7 +124,7 @@
         </div>
         <div class="fieldRow">
           {{fixedInterval.rest.label}}
-          {{fixedInterval.rest(id="restInput")}}
+          {{fixedInterval.rest}}
         </div>
       </article>
       <div class="row">
@@ -140,7 +140,7 @@
   </section>
 
   <section id="intervalVariableForm" class="row hidden">
-    <form method="POST" action="{{url_for('uploadFixed')}}" class="distance-form">
+    <form method="POST" action="{{url_for('uploadVariable')}}" class="distance-form">
         <h3>Fixed Intervals</h3>
         {{variableInterval.hidden_tag()}}
         <article class="workoutDetails">
@@ -156,17 +156,17 @@
             {% else %}
               {{variableInterval.title(id="title")}}
             {% endif %}
-            {{variableInterval.count(id="intervalCount", type="hidden")}}
+            {{variableInterval.count(id="intervalCountVariable", type="hidden")}}
           </div>
         </article>
         <div class="row">
           <button type="button" id="addVariableInterval" class="button dark wide small_text">Add Interval</button>
           <button type="button" id="removeVariable" class="button red wide small_text">Remove Interval</button>
         </div>
-        <div id="intervalForms" class="column">
+        <div id="intervalFormsVariable" class="column">
         </div>
 
-        <input class="button dark wide center-align small_text" id="upload" name="upload" type="submit" value="Upload">
+        <button class="button dark wide center-align small_text" id="upload" name="upload" type="submit">Upload</button>
 
       </form>
   </section>

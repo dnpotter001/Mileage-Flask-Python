@@ -75,7 +75,7 @@ class UploadSingleInterval(FlaskForm):
       "placeholder":"H:MM:SS",
       "id":"singleTime",
       "required":"required",
-      "pattern": r"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$",
+      "pattern": r"^(?:(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d).)?([0-9]?\d)$",
       "title":"Hours:Minutes:Seconds"})
 
   upload = SubmitField('Upload')

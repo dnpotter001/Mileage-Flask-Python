@@ -159,9 +159,9 @@ def upload():
     if len(timeArray) == 1:
       totalTime = timeArray[0]
     if len(timeArray) == 2:
-      totalTime = int(timeArray[0]) * 60 + int(timeArray[1])
+      totalTime = int(timeArray[0]) * 60 + float(timeArray[1])
     if len(timeArray) == 3:
-      totalTime = int(timeArray[0]) * 60 * 60 + int(timeArray[1]) * 60 + int(timeArray[0])
+      totalTime = int(timeArray[0]) * 60 * 60 + int(timeArray[1]) * 60 + float(timeArray[2])
 
     workout.add_Interval(singleInterval.distance.data, totalTime, None)
     
@@ -234,7 +234,45 @@ def uploadFixed():
 
   flash('Workout uploaded', 'success')
   return redirect(url_for("feed"))
+
+@app.route("/upload/variable", methods=['GET','POST'])
+def uploadVariable():
+
+  if request.method == 'POST' and request.form:
+    form = request.form
+  else:
+    flash('Invalid Upload', 'warning')
+    return redirect(url_for('upload'))
   
+  workout = Workout(form['title'], "FIXED")
+
+  if not form['count']:
+    flash("You didn't add any intervals", 'warning')
+    return redirect(url_for('upload'))
+
+  for x in range(1, int(form['count'])+1):
+    try:
+      restArray = form['rest' + str(x)].split(':')
+      rest = (int(restArray[0]) * 60) + int(restArray[1])
+      timeArray = form['time' + str(x)].split(':')
+      time = (int(timeArray[0]) * 60) + int(timeArray[1])
+      workout.add_Interval(form['distance'+ str(x)], time, rest)
+    except:
+      flash('Time or rest in the wrong format, try Minutes:Seconds.', 'warning')
+      return redirect(url_for("upload"))
+
+  try:
+    users.update_one(
+      {'_id': ObjectId(current_user._id)},
+      {'$addToSet': {'workouts':workout.__dict__}}
+    )
+  except:
+    flash('Workout correct but error upload', 'warning')
+    return redirect(url_for("upload"))
+
+  flash('Workout uploaded', 'success')
+  return redirect(url_for("feed"))
+
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
