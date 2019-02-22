@@ -76,15 +76,15 @@ function CalcSplit(distance, timeString){
 
   switch (timeArray.length) {
     case 1:
-      totalTime = parseInt(timeArray[0])
+      totalTime = parseFloat(timeArray[0])
       break;
   
     case 2:
-      totalTime = parseInt(timeArray[0]) * 60 + parseInt(timeArray[1]);
+      totalTime = parseInt(timeArray[0]) * 60 + parseFloat(timeArray[1]);
       break;
     
     case 3:
-      totalTime = parseInt(timeArray[0]) * 60 * 60 + parseInt(timeArray[1]) * 60 + parseInt(timeArray[2]);
+      totalTime = parseInt(timeArray[0]) * 60 * 60 + parseInt(timeArray[1]) * 60 + parseFloat(timeArray[2]);
       break;
   }
 
@@ -175,7 +175,7 @@ addInterval.addEventListener("click", () => {
   </div>
   <div class="fieldRow">
     <label for="time">Time: </label>
-    <input id="time${count}" name="time${count}" placeholder="Minute:Seconds" required pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" title="Minutes:Seconds">
+    <input id="time${count}" name="time${count}" placeholder="Minute:Seconds" required pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9](.[0-9])?$" title="Minutes:Seconds.Centiseconds(optional)">
   </div>
   <div class="fieldRow">
     <label>Split: </label> 
@@ -226,7 +226,7 @@ addVarInt.addEventListener("click", () => {
   </div>
   <div class="fieldRow">
     <label for="time">Time: </label>
-    <input id="time${variableCount}" name="time${variableCount}" placeholder="Minute:Seconds" required pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" title="Minutes:Seconds">
+    <input id="time${variableCount}" name="time${variableCount}" placeholder="Minute:Seconds" required pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9](.[0-9])?$" title="Minutes:Seconds.Centiseconds(Optional)">
   </div>
   <div class="fieldRow">
     <label for="rest">Rest: </label>

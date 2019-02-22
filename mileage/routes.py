@@ -157,7 +157,7 @@ def upload():
     timeArray = singleInterval.time.data.split(':')
 
     if len(timeArray) == 1:
-      totalTime = timeArray[0]
+      totalTime = float(timeArray[0])
     if len(timeArray) == 2:
       totalTime = int(timeArray[0]) * 60 + float(timeArray[1])
     if len(timeArray) == 3:
@@ -217,7 +217,7 @@ def uploadFixed():
   for x in range(1, int(form['count'])+1):
     try:
       timeArray = form['time' + str(x)].split(':')
-      time = (int(timeArray[0]) * 60) + int(timeArray[1])
+      time = (int(timeArray[0]) * 60) + float(timeArray[1])
       workout.add_Interval(form['distance'+ str(x)], time, rest)
     except:
       flash('Time in the wrong format, try Minutes:Seconds.', 'warning')
@@ -255,7 +255,7 @@ def uploadVariable():
       restArray = form['rest' + str(x)].split(':')
       rest = (int(restArray[0]) * 60) + int(restArray[1])
       timeArray = form['time' + str(x)].split(':')
-      time = (int(timeArray[0]) * 60) + int(timeArray[1])
+      time = (int(timeArray[0]) * 60) + float(timeArray[1])
       workout.add_Interval(form['distance'+ str(x)], time, rest)
     except:
       flash('Time or rest in the wrong format, try Minutes:Seconds.', 'warning')
