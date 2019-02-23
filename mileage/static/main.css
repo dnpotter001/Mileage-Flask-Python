@@ -361,16 +361,18 @@ rect.bar{
 
 .workoutReview {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto 1fr auto auto;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr  auto auto auto auto;
   grid-template-areas:
-    "overview reviewBarGraph"
-    "reviewLineGraph reviewLineGraph"
-    "rowingFis angleView"
-    "intervals intervals" 
-    "submitRow submitRow";
+    "overview "
+    "reviewLineGraph"
+    "angleView"
+    "rowingFis"
+    "reviewBarGraph"
+    "intervals" 
+    "nameWorkout"
+    "submitRow";
   height: 100%; 
-
 }
 
 h3{
@@ -379,7 +381,6 @@ h3{
 
 .overview{
   grid-area: overview;
-  margin-right: 10px;
   padding: 20px;
   border: 1px solid var(--border);
   background: #EEE;
@@ -398,8 +399,7 @@ article ul li{
   border: 1px solid var(--border);
   background: #EEE;
   padding: 20px;
-  margin-left: 10px;
-  
+  margin-top: 20px; 
 }
 
 .reviewLineGraph{
@@ -415,7 +415,7 @@ article ul li{
   border: 1px solid var(--border);
   background: #EEE;
   padding: 20px;
-  margin-right: 10px;
+  margin-right: 0px;
   margin-top:20px;
 }
 
@@ -425,7 +425,7 @@ article ul li{
   background: #EEE;
   padding: 20px;
   margin-top:20px;
-  margin-left: 10px;
+
 }
 
 .intervalOverview{
@@ -451,6 +451,24 @@ article ul li{
   
 }
 .intervalOverview tr:nth-child(odd){background-color: var(--background);}
+
+.nameWorkout{
+  width: auto;
+  grid-area: nameWorkout;
+  border: 1px solid var(--border);
+  background: #EEE;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.nameWorkout input{
+  width: 45%
+}
+.nameWorkout label {
+
+  width: 50%;
+  text-align: right;
+}
 
 .submitRow {
   grid-area: submitRow;
@@ -655,6 +673,42 @@ input, select{
     width: 120px;
   }
 
+  .workoutReview {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto 1fr auto auto auto auto;
+    grid-template-areas:
+      "overview reviewBarGraph"
+      "reviewLineGraph reviewLineGraph"
+      "rowingFis angleView"
+      "intervals intervals"
+      "nameWorkout nameWorkout" 
+      "submitRow submitRow";
+    height: 100%; 
+  }
+
+  .reviewBarGraph{
+    margin-left: 10px;
+    margin-top: 0px;
+  }
+
+  .rowingFis{
+    margin-right: 10px;
+  }
+
+  .angleView{
+    margin-left: 10px;
+  }
+
+  .overview{
+    margin-right: 10px;
+  }
+  .nameWorkout{
+    width: auto;
+    margin-top: 20px;
+    text-align: center;
+  }
+
   .menu-toggle {
     width: 200px;
   }
@@ -702,6 +756,8 @@ input, select{
     grid-template-rows: 1fr;
     grid-template-areas: "distance-form time-form standard-form"
   }
+
+
 
 
 }

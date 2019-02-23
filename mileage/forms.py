@@ -48,8 +48,18 @@ class CSVUpload(FlaskForm):
 
   csvField = FileField('Upload a CSV', 
     validators=[FileRequired(), FileAllowed(['csv'], '.csv files only!')])
-  
+
+  title = StringField('Workout Name: ',
+    validators=[DataRequired()],
+    render_kw={
+      "placeholder": "e.g. Sunday Workout", 
+      "required": "required",
+      "min": "5",
+      "max": "40"})
+
   submitCSV = SubmitField('Submit')
+
+  upload = SubmitField('upload')
 
 class UploadSingleInterval(FlaskForm):
 

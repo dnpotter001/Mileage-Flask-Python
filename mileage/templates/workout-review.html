@@ -8,8 +8,8 @@
       <li><b>Workout Type: </b> {{workout.type}}</li>
       <li><b>Details: </b> {{ workout.details }}</li>
       <li><b>Interval Count: </b> {{workout.intervalCount}}</li>
-      <li><b>Total Time: </b>{{workout.overview[1]}}</li>
-      <li><b>Total Distance: </b>{{workout.overview[2]}}</li>
+      <li><b>Total Distance: </b>{{workout.overview[1]}}</li>
+      <li><b>Total Time: </b>{{workout.overview[3]}}</li>
     </ul>
   </article>
 
@@ -86,11 +86,20 @@
       {% endfor %}
     </table>
   </article>
-
-
+  
   <div class="row submitRow">
-    <button class="button red small ">Cancel</button>
-    <button class="button contrast small">Submit</button>
+  <form action="" method="POST">
+    <div class="fieldRow nameWorkout">
+      {{form.hidden_tag()}}
+      {{form.title.label}}
+      {{form.title}}
+    </div>
+
+    <a href="{{url_for('upload')}}">
+      <button class="button red small" href="{{url_for('feed')}}">Cancel</button>
+    </a>
+    {{form.upload(class="button contrast small")}}
+    </form>
   </div>
 
 </article>

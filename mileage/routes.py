@@ -276,11 +276,12 @@ def uploadVariable():
 
 @app.route("/workout-review", methods=['GET', 'POST'])
 def workoutReview():
+  form = CSVUpload()
 
   if not current_user.is_authenticated:
     return redirect(url_for('welcome'))
 
-  if request.method == 'POST': 
+  if request.method == 'POST' and request.files: 
 
     upload = request.files['csvField']
     if not upload:
@@ -308,7 +309,7 @@ def workoutReview():
       intervals.append(csvArray[x + 22])
   
     workout = { 
-      'ty pe': csvArray[4][1],
+      'type': csvArray[4][1],
       'details': csvArray[2][1],
       'intervalCount': intervalCount,
       'units':csvArray[14],
@@ -334,6 +335,9 @@ def workoutReview():
       maleFisQuality = "FIS score not available"
       femaleFISQuality = "FIS score not available"
 
+  if form.upload.data and form.validate():
+    return redirect(url_for("feed"))
+
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
@@ -346,6 +350,7 @@ def workoutReview():
     intervals = workout['intervals'],
     manFis=maleFisQuality,
     womanFis=femaleFISQuality,
+    form=form
     )
 
 
