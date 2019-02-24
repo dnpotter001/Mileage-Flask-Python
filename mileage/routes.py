@@ -304,24 +304,11 @@ def workoutReview():
 
     workout = Workout(request.form['title'], 'CSV')
     workout.add_csv(csvArray)
-
-
-    if (csvArray[15][14] != None):
-      catch = -int(csvArray[15][14])
-      finish = int(csvArray[15][16])
-      slip = int(csvArray[15][15])
-      wash = int(csvArray[15][17])
-      length = (catch - slip) + (finish - wash)
-
-      print(catch,finish,slip,wash,length)
-
-      maleFIS = MaleFIS()
-      maleFisQuality = maleFIS.EvalStroke(catch, finish, slip, wash, length)
-      femaleFIS = FemaleFIS()
-      femaleFISQuality = femaleFIS.EvalStroke(catch, finish, slip, wash, length)
-    else:
-      maleFisQuality = "FIS score not available"
-      femaleFISQuality = "FIS score not available"
+    fisScores = workout.rowFis()
+  
+  else: 
+    flash('No .CSV uploaded.', 'warning')
+    return redirect(url_for('upload'))
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -333,8 +320,8 @@ def workoutReview():
     workout=workout.csv,
     zip=zip,
     intervals = workout.csv['intervals'],
-    manFis=maleFisQuality,
-    womanFis=femaleFISQuality,
+    manFis=fisScores['male'],
+    womanFis=fisScores['female'],
     form=form
     )
 

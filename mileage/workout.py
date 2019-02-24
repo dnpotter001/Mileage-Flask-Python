@@ -1,5 +1,6 @@
 import datetime
 from bson import ObjectId
+from mileage.rowfis import MaleFIS, FemaleFIS
 
 class Workout(object):
 
@@ -36,9 +37,64 @@ class Workout(object):
       'intervals':intervals
     }
 
+  def rowFis(self):
+
+    if (self.csv['overview'][14] != None):
+      catch = -int(self.csv['overview'][14])
+      finish = int(self.csv['overview'][16])
+      slip = int(self.csv['overview'][15])
+      wash = int(self.csv['overview'][17])
+      length = catch + finish
+
+      print(catch,finish,slip,wash,length)
+
+      maleFIS = MaleFIS()
+      maleFisQuality = maleFIS.EvalStroke(catch, finish, slip, wash, length)
+      femaleFIS = FemaleFIS()
+      femaleFISQuality = femaleFIS.EvalStroke(catch, finish, slip, wash, length)
+
+      return {
+        'male': maleFisQuality,
+        'female': femaleFISQuality
+      }  
+
+    else:
+      return {
+        'male': 'FIS score not available',
+        'female': 'FIS score not available'
+      }
+      
+
   @staticmethod
   def createInterval(distance, time, rest, spm):
     return locals()
+  
+  @staticmethod 
+  def rowFisFromArray(csvArray):
+    if (csvArray[15][14] != None):
+      catch = -int(csvArray[15][14])
+      finish = int(csvArray[15][16])
+      slip = int(csvArray[15][15])
+      wash = int(csvArray[15][17])
+      length = catch + finish
+
+      print(catch,finish,slip,wash,length)
+
+      maleFIS = MaleFIS()
+      maleFisQuality = maleFIS.EvalStroke(catch, finish, slip, wash, length)
+      femaleFIS = FemaleFIS()
+      femaleFISQuality = femaleFIS.EvalStroke(catch, finish, slip, wash, length)
+
+      return {
+        'male': maleFisQuality,
+        'female': femaleFISQuality
+      }  
+
+    else:
+      return {
+        'male': 'FIS score not available',
+        'female': 'FIS score not available'
+      }
 
   
 
