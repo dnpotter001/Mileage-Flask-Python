@@ -5,6 +5,7 @@
   <article class="overview">
     <h3>Overview</h3>
     <ul>
+      <li><b>Workout title: </b> {{workoutTitle}}</li>
       <li><b>Workout Type: </b> {{workout.type}}</li>
       <li><b>Details: </b> {{ workout.details }}</li>
       <li><b>Interval Count: </b> {{workout.intervalCount}}</li>
@@ -87,21 +88,7 @@
     </table>
   </article>
   
-  <div class="row submitRow">
-  <form action="" method="POST">
-    <div class="fieldRow nameWorkout">
-      {{form.hidden_tag()}}
-      {{form.title.label}}
-      {{form.title}}
-    </div>
-
-    <a href="{{url_for('upload')}}">
-      <button class="button red small" href="{{url_for('feed')}}">Cancel</button>
-    </a>
-    </form>
-  </div>
 </article>
-{{ workout }}
 
 
 {% endblock content %}

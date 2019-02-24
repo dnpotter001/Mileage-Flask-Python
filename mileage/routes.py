@@ -171,7 +171,7 @@ def upload():
         {'$addToSet': {'workouts':workout.__dict__}}
       )
     except:
-      flash('Workout correct but error upload', 'warning')
+      flash('Workout correct but error uploading', 'warning')
       return redirect(url_for("upload"))
 
     flash('Workout Uploaded', 'success')
@@ -229,7 +229,7 @@ def uploadFixed():
       {'$addToSet': {'workouts':workout.__dict__}}
     )
   except:
-    flash('Workout correct but error upload', 'warning')
+    flash('Workout correct but error uploading.', 'warning')
     return redirect(url_for("upload"))
 
   flash('Workout uploaded', 'success')
@@ -267,7 +267,7 @@ def uploadVariable():
       {'$addToSet': {'workouts':workout.__dict__}}
     )
   except:
-    flash('Workout correct but error upload', 'warning')
+    flash('Workout correct but error uploading.', 'warning')
     return redirect(url_for("upload"))
 
   flash('Workout uploaded', 'success')
@@ -294,7 +294,7 @@ def workoutReview():
       flash(f'{upload.filename} is not a .csv', 'warning')
       return redirect(url_for('upload'))
     else:
-      flash(f'{upload.filename} successfully uploaded', 'success')
+      flash(f"{upload.filename} successfully uploaded as {request.form['title']}", 'success')
 
     stream = io.StringIO(upload.stream.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)
@@ -305,7 +305,15 @@ def workoutReview():
     workout = Workout(request.form['title'], 'CSV')
     workout.add_csv(csvArray)
     fisScores = workout.rowFis()
-  
+
+    try:
+        users.update_one(
+          {'_id': ObjectId(current_user._id)},
+          {'$addToSet': {'workouts':workout.__dict__}}
+        )
+    except:
+        return flash('Workout correct but error uploading, all information is temporary', 'warning')
+    
   else: 
     flash('No .CSV uploaded.', 'warning')
     return redirect(url_for('upload'))
@@ -318,6 +326,7 @@ def workoutReview():
     'workout-review.html', 
     title='Erg Control',
     workout=workout.csv,
+    workoutTitle=workout.title,
     zip=zip,
     intervals = workout.csv['intervals'],
     manFis=fisScores['male'],
