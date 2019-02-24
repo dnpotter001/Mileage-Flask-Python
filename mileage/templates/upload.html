@@ -21,15 +21,12 @@
 </section>
 
 <section id="csvPane" class="column hidden">
-  <!-- <form method="POST" action="/workout-review" enctype="multipart/form-data">
-    <input type="file" name="csvField" id="csvInput" class="hidden">
-    <div class="row">
-      <button class="button contrast wide" id="uploadCSV" type="button">Upload</button>
-      <input type="submit" class="button contrast wide"/>
-    </div>
-  </form> -->
 
   <form method="POST" action="{{ url_for('workoutReview') }}" enctype="multipart/form-data">
+    <div class="fieldRow">
+      {{ csv.title.label }}
+      {{ csv.title }}
+    </div>
     {{ csv.hidden_tag() }}
     {{ csv.csrf_token }}
     {{csv.csvField(id="csvInput", class="hidden")}}

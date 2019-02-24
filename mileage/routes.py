@@ -281,7 +281,7 @@ def workoutReview():
   if not current_user.is_authenticated:
     return redirect(url_for('welcome'))
 
-  if request.method == 'POST' and request.files: 
+  if request.method == 'POST': 
 
     upload = request.files['csvField']
     if not upload:
@@ -302,22 +302,10 @@ def workoutReview():
     for row in csv_input:
       csvArray.append(row)
 
+    workout = Workout(request.form['title'], 'CSV')
+    workout.add_csv(csvArray)
 
-    intervalCount = csvArray[15][0]
-    intervals = []
-    for x in range(0, int(intervalCount)):
-      intervals.append(csvArray[x + 22])
-  
-    workout = { 
-      'type': csvArray[4][1],
-      'details': csvArray[2][1],
-      'intervalCount': intervalCount,
-      'units':csvArray[14],
-      'overviewLabels':csvArray[13],
-      'overview':csvArray[15],
-      'intervalLabels':csvArray[20],
-      'intervals':intervals
-    }
+
     if (csvArray[15][14] != None):
       catch = -int(csvArray[15][14])
       finish = int(csvArray[15][16])
@@ -335,9 +323,6 @@ def workoutReview():
       maleFisQuality = "FIS score not available"
       femaleFISQuality = "FIS score not available"
 
-  if form.upload.data and form.validate():
-    return redirect(url_for("feed"))
-
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
@@ -345,9 +330,9 @@ def workoutReview():
   return render_template(
     'workout-review.html', 
     title='Erg Control',
-    workout=workout,
+    workout=workout.csv,
     zip=zip,
-    intervals = workout['intervals'],
+    intervals = workout.csv['intervals'],
     manFis=maleFisQuality,
     womanFis=femaleFISQuality,
     form=form

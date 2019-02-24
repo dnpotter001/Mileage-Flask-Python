@@ -315,6 +315,7 @@ footer a:visited {
 
 }
 .fieldRow{
+  text-align: center;
   width: 100%;
   align-content: center;
 }

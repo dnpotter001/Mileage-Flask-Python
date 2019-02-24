@@ -59,8 +59,6 @@ class CSVUpload(FlaskForm):
 
   submitCSV = SubmitField('Submit')
 
-  upload = SubmitField('upload')
-
 class UploadSingleInterval(FlaskForm):
 
   title = StringField('Workout Name: ',
