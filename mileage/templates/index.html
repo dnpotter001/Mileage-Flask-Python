@@ -1,16 +1,21 @@
-{% extends "layout.html" %}
+{% extends "plain.html" %}
 {% block content %}
 
+<section class="center-align">
+  
+  <h2>
+    Training Tracking Tool
+  </h2>
+  <div class="row">
+    <a href={{url_for('login')}} class="verticle-align" >
+      Already have an account? Sign in here.
+    </a>
+  
+    <a href={{url_for('register')}}>
+      <button class="button light" >Register</button>
+    </a>
+  </div>
 
-{% for post in posts %}
-<article class="feed-item">
+</section>
 
-    <div class="feed title">{{post.title}}</div>
-    <figure class="feed graph">graph</figure>
-    <article class="feed table">table</article>
-    <div class="feed info">By {{ post.author}} on {{post.date}}</div>
-
-</article>
-{% endfor %}
-
-{% endblock content%}
+{% endblock content %}

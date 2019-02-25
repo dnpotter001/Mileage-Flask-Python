@@ -20,6 +20,7 @@ class Workout(object):
     self.intervals.append(interval) 
 
   def add_csv(self, csvArray):
+    self.intervals = 'No interval data see CSV'
     intervalCount = csvArray[15][0]
     intervals = []
 

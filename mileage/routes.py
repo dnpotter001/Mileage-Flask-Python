@@ -18,25 +18,23 @@ from mileage.workout import Workout
 import io, csv, os, json, time
 from io import StringIO
 
-#print(plot_tipping_problem_newapi.CalcTip(10, 10))
-#dunny test data for the feed
-workouts = [
-  {
-    'author':'David Potter',
-    'title': 'Sunday workout',
-    'date': '11th Jan 2018'
-  },
-  {
-    'author':'Judith Potter',
-    'title': 'Saturday workout',
-    'date': '12th Jan 2019'
-  },
-  {
-    'author':'Eve Megaw',
-    'title': 'Thursday workout',
-    'date': '14th Aug 2019'
-  }
-]
+# workouts = [
+#   {
+#     'author':'David Potter',
+#     'title': 'Sunday workout',
+#     'date': '11th Jan 2018'
+#   },
+#   {
+#     'author':'Judith Potter',
+#     'title': 'Saturday workout',
+#     'date': '12th Jan 2019'
+#   },
+#   {
+#     'author':'Eve Megaw',
+#     'title': 'Thursday workout',
+#     'date': '14th Aug 2019'
+#   }
+# ]
 
 users = mongo.db.users
 
@@ -47,18 +45,11 @@ def load_user(user_id):
         return None
     return User(str(user['_id']))
 
-@app.route("/dbtest")
-def dbtest():
-  
-  users.insert({"name": "David Potter"})
-
-  return "Added user"
-
 @app.route("/")
 def welcome():
 
   return render_template(
-    'welcome.html',
+    'index.html',
     title="Welcome",
 
   )
@@ -129,15 +120,19 @@ def feed():
     return g.sijax.process_request()
 
   return render_template(
-    'index.html', 
-    posts=workouts, 
+    'feed.html', 
+   # posts=workouts, 
     title="Your Feed"
   )
 
 @app.route('/profile')
 def profile():
+
+  workouts = users.find({'_id': ObjectId(current_user._id)},{'_id':0,'workouts': 1}).distinct('workouts')
+  
   return render_template(
     'profile.html',
+    workouts=workouts,
     title='Your Profile',
   )
 
@@ -333,8 +328,6 @@ def workoutReview():
     womanFis=fisScores['female'],
     form=form
     )
-
-
     
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():

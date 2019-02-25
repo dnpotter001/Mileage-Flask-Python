@@ -85,7 +85,7 @@ let LineGraph = function (area, intervals) {
     let maxValue = 0;
 
     if (dotCount == 1) {
-      chartArea.innerHTML = "More intervals needed for a line graph. "
+      area.innerHTML = "More intervals needed for a line graph. "
       return;
     }
     intervals.forEach(x => {
