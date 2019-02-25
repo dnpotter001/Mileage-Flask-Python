@@ -722,33 +722,6 @@ input, select{
     margin-top: 20px;
     text-align: center;
   }
-
-  /*feed styling*/
-
-  .averages {
-    grid-area: averages;
-    margin: 10px 0px;
-    overflow: auto;
-    white-space: nowrap;
-  }
-  
-  .averages table {
-    width: 100%;
-    text-align: center;
-    background: #EEEEEE;
-  }
-  
-  .averages table tr td{
-    padding: 7px 5px;
-    white-space: nowrap
-  }
-
-  .menu-toggle {
-    width: 200px;
-  }
-  .menu-open {
-    margin-left: 200px;
-  }
 }
 
 /* desktop styling */
@@ -791,7 +764,39 @@ input, select{
     grid-template-areas: "distance-form time-form standard-form"
   }
 
+  .feed-item {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 
+      "label label"
+      "graph details" 
+      "averages averages" 
+      "info info";
+    padding: 0;
+    margin-bottom: 20px;
+  }
 
+  .feed {
+    padding: 10px;
+    border: 1px solid var(--border);
+    background:#EEE;
+  }
+  
+  .title {
+    grid-area: label;
+    
+    background: var(--teal-accent);
+    color: var(--text);
+    font-weight: bold;
+  }
 
+  .details .left{
+    width: 100%;
+
+  }
+  .details .right{
+    width: 100%;
+  }
 
 }

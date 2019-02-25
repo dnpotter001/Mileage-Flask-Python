@@ -64,6 +64,10 @@ class Workout(object):
         'male': 'FIS score not available',
         'female': 'FIS score not available'
       }
+  
+  def addRowFis(self):
+    self.maleFis = self.rowFis()['male']
+    self.femaleFis = self.rowFis()['female']
       
 
   @staticmethod

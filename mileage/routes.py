@@ -300,6 +300,7 @@ def workoutReview():
 
     workout = Workout(request.form['title'], 'CSV')
     workout.add_csv(csvArray)
+    workout.addRowFis()
     fisScores = workout.rowFis()
 
     try:
