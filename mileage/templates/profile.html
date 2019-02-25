@@ -1,49 +1,62 @@
 {% extends "layout.html" %}
 {% block content %}
 <script src="../static/js/svgCharts.js"></script>
-<h2>{{current_user}}</h2>
-<h2>{{current_user._id}}</h2>
-  
-{% for post in posts %}
-<article class="feed-item">
 
-    <div class="feed title">{{post.title}}</div>
-    <figure class="feed graph">graph</figure>
-    <article class="feed table">table</article>
-    <div class="feed info">By {{ post.author}} on {{post.date}}</div>
-
-</article>
-{% endfor %}
 
 {%for workout in workouts %}
-  {{workout._id}}
-{% endfor %}
-
-{%for workout in workouts %}
-<article class="feed-item">
-
-  <div class="feed title">{{workout.title}}</div>
-  <figure class="feed graph" id="lineGraph{{workout._id}}">
-    <script>
-      const lineGraphArea{{workout._id}} = document.getElementById("lineGraph{{workout._id}}");
-      let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, {{workout.csv.intervals|tojson|safe}});
-      lineGraph{{workout._id}}.createSVG()
-      lineGraph{{workout._id}}.drawSeries(8, "red", "SPM")
-      lineGraph{{workout._id}}.drawSeries(14, "green", "Catch") 
-      lineGraph{{workout._id}}.drawSeries(13, "orange", "Power") 
-      lineGraph{{workout._id}}.drawSeries(5, "black", "Speed") 
-      </script>
-  </figure>
-  <article class="feed table">
-      <li><b>Workout Type: </b> {{workout.csv.type}}</li>
-      <li><b>Details: </b> {{ workout.csv.details }}</li>
-      <li><b>Interval Count: </b> {{workout.csv.intervalCount}}</li>
-      <li><b>Total Distance: </b>{{workout.csv.overview[1]}}</li>
-      <li><b>Total Time: </b>{{workout.csv.overview[3]}}</li>
+{% if workout.workoutType == "CSV" %}
+  <article class="feed-item">
+    <div class="feed title">{{workout.title}}</div>
+    <figure class="feed graph" id="lineGraph{{workout._id}}">
+      <script>
+        const lineGraphArea{{workout._id}} = document.getElementById("lineGraph{{workout._id}}");
+        let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, {{workout.csv.intervals|tojson|safe}});
+        lineGraph{{workout._id}}.createSVG()
+        lineGraph{{workout._id}}.drawSeries(8, "red", "SPM")
+        lineGraph{{workout._id}}.drawSeries(14, "green", "Catch") 
+        lineGraph{{workout._id}}.drawSeries(13, "orange", "Power") 
+        lineGraph{{workout._id}}.drawSeries(5, "black", "Speed") 
+        </script>
+    </figure>
+    <article class="feed details">
+      <ul class="left">
+        <li><b>Details: </b> {{ workout.csv.details }}</li>
+        <li><b>Total Distance: </b>{{workout.csv.overview[1]}}</li>
+      </ul>
+      <ul class="right">
+        <li><b>Total Time: </b>{{workout.csv.overview[3]}}</li>
+        <li><b>Average Split: </b>{{workout.csv.overview[4]}}</li>
+      </ul>
+    </article>
+    <article class="feed averages">
+      <table>
+          <tr>
+              {% for label, unit in zip(workout.csv.overviewLabels, workout.csv.units) %}
+              <td class=""><b>{{label}}<br> {{unit}}</b></td>
+              {% endfor %}
+            </tr> 
+            <tr>
+              {% for cell in workout.csv.overview %}
+              <td>{{cell}}</td>
+              {% endfor %}
+            </tr>
+            <!-- <tr>
+              {% for label, unit in zip(workout.csv.intervalLabels, workout.csv.units) %}
+              <td class=""><b>{{label}}<br> {{unit}}</b></td>
+              {% endfor %}
+            </tr>
+            {% for interval in workout.csv.intervals %}
+            <tr>
+              {% for cell in interval %}
+              <td>{{cell}}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %} -->
+      </table>
+    </article>
+    <div class="feed info"> {{workout.dateTime}}</div>
   </article>
-  <div class="feed info"> {{workout.date}}</div>
-
-</article>
+{% endif %}
 {% endfor %}
 
 

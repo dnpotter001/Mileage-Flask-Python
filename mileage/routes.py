@@ -132,6 +132,7 @@ def profile():
   
   return render_template(
     'profile.html',
+    zip=zip,
     workouts=workouts,
     title='Your Profile',
   )

@@ -267,40 +267,57 @@ footer a:visited {
 
 .feed-item {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 40px 180px 40px;
-  grid-template-areas: "label label" "graph table" "info info";
+  grid-template-columns: 100%;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas: 
+    "label"
+    "details" 
+    "graph" 
+    "info";
   padding: 0;
   margin-bottom: 20px;
 }
 
 .feed {
   padding: 10px;
-  border: 1px solid var(--teal-accent);
+  border: 1px solid var(--border);
+  background:#EEE;
 }
 
 .title {
   grid-area: label;
+  
   background: var(--teal-accent);
-  border-bottom: 2px solid var(--teal);
+  color: var(--text);
+  font-weight: bold;
+}
+
+.details{
+  grid-area: details;
+}
+
+.details .left{
+  width: 50%;
+  float: left;
+}
+.details .right{
+  width: 50%;
+  float: right;
 }
 
 .graph {
   grid-area: graph;
-  background: white;
   margin: 0;
   overflow: hidden;
 }
 
-.table {
-  grid-area: table;
-  background: white;
-  margin: 0;
+.averages{
+  display: none;
 }
+
 
 .info {
   grid-area: info;
-  background: var(--offWhite);
 }
 
 /* -------------------------upload stylin-------------------------g*/
@@ -448,7 +465,6 @@ article ul li{
 .intervalOverview table tr td{
   padding: 7px 5px;
   white-space: nowrap
-  
 }
 .intervalOverview tr:nth-child(odd){background-color: var(--background);}
 
@@ -705,6 +721,26 @@ input, select{
     width: auto;
     margin-top: 20px;
     text-align: center;
+  }
+
+  /*feed styling*/
+
+  .averages {
+    grid-area: averages;
+    margin: 10px 0px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+  .averages table {
+    width: 100%;
+    text-align: center;
+    background: #EEEEEE;
+  }
+  
+  .averages table tr td{
+    padding: 7px 5px;
+    white-space: nowrap
   }
 
   .menu-toggle {

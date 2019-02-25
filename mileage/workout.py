@@ -9,7 +9,7 @@ class Workout(object):
     self.title = title
     self.workoutType = workoutType
     self.intervals = []
-    self.dateTime = datetime.datetime.today().strftime('%Y-%m-%d')
+    self.dateTime = datetime.datetime.today().strftime('%d-%m-%Y')
 
   def add_Interval(self, distance, totalTime, rest):
     interval = {
