@@ -28,5 +28,13 @@ document.getElementById('refreshErgPane').addEventListener("click", () => {
 })
 
 
+function secsToTime(secs){
+  let hours = secs / (60*60)
+  let a = secs % (60*60)
+  let minutes = secs / 60
+  a = secs % 60
+  let seconds = a 
+  return `${hours}:${minutes}:${seconds}`
+}
 
-
+secsToTime(100)

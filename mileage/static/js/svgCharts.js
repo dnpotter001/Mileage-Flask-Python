@@ -117,7 +117,6 @@ let LineGraph = function (area, intervals) {
       dot.setAttributeNS(null, 'r', 2)
       dot.setAttributeNS(null, 'cx', (interval[0] - 0.5) * dotWidth + "%")
       dot.setAttributeNS(null, 'cy', (interval[series]) * dotInc + 330 + "%")
-      console.trace(interval[series], dotInc )
       dot.setAttributeNS(null, 'fill', colour)
       this.svg.appendChild(dot)
     })

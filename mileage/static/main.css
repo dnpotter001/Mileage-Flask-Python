@@ -273,6 +273,7 @@ footer a:visited {
     "label"
     "details" 
     "graph" 
+    "averages"
     "info";
   padding: 0;
   margin-bottom: 20px;
@@ -312,8 +313,17 @@ footer a:visited {
 }
 
 .averages{
-  display: none;
+  grid-area: averages;
 }
+.averages .left{
+  width: 50%;
+  float: left;
+}
+.averages .right{
+  width: 50%;
+  float: right;
+}
+
 
 
 .info {
