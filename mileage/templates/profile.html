@@ -61,6 +61,33 @@
   <div class="feed info"> {{workout.dateTime}}</div>
 </article>
 {% endif %}
+{% if workout.workoutType == "FIXED" %}
+  <article class="feed-item">
+    <div class="feed title">{{workout.title}}</div>
+    <figure class="feed graph" id="lineGraph{{workout._id}}">
+        <script>
+          const lineGraphArea{{workout._id}} = document.getElementById("lineGraph{{workout._id}}");
+          let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, {{workout.intervals|tojson|safe}});
+          lineGraph{{workout._id}}.createSVG()
+          lineGraph{{workout._id}}.drawSeries(2, "red", "SPM")
+        </script>
+    </figure>
+    <article class="feed details">
+      <ul class="left">
+        <li><b>Details: </b></li>
+        <li><b>Total Distance: </b>
+        </li>
+      </ul>
+      <ul class="right">
+        <li><b>Average Split: </b></li>
+        <li><b>Total Time: </b></li>
+
+
+      </ul>
+    </article>
+    <div class="feed info"> {{workout.dateTime}}</div>
+  </article>
+{% endif %}
 {% endfor %}
 
 
