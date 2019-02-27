@@ -50,7 +50,12 @@
           document.getElementById("totaltime{{workout._id}}").append(secsToTime("{{workout.intervals[0].time}}"))
         </script>
       </li>
-      <li><b>Average Split: </b></li>
+      <li id="averageSplit{{workout._id}}">
+        <b>Average Split: </b>
+        <script>
+            document.getElementById("averageSplit{{workout._id}}").append(averageSplit("{{workout.intervals[0].time}}", "{{workout.intervals[0].distance}}"))
+          </script>
+      </li>
     </ul>
   </article>
   <div class="feed info"> {{workout.dateTime}}</div>

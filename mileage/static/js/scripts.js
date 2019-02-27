@@ -29,12 +29,21 @@ document.getElementById('refreshErgPane').addEventListener("click", () => {
 
 
 function secsToTime(secs){
-  let hours = secs / (60*60)
+  let hours = parseInt(secs / (60*60))
   let a = secs % (60*60)
-  let minutes = secs / 60
+  let minutes = parseInt(secs / 60)
   a = secs % 60
   let seconds = a 
   return `${hours}:${minutes}:${seconds}`
 }
 
-secsToTime(100)
+function averageSplit(sec, distance){
+  let splitSeconds = 500*(sec/distance);
+  let m = parseInt(splitSeconds / 60);
+  let s = (splitSeconds % 60).toFixed(1);
+  if (s < 10) {
+    s = "0" + s;
+  }
+  let split = `0${m}:${s}`
+  return split
+}
