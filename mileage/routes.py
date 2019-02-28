@@ -240,7 +240,7 @@ def uploadVariable():
     flash('Invalid Upload', 'warning')
     return redirect(url_for('upload'))
   
-  workout = Workout(form['title'], "FIXED")
+  workout = Workout(form['title'], "VARIABLE")
 
   if not form['count']:
     flash("You didn't add any intervals", 'warning')

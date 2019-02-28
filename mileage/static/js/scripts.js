@@ -3,6 +3,7 @@
 const navbar = document.getElementById("navbar");
 const navbutton = document.getElementById("navbutton");
 const header = document.getElementById("header");
+const ergRefresh = document.getElementById('refreshErgPane')
 
 navbutton.addEventListener("click", () => {
   //console.log("toggled");
@@ -22,7 +23,7 @@ window.addEventListener("load", () => {
   Sijax.request('checkForErgs');
 })
 
-document.getElementById('refreshErgPane').addEventListener("click", () => {
+ergRefresh.addEventListener("click", () => {
   Sijax.request('checkForErgs');
   document.getElementById('status').innerHTML = "...";
 })
@@ -34,7 +35,21 @@ function secsToTime(secs){
   let minutes = parseInt(a / 60)
   a = secs % 60
   let seconds = a.toFixed(1) 
-  return `${hours}:${minutes}:${seconds}`
+  let formattedTime = ""
+  if (seconds < 10){
+    seconds = "0"+ seconds
+  }
+  if (hours == 0){
+    formattedTime = `${minutes}:${seconds}`
+  } 
+  if (seconds == 0.0){
+    formattedTime = `${minutes}:00`
+  }
+  
+  if (hours != 0) {
+    formattedTime = `${hours}:${minutes}:${seconds}`
+  }
+  return formattedTime
 }
 
 function averageSplit(secs, distance){
@@ -51,13 +66,16 @@ function averageSplit(secs, distance){
 function intervalsToArray(intervals){
   console.log(intervals)
   let newIntervals = []
+  let count = 1
   intervals.forEach(i => {
     let interval = []
+    interval.push(count)
     interval.push(i.distance)
     interval.push(i.time)
     interval.push(i.rest)
-    interval.push(averageSplit(i.time,i.distance))
+    interval.push(500*(i.time/i.distance))
     newIntervals.push(interval)
+    count++
   }) 
   console.log(newIntervals)
   return newIntervals
@@ -77,4 +95,36 @@ function totalDistance(intervals){
     dist += parseInt(i.distance)
   })
   return dist
+}
+
+function createTable(intervals){
+  let table = document.createElement("table");
+  let tableRow = document.createElement("tr");
+
+  //labels
+  let labels = ['Interval', 'Distance', 'Time', 'Rest', 'Split/500']
+  labels.forEach((x) => {
+    let cell = document.createElement("td");
+    cell.innerHTML = x
+    tableRow.append(cell)
+  });
+  table.append(tableRow)
+
+  intervals.forEach((interval) => {
+    interval[2] = secsToTime(interval[2])
+    interval[3] = secsToTime(interval[3])
+    interval[4] = secsToTime(interval[4])
+  })
+
+  intervals.forEach((interval) => { 
+    console.log(interval)
+    tableRow = document.createElement("tr");
+    interval.forEach((data) => {
+      let cell = document.createElement("td");
+      cell.innerHTML = data
+      tableRow.append(cell)
+    })
+    table.append(tableRow)
+  })
+  return table
 }

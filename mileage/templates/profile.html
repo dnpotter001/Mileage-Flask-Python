@@ -61,17 +61,19 @@
   <div class="feed info"> {{workout.dateTime}}</div>
 </article>
 {% endif %}
-{% if workout.workoutType == "FIXED" %}
+{% if workout.workoutType == "FIXED" or workout.workoutType == "VARIABLE"  %}
   <article class="feed-item">
     <div class="feed title">{{workout.title}}</div>
-    <figure class="feed graph" id="lineGraph{{workout._id}}">
+    <!-- <figure class="feed graph" id="lineGraph{{workout._id}}">
         <script>
           const lineGraphArea{{workout._id}} = document.getElementById("lineGraph{{workout._id}}");
           let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, intervalsToArray({{workout.intervals|tojson|safe}}));
           lineGraph{{workout._id}}.createSVG()
-          lineGraph{{workout._id}}.drawSeries(1, "red", "Time")
+          lineGraph{{workout._id}}.drawSeries(1, "blue", "Dist")
+          lineGraph{{workout._id}}.drawSeries(2, "black", "Time")
+          lineGraph{{workout._id}}.drawSeries(4, "green", "Split")
         </script>
-    </figure>
+    </figure> -->
     <article class="feed details">
       <ul class="left">
         <li><b>Details: </b>Fixed Intervals</li>
@@ -95,9 +97,14 @@
             document.getElementById("totaltime{{workout._id}}").append(secsToTime(totalTime({{workout.intervals|tojson|safe}})))
           </script>
         </li>
-
-
       </ul>
+    </article>
+    <article class="feed averages">
+      <div id="tableArea{{workout._id}}">
+        <script>
+          document.getElementById("tableArea{{workout._id}}").append(createTable(intervalsToArray({{workout.intervals|tojson|safe}})))
+        </script>
+      </div>
     </article>
     <div class="feed info"> {{workout.dateTime}}</div>
   </article>
