@@ -31,14 +31,14 @@ document.getElementById('refreshErgPane').addEventListener("click", () => {
 function secsToTime(secs){
   let hours = parseInt(secs / (60*60))
   let a = secs % (60*60)
-  let minutes = parseInt(secs / 60)
+  let minutes = parseInt(a / 60)
   a = secs % 60
-  let seconds = a 
+  let seconds = a.toFixed(1) 
   return `${hours}:${minutes}:${seconds}`
 }
 
-function averageSplit(sec, distance){
-  let splitSeconds = 500*(sec/distance);
+function averageSplit(secs, distance){
+  let splitSeconds = 500*(secs/distance);
   let m = parseInt(splitSeconds / 60);
   let s = (splitSeconds % 60).toFixed(1);
   if (s < 10) {
@@ -46,4 +46,35 @@ function averageSplit(sec, distance){
   }
   let split = `0${m}:${s}`
   return split
+}
+
+function intervalsToArray(intervals){
+  console.log(intervals)
+  let newIntervals = []
+  intervals.forEach(i => {
+    let interval = []
+    interval.push(i.distance)
+    interval.push(i.time)
+    interval.push(i.rest)
+    interval.push(averageSplit(i.time,i.distance))
+    newIntervals.push(interval)
+  }) 
+  console.log(newIntervals)
+  return newIntervals
+}
+
+function totalTime(intervals){
+  let totalTime = 0
+  intervals.forEach(i => {
+    totalTime += i.time
+  })
+  return totalTime
+}
+
+function totalDistance(intervals){
+  let dist = 0
+  intervals.forEach(i => {
+    dist += parseInt(i.distance)
+  })
+  return dist
 }

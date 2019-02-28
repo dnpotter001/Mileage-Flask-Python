@@ -67,20 +67,34 @@
     <figure class="feed graph" id="lineGraph{{workout._id}}">
         <script>
           const lineGraphArea{{workout._id}} = document.getElementById("lineGraph{{workout._id}}");
-          let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, {{workout.intervals|tojson|safe}});
+          let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, intervalsToArray({{workout.intervals|tojson|safe}}));
           lineGraph{{workout._id}}.createSVG()
-          lineGraph{{workout._id}}.drawSeries(2, "red", "SPM")
+          lineGraph{{workout._id}}.drawSeries(1, "red", "Time")
         </script>
     </figure>
     <article class="feed details">
       <ul class="left">
-        <li><b>Details: </b></li>
-        <li><b>Total Distance: </b>
+        <li><b>Details: </b>Fixed Intervals</li>
+        <li id="totalDistance{{workout._id}}">
+          <b>Total Distance: </b>
+          <script>
+            document.getElementById("totalDistance{{workout._id}}").append(totalDistance({{workout.intervals|tojson|safe}})+"m")
+          </script>
         </li>
       </ul>
       <ul class="right">
-        <li><b>Average Split: </b></li>
-        <li><b>Total Time: </b></li>
+        <li id="averageSplit{{workout._id}}">
+          <b>Average Split: </b>
+          <script>
+              document.getElementById("averageSplit{{workout._id}}").append(averageSplit(totalTime({{workout.intervals|tojson|safe}}), totalDistance({{workout.intervals|tojson|safe}})))
+            </script>
+        </li>
+        <li id="totaltime{{workout._id}}">
+          <b>Total Time: </b>
+          <script>
+            document.getElementById("totaltime{{workout._id}}").append(secsToTime(totalTime({{workout.intervals|tojson|safe}})))
+          </script>
+        </li>
 
 
       </ul>

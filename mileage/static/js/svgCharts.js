@@ -89,10 +89,10 @@ let LineGraph = function (area, intervals) {
       return;
     }
     intervals.forEach(x => {
-      //console.log(x[series])
+      console.log(x[series])
       if (x[series] < 0){
         x[series] = x[series] * - 1
-        // /console.log(x[series])
+        console.log(x[series])
       }
     })
     let minValue = intervals[0][series];
