@@ -18,24 +18,6 @@ from mileage.workout import Workout
 import io, csv, os, json, time
 from io import StringIO
 
-# workouts = [
-#   {
-#     'author':'David Potter',
-#     'title': 'Sunday workout',
-#     'date': '11th Jan 2018'
-#   },
-#   {
-#     'author':'Judith Potter',
-#     'title': 'Saturday workout',
-#     'date': '12th Jan 2019'
-#   },
-#   {
-#     'author':'Eve Megaw',
-#     'title': 'Thursday workout',
-#     'date': '14th Aug 2019'
-#   }
-# ]
-
 users = mongo.db.users
 
 @login_manager.user_loader
@@ -128,7 +110,25 @@ def feed():
 @app.route('/profile')
 def profile():
 
-  workouts = users.find({'_id': ObjectId(current_user._id)},{'_id':0,'workouts': 1}).distinct('workouts')
+  pipeline = [
+      {"$unwind": {"path": "$workouts"}},
+      {"$project": {
+          "_id": "$workouts._id",
+          "firstName": 1,
+          "lastName": 1,
+          "title": "$workouts.title",
+          "workoutType": "$workouts.workoutType",
+          "intervals": "$workouts.intervals",
+          "csv": "$workouts.csv",
+          "dateTime": "$workouts.dateTime",
+          "unixTime": "$workouts.unixtime",
+          }},
+      {"$sort": {"unixTime":-1}},
+      {"$limit": 20}
+  ]
+  workouts = users.aggregate(pipeline)
+
+  #workouts = users.find({'_id': ObjectId(current_user._id)},{'_id':0,'workouts': 1}).distinct('workouts').sort({"unixtime":1})
   
   return render_template(
     'profile.html',
@@ -199,7 +199,7 @@ def uploadFixed():
   
   workout = Workout(form['title'], "FIXED")
 
-  if not form['count'] or form['count'] == 1:
+  if not form['count'] or form['count'] == "0":
     flash("You didn't add any intervals", 'warning')
     return redirect(url_for('upload'))
 
@@ -242,7 +242,7 @@ def uploadVariable():
   
   workout = Workout(form['title'], "VARIABLE")
 
-  if not form['count']:
+  if not form['count'] or form['count'] == "0":
     flash("You didn't add any intervals", 'warning')
     return redirect(url_for('upload'))
 

@@ -331,8 +331,10 @@ footer a:visited {
 .input {
   display: none;
 }
+
 .dropDown{
   transition: all 0.5s;
+  display: inline-block;
 }
 
 .breakdown {
@@ -342,6 +344,7 @@ footer a:visited {
   text-align: center;
   width: 100%;
   transition: all .7s ease-in-out;
+  font-style: italic;
 }
 
 .accordian {

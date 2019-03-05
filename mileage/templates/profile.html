@@ -3,7 +3,6 @@
 <script src="../static/js/svgCharts.js"></script>
 <script src="../static/js/scripts.js"></script>
 
-
 {%for workout in workouts %}
 {% if workout.workoutType == "CSV" %}
   <article class="feed-item">
@@ -32,9 +31,10 @@
 
       </ul>
     </article>
-    <div class="feed info"> {{workout.dateTime}}</div>
+    <div class="feed info">On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
   </article>
 {% endif %}
+
 {% if workout.workoutType == "SINGLE" %}
 <article class="feed-item">
   <div class="feed title">{{workout.title}}</div>
@@ -58,7 +58,7 @@
       </li>
     </ul>
   </article>
-  <div class="feed info"> {{workout.dateTime}}</div>
+  <div class="feed info"> On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
 </article>
 {% endif %}
 {% if workout.workoutType == "FIXED" or workout.workoutType == "VARIABLE"  %}
@@ -101,14 +101,14 @@
     </article>
     <article class="feed table">
       <input name="more" type="checkbox" id="breakdown{{workout._id}}" class="input" />
-      <label for="breakdown{{workout._id}}" class="breakdown"><span class="dropDown">⯆</span></label>
+      <label for="breakdown{{workout._id}}" class="breakdown">See Breakdown<span class="dropDown">▼</span></label>
       <div id="tableArea{{workout._id}}" class="accordian">
         <script>
           document.getElementById("tableArea{{workout._id}}").append(createTable(intervalsToArray({{workout.intervals|tojson|safe}})))
         </script>
       </div>
     </article>
-    <div class="feed info"> {{workout.dateTime}}</div>
+    <div class="feed info">On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
   </article>
 {% endif %}
 {% endfor %}

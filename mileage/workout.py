@@ -1,4 +1,5 @@
 import datetime
+import time
 from bson import ObjectId
 from mileage.rowfis import MaleFIS, FemaleFIS
 
@@ -10,6 +11,7 @@ class Workout(object):
     self.workoutType = workoutType
     self.intervals = []
     self.dateTime = datetime.datetime.today().strftime('%d-%m-%Y')
+    self.unixtime = int(time.time())
 
   def add_Interval(self, distance, totalTime, rest):
     interval = {
