@@ -199,7 +199,7 @@ def uploadFixed():
   
   workout = Workout(form['title'], "FIXED")
 
-  if not form['count']:
+  if not form['count'] or form['count'] == 1:
     flash("You didn't add any intervals", 'warning')
     return redirect(url_for('upload'))
 

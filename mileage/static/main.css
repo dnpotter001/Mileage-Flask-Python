@@ -274,6 +274,7 @@ footer a:visited {
     "details" 
     "graph" 
     "averages"
+    "table"
     "info";
   padding: 0;
   margin-bottom: 20px;
@@ -314,7 +315,7 @@ footer a:visited {
 }
 
 .averages{
-  padding:0px;
+  padding:10px;
   grid-area: averages;
 }
 .averages .left{
@@ -326,17 +327,55 @@ footer a:visited {
   float: right;
 }
 
-.averages table{
+/*hidden table layout on feed*/
+.input {
+  display: none;
+}
+.dropDown{
+  transition: all 0.5s;
+}
+
+.breakdown {
+  display: block;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  transition: all .7s ease-in-out;
+}
+
+.accordian {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .7s ease-in-out;
+}
+
+.input:checked+.breakdown+.accordian {
+  max-height: 100vh;
+}
+.input:checked+.breakdown>.dropDown{
+  transform: rotate(180deg);
+}
+
+
+
+
+.table {
+  grid-area: table;
+  padding: 0px;
+}
+
+.table table{
   width: 100%;
   text-align: center;
   margin:0;
 }
 
-.averages table tr td{
+.table table tr td{
   padding: 7px 5px;
   white-space: nowrap
 }
-.averages tr:nth-child(odd){background-color: var(--background);}
+.table tr:nth-child(odd){background-color: var(--background);}
 
 
 
@@ -796,13 +835,13 @@ input, select{
       "label label"
       "graph details" 
       "averages averages" 
+      "table table"
       "info info";
     padding: 0;
     margin-bottom: 20px;
   }
 
   .feed {
-    padding: 10px;
     border: 1px solid var(--border);
     background:#EEE;
   }

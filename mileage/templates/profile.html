@@ -74,7 +74,7 @@
           lineGraph{{workout._id}}.drawSeries(4, "green", "Split")
         </script>
     </figure> -->
-    <article class="feed details">
+    <article class="feed averages">
       <ul class="left">
         <li><b>Details: </b>Fixed Intervals</li>
         <li id="totalDistance{{workout._id}}">
@@ -99,8 +99,10 @@
         </li>
       </ul>
     </article>
-    <article class="feed averages">
-      <div id="tableArea{{workout._id}}">
+    <article class="feed table">
+      <input name="more" type="checkbox" id="breakdown{{workout._id}}" class="input" />
+      <label for="breakdown{{workout._id}}" class="breakdown"><span class="dropDown">⯆</span></label>
+      <div id="tableArea{{workout._id}}" class="accordian">
         <script>
           document.getElementById("tableArea{{workout._id}}").append(createTable(intervalsToArray({{workout.intervals|tojson|safe}})))
         </script>
