@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request, g, jsonify, request, make_response
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 from flask_pymongo import PyMongo
 import flask_sijax
 
@@ -75,7 +75,8 @@ def login():
         user_obj = User(str(user['_id']))
         login_user(user_obj, remember=login.remember.data)
         flash(f'Login Successful, welcome {user["firstName"]}', 'success')
-        return redirect(url_for('feed'))
+        next_page = request.args.get('next')
+        return redirect(next_page) if next_page else redirect(url_for('feed'))
       else:
         flash('Login Unsuccessful. Please check email and password', 'warning')
 
@@ -91,11 +92,8 @@ def logout():
   return redirect(url_for('welcome'))
 
 @app.route("/feed")
+@login_required
 def feed():
-
-  if not current_user.is_authenticated:
-    #flash(f'{current_user.is_authenticated} {current_user._id}', 'warning')
-    return redirect(url_for('welcome'))
   
   pipeline = [
       {"$unwind": {"path": "$workouts"}},
@@ -126,6 +124,7 @@ def feed():
   )
 
 @app.route('/profile')
+@login_required
 def profile():
 
   pipeline = [
@@ -146,9 +145,7 @@ def profile():
       {"$limit": 20}
   ]
   workouts = users.aggregate(pipeline)
-
-  #workouts = users.find({'_id': ObjectId(current_user._id)},{'_id':0,'workouts': 1}).distinct('workouts').sort({"unixtime":1})
-  
+    
   return render_template(
     'profile.html',
     zip=zip,
@@ -157,14 +154,13 @@ def profile():
   )
 
 @app.route("/upload", methods=['GET', 'POST'])
+@login_required
 def upload():
 
   singleInterval= UploadSingleInterval()
   csv = CSVUpload()
   fixedInterval = UploadIntervalFixed()
   variableInterval = UploadIntervalsVariable()
-  if not current_user.is_authenticated:
-    return redirect(url_for('welcome'))
 
   if singleInterval.upload.data and singleInterval.validate():
     workout = Workout(title= singleInterval.title.data, workoutType="SINGLE")
@@ -208,6 +204,7 @@ def upload():
 
 
 @app.route("/upload/fixed", methods=['GET','POST'])
+@login_required
 def uploadFixed():
 
   if request.method == 'POST' and request.form:
@@ -251,6 +248,7 @@ def uploadFixed():
   return redirect(url_for("feed"))
 
 @app.route("/upload/variable", methods=['GET','POST'])
+@login_required
 def uploadVariable():
 
   if request.method == 'POST' and request.form:
@@ -290,11 +288,8 @@ def uploadVariable():
 
 
 @app.route("/workout-review", methods=['GET', 'POST'])
+@login_required
 def workoutReview():
-  form = CSVUpload()
-
-  if not current_user.is_authenticated:
-    return redirect(url_for('welcome'))
 
   if request.method == 'POST': 
 
@@ -347,15 +342,11 @@ def workoutReview():
     intervals = workout.csv['intervals'],
     manFis=fisScores['male'],
     womanFis=fisScores['female'],
-    form=form
     )
     
 @app.route('/erg-control', methods=['GET', 'POST'])
 def ergControl():
-
-  if not current_user.is_authenticated:
-    return redirect(url_for('welcome'))
-
+  
   formDis = SetDistanceWorkout()
   formTime = SetTimeWorkout()
   formSL = StandardWorkouts()

@@ -18,5 +18,8 @@ flask_sijax.Sijax(app)
 bcrypt = Bcrypt(app)
 mongo = PyMongo(app)
 login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'warning'
+
 
 from mileage import routes
