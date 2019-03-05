@@ -96,6 +96,24 @@ def feed():
   if not current_user.is_authenticated:
     #flash(f'{current_user.is_authenticated} {current_user._id}', 'warning')
     return redirect(url_for('welcome'))
+  
+  pipeline = [
+      {"$unwind": {"path": "$workouts"}},
+      {"$project": {
+          "_id": "$workouts._id",
+          "firstName": 1,
+          "lastName": 1,
+          "title": "$workouts.title",
+          "workoutType": "$workouts.workoutType",
+          "intervals": "$workouts.intervals",
+          "csv": "$workouts.csv",
+          "dateTime": "$workouts.dateTime",
+          "unixTime": "$workouts.unixtime",
+          }},
+      {"$sort": {"unixTime":-1}},
+      {"$limit": 20}
+  ]
+  workouts = users.aggregate(pipeline)
 
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -103,7 +121,7 @@ def feed():
 
   return render_template(
     'feed.html', 
-   # posts=workouts, 
+     workouts=workouts, 
     title="Your Feed"
   )
 
@@ -111,6 +129,7 @@ def feed():
 def profile():
 
   pipeline = [
+      {"$match": {'_id': ObjectId(current_user._id)}},
       {"$unwind": {"path": "$workouts"}},
       {"$project": {
           "_id": "$workouts._id",

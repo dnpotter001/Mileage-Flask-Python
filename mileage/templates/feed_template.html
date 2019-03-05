@@ -1,0 +1,118 @@
+
+{% block content %}
+<script src="../static/js/svgCharts.js"></script>
+<script src="../static/js/scripts.js"></script>
+
+{%for workout in workouts %}
+{% if workout.workoutType == "CSV" %}
+  <article class="feed-item">
+    <div class="feed title">{{workout.title}}</div>
+    <figure class="feed graph" id="lineGraph{{workout._id}}">
+      <script>
+        const lineGraphArea{{workout._id}} = document.getElementById("lineGraph{{workout._id}}");
+        let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, {{workout.csv.intervals|tojson|safe}});
+        lineGraph{{workout._id}}.createSVG()
+        lineGraph{{workout._id}}.drawSeries(8, "red", "SPM")
+        lineGraph{{workout._id}}.drawSeries(14, "green", "Catch") 
+        lineGraph{{workout._id}}.drawSeries(13, "orange", "Power") 
+        lineGraph{{workout._id}}.drawSeries(5, "black", "Speed") 
+        </script>
+    </figure>
+    <article class="feed details">
+      <ul class="left">
+        <li><b>Details: </b> {{ workout.csv.details }}</li>
+        <li><b>Total Distance: </b>{{workout.csv.overview[1]}}</li>
+        <li><b>Total Time: </b>{{workout.csv.overview[3]}}</li>
+      </ul>
+      <ul class="right">
+        <li><b>Average Split: </b>{{workout.csv.overview[4]}}</li>
+        <li><b>Male RFis: </b>{{workout.maleFis}}%</li>
+        <li><b>Female RFis: </b>{{workout.femaleFis}}%</li>
+
+      </ul>
+    </article>
+    <div class="feed info">On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
+  </article>
+{% endif %}
+
+{% if workout.workoutType == "SINGLE" %}
+<article class="feed-item">
+  <div class="feed title">{{workout.title}}</div>
+  <article class="feed averages">
+    <ul class="left">
+      <li><b>Details: </b> Single Interval</li>
+      <li><b>Total Distance: </b>{{workout.intervals[0].distance}}</li>
+    </ul>
+    <ul class="right">
+      <li id="totaltime{{workout._id}}">
+        <b>Total Time: </b>
+        <script>
+          document.getElementById("totaltime{{workout._id}}").append(secsToTime("{{workout.intervals[0].time}}"))
+        </script>
+      </li>
+      <li id="averageSplit{{workout._id}}">
+        <b>Average Split: </b>
+        <script>
+            document.getElementById("averageSplit{{workout._id}}").append(averageSplit("{{workout.intervals[0].time}}", "{{workout.intervals[0].distance}}"))
+          </script>
+      </li>
+    </ul>
+  </article>
+  <div class="feed info"> On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
+</article>
+{% endif %}
+{% if workout.workoutType == "FIXED" or workout.workoutType == "VARIABLE"  %}
+  <article class="feed-item">
+    <div class="feed title">{{workout.title}}</div>
+    <!-- <figure class="feed graph" id="lineGraph{{workout._id}}">
+        <script>
+          const lineGraphArea{{workout._id}} = document.getElementById("lineGraph{{workout._id}}");
+          let lineGraph{{workout._id}} = new LineGraph(lineGraphArea{{workout._id}}, intervalsToArray({{workout.intervals|tojson|safe}}));
+          lineGraph{{workout._id}}.createSVG()
+          lineGraph{{workout._id}}.drawSeries(1, "blue", "Dist")
+          lineGraph{{workout._id}}.drawSeries(2, "black", "Time")
+          lineGraph{{workout._id}}.drawSeries(4, "green", "Split")
+        </script>
+    </figure> -->
+    <article class="feed averages">
+      <ul class="left">
+        <li><b>Details: </b>Fixed Intervals</li>
+        <li id="totalDistance{{workout._id}}">
+          <b>Total Distance: </b>
+          <script>
+            document.getElementById("totalDistance{{workout._id}}").append(totalDistance({{workout.intervals|tojson|safe}})+"m")
+          </script>
+        </li>
+      </ul>
+      <ul class="right">
+        <li id="averageSplit{{workout._id}}">
+          <b>Average Split: </b>
+          <script>
+              document.getElementById("averageSplit{{workout._id}}").append(averageSplit(totalTime({{workout.intervals|tojson|safe}}), totalDistance({{workout.intervals|tojson|safe}})))
+            </script>
+        </li>
+        <li id="totaltime{{workout._id}}">
+          <b>Total Time: </b>
+          <script>
+            document.getElementById("totaltime{{workout._id}}").append(secsToTime(totalTime({{workout.intervals|tojson|safe}})))
+          </script>
+        </li>
+      </ul>
+    </article>
+    <article class="feed table">
+      <input name="more" type="checkbox" id="breakdown{{workout._id}}" class="input" />
+      <label for="breakdown{{workout._id}}" class="breakdown">See Breakdown<span class="dropDown">▼</span></label>
+      <div id="tableArea{{workout._id}}" class="accordian">
+        <script>
+          document.getElementById("tableArea{{workout._id}}").append(createTable(intervalsToArray({{workout.intervals|tojson|safe}})))
+        </script>
+      </div>
+    </article>
+    <div class="feed info">On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
+  </article>
+{% endif %}
+{% endfor %}
+
+
+
+{% endblock %}
