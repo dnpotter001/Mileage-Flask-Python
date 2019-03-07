@@ -24,7 +24,10 @@ let BarChart = function (area, intervals) {
     let maxValue = 0;
 
     if (barCount == 1) {
-      chartArea.innerHTML = "More intervals needed for bar chart. "
+      area.innerHTML = "More intervals needed for bar chart. "
+      if (window.screen.width <= "800"){
+        area.style.height = "20px"
+      }
       return;
     }
     intervals.forEach(x => {
@@ -86,6 +89,7 @@ let LineGraph = function (area, intervals) {
 
     if (dotCount == 1) {
       area.innerHTML = "More intervals needed for a line graph. "
+      area.style.height = "20px"
       return;
     }
     intervals.forEach(x => {
@@ -155,3 +159,39 @@ let LineGraph = function (area, intervals) {
     return;
   }
 }
+
+let AngleView = function (area) {
+
+  this.createSVG = function () {
+    this.ns = 'http://www.w3.org/2000/svg'
+    this.svg = document.createElementNS(this.ns, 'svg')
+    this.svg.setAttributeNS(null, 'width', '100%')
+    this.svg.setAttributeNS(null, 'height', '100%')
+    area.appendChild(this.svg)
+  }
+
+  this.drawAngles = function(cat, fin, slip, wash){
+
+    //draw cross
+    let verticleAxis = document.createElementNS(this.ns, 'line');
+    verticleAxis.setAttributeNS(null, 'x1', 50 + "%")
+    verticleAxis.setAttributeNS(null, 'y1', 0 + "%")
+    verticleAxis.setAttributeNS(null, 'x2', 50 + "%")
+    verticleAxis.setAttributeNS(null, 'y2', 100 + "%")
+    verticleAxis.setAttributeNS(null, 'style', `stroke:black;stroke-width:2`)
+
+    let horizontalAxis = document.createElementNS(this.ns, 'line');
+    horizontalAxis.setAttributeNS(null, 'x1', 0 + "%")
+    horizontalAxis.setAttributeNS(null, 'y1', 50 + "%")
+    horizontalAxis.setAttributeNS(null, 'x2', 100 + "%")
+    horizontalAxis.setAttributeNS(null, 'y2', 50 + "%")
+    horizontalAxis.setAttributeNS(null, 'style', `stroke:black;stroke-width:2`)
+
+    this.svg.appendChild(verticleAxis)
+    this.svg.appendChild(horizontalAxis)
+
+    //catch
+    
+  }
+}
+

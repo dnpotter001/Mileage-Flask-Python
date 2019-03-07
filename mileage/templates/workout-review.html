@@ -56,8 +56,13 @@
     </ul>
   </article>
 
-  <article class="angleView">
-    <h3>Angle View</h3>
+  <article class="angleView" id="angleView">
+    <script>
+      const angleViewArea = document.getElementById("angleView");
+      let angleView = new AngleView(angleViewArea);
+      angleView.createSVG()
+      angleView.drawAngles(0,0,0,0)
+      </script>
   </article>
   
 

@@ -88,7 +88,7 @@ class MaleFIS(object):
     self.rowingFis.input['Wash'] = wash
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
-    self.quality.view(sim=self.rowingFis)
+    #self.quality.view(sim=self.rowingFis)
     return round(self.rowingFis.output['Quality'], 1)
 
   def ViewPlots(self):

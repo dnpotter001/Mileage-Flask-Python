@@ -447,7 +447,7 @@ rect.bar{
 .workoutReview {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 1fr 1fr  auto auto auto auto;
+  grid-template-rows: auto auto 400px auto auto auto auto;
   grid-template-areas:
     "overview "
     "reviewLineGraph"
@@ -758,7 +758,7 @@ input, select{
   .workoutReview {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 1fr 1fr auto auto;
+    grid-template-rows: auto auto 400px auto;
     grid-template-areas:
       "overview reviewBarGraph"
       "reviewLineGraph reviewLineGraph"
