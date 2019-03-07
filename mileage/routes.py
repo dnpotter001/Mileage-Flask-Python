@@ -107,6 +107,8 @@ def feed():
           "csv": "$workouts.csv",
           "dateTime": "$workouts.dateTime",
           "unixTime": "$workouts.unixtime",
+          "maleFis": "$workouts.maleFis",
+          "femaleFis": "$workouts.femaleFis"
           }},
       {"$sort": {"unixTime":-1}},
       {"$limit": 20}
@@ -140,6 +142,8 @@ def profile():
           "csv": "$workouts.csv",
           "dateTime": "$workouts.dateTime",
           "unixTime": "$workouts.unixtime",
+          "maleFis": "$workouts.maleFis",
+          "femaleFis": "$workouts.femaleFis"
           }},
       {"$sort": {"unixTime":-1}},
       {"$limit": 20}
@@ -342,6 +346,7 @@ def workoutReview():
     intervals = workout.csv['intervals'],
     manFis=fisScores['male'],
     womanFis=fisScores['female'],
+    plot='/static/img/fis.png'
     )
     
 @app.route('/erg-control', methods=['GET', 'POST'])
