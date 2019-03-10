@@ -92,8 +92,8 @@ class MaleFIS(object):
     plt.savefig("mileage/static/img/maleFis.png")
     return round(self.rowingFis.output['Quality'], 1)
 
-  def ViewPlots(self):
-    return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()
+  #def ViewPlots(self):
+  #  return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()
 
 class FemaleFIS(object):
   def __init__(self):
@@ -185,8 +185,8 @@ class FemaleFIS(object):
     plt.savefig("mileage/static/img/femaleFis.png")
     return round(self.rowingFis.output['Quality'],1)
 
-  def ViewPlots(self):
-    return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()
+  #def ViewPlots(self):
+  #  return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()
 
 
 
