@@ -14,7 +14,7 @@ let BarChart = function (area, intervals) {
     this.ns = 'http://www.w3.org/2000/svg'
     this.svg = document.createElementNS(this.ns, 'svg')
     this.svg.setAttributeNS(null, 'width', '100%')
-    this.svg.setAttributeNS(null, 'height', '100%')
+    this.svg.setAttributeNS(null, 'height', '90%')
     area.appendChild(this.svg)
   }
 

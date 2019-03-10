@@ -447,11 +447,10 @@ rect.bar{
 .workoutReview {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: auto auto 400px auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto;
   grid-template-areas:
     "overview "
     "reviewLineGraph"
-    "angleView"
     "rowingFis"
     "reviewBarGraph"
     "intervals" ;
@@ -500,6 +499,20 @@ article ul li{
   padding: 20px;
   margin-right: 0px;
   margin-top:20px;
+}
+.rowingFis .left{
+  width: 100%;
+  text-align:center;
+}
+
+.rowingFis .right{
+  width: 100%;
+  text-align: center;
+}
+
+.fisPlot {
+  width:80%;
+  margin: 10px 0px;
 }
 
 .angleView { 
@@ -758,11 +771,11 @@ input, select{
   .workoutReview {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: auto auto 400px auto;
+    grid-template-rows: 1fr auto auto auto;
     grid-template-areas:
       "overview reviewBarGraph"
       "reviewLineGraph reviewLineGraph"
-      "rowingFis angleView"
+      "rowingFis rowingFis"
       "intervals intervals";
     height: 100%; 
   }
@@ -772,12 +785,16 @@ input, select{
     margin-top: 0px;
   }
 
-  .rowingFis{
-    margin-right: 10px;
+  .rowingFis .left{
+    width: 50%;
+    float:left;
+    text-align:center;
   }
 
-  .angleView{
-    margin-left: 10px;
+  .rowingFis .right{
+    width: 50%;
+    float:right;
+    text-align: center;
   }
 
   .overview{
