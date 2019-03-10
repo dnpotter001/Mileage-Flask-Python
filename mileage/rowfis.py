@@ -88,7 +88,7 @@ class MaleFIS(object):
     self.rowingFis.input['Wash'] = wash
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
-    #self.quality.view(sim=self.rowingFis)
+    self.quality.view(sim=self.rowingFis)
     plt.savefig("mileage/static/img/fis.png")
     return round(self.rowingFis.output['Quality'], 1)
 

@@ -321,13 +321,13 @@ def workoutReview():
     workout.addRowFis()
     fisScores = workout.rowFis()
 
-    try:
-        users.update_one(
-          {'_id': ObjectId(current_user._id)},
-          {'$addToSet': {'workouts':workout.__dict__}}
-        )
-    except:
-        return flash('Workout correct but error uploading, all information is temporary', 'warning')
+    # try:
+    #     users.update_one(
+    #       {'_id': ObjectId(current_user._id)},
+    #       {'$addToSet': {'workouts':workout.__dict__}}
+    #     )
+    # except:
+    #     return flash('Workout correct but error uploading, all information is temporary', 'warning')
     
   else: 
     flash('No .CSV uploaded.', 'warning')
@@ -346,7 +346,8 @@ def workoutReview():
     intervals = workout.csv['intervals'],
     manFis=fisScores['male'],
     womanFis=fisScores['female'],
-    plot='/static/img/fis.png'
+    malePlot='/static/img/maleFis.png',
+    femalePlot='/static/img/femaleFis.png'
     )
     
 @app.route('/erg-control', methods=['GET', 'POST'])
