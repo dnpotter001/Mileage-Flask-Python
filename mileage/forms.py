@@ -1,8 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, BooleanField, FieldList, FormField
+from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, BooleanField, FieldList, FormField, TextAreaField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, ValidationError, Email, DataRequired
 from mileage import mongo
+from flask_login import current_user
+from bson import ObjectId
+from flask_wtf.html5 import URLField
+from wtforms.validators import url
+
 
 class RegistrationForm(FlaskForm):
   firstName = StringField('First Name',
@@ -177,3 +182,33 @@ class StandardWorkouts(FlaskForm):
       ('5', '500m/1:00r')])
 
   submitSL = SubmitField('Set Workout')
+
+
+class UpdateAccount(FlaskForm):
+  firstName = StringField('First Name: ',
+    validators=[InputRequired(), Length(min=2, max=30)],
+    render_kw={"placeholder": "First Name"})
+
+  lastName = StringField('Last Name: ',
+    validators=[InputRequired(), Length(min=2, max=30)],
+    render_kw={"placeholder": "Last Name"})
+  
+  email = StringField('Email: ',
+    validators=[InputRequired(), Email()],
+    render_kw={"placeholder": "Email"})
+
+  club = StringField('Squad: ',
+    validators=[Length(min=2, max=40)])
+
+  bio = TextAreaField('About You: ',
+    validators=[Length(min=0, max=200)])
+
+  gsheets = URLField('Google Sheet Link',
+    validators=[url()])
+
+  submit = SubmitField('Update')
+
+  def validate_email(self, email):
+    if (not (mongo.db.users.find_one({"email": email.data},{'_id':1}) == ObjectId(current_user._id))):
+      if (mongo.db.users.find_one({"email": email.data}) != None):
+        raise ValidationError("That email address is taken. Please choose another.")

@@ -8,7 +8,7 @@ from bson import Binary, Code, json_util, ObjectId
 from mileage import app, bcrypt, mongo, login_manager
 from mileage.forms import (SetDistanceWorkout, SetTimeWorkout, StandardWorkouts, 
                            UploadSingleInterval, CSVUpload, LoginForm, RegistrationForm, 
-                           UploadIntervalFixed, UploadIntervalsVariable)
+                           UploadIntervalFixed, UploadIntervalsVariable, UpdateAccount)
 from mileage.sijaxHandlers import ErgHandler 
 from mileage.rowfis import MaleFIS, FemaleFIS
 from . import pyrow
@@ -409,7 +409,17 @@ def ergControl():
 @app.route("/settings")
 def settings():
 
-  return render_template('settings.html', title="Settings")
+  update = UpdateAccount()
+
+  
+  if g.sijax.is_sijax_request:
+    g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
+    return g.sijax.process_request()
+
+  return render_template(
+    'settings.html', 
+    title="Settings",
+    )
 
 @app.route("/about")
 def about():
