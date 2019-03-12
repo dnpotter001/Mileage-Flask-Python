@@ -1,11 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, BooleanField, FieldList, FormField, TextAreaField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, ValidationError, Email, DataRequired
+from wtforms.validators import Length, InputRequired, NumberRange, EqualTo, ValidationError, Email, DataRequired, Optional
 from mileage import mongo
 from flask_login import current_user
 from bson import ObjectId
-from flask_wtf.html5 import URLField
+from wtforms.fields.html5 import URLField
 from wtforms.validators import url
 
 
@@ -197,18 +197,19 @@ class UpdateAccount(FlaskForm):
     validators=[InputRequired(), Email()],
     render_kw={"placeholder": "Email"})
 
-  club = StringField('Squad: ',
-    validators=[Length(min=2, max=40)])
+  club = StringField('Club: ',
+    validators=[Length(min=0, max=40)])
 
   bio = TextAreaField('About You: ',
     validators=[Length(min=0, max=200)])
 
-  gsheets = URLField('Google Sheet Link',
-    validators=[url()])
+  gsheet = URLField('Google Sheet Link',
+    validators=[url(), Optional()])
 
   submit = SubmitField('Update')
 
   def validate_email(self, email):
-    if (not (mongo.db.users.find_one({"email": email.data},{'_id':1}) == ObjectId(current_user._id))):
-      if (mongo.db.users.find_one({"email": email.data}) != None):
+    currentEmail = mongo.db.users.find_one({'_id': ObjectId(current_user._id)}, {'_id':0, 'email': 1})
+    if (email.data != currentEmail['email']):
+      if (mongo.db.users.find_one({"email": email.data}) != None ):
         raise ValidationError("That email address is taken. Please choose another.")

@@ -422,6 +422,19 @@ footer a:visited {
   grid-area: info;
 }
 
+/* -------------------------setting stylin-------------------------g*/
+
+.settings {
+  margin:10px 0px;
+  padding: 20px;
+  width: calc(100% - 40px);
+}
+
+.settings h3 {
+  text-align: center;
+}
+
+
 /* -------------------------upload stylin-------------------------g*/
 .hidden{
   display: none;
@@ -439,15 +452,25 @@ footer a:visited {
   align-content: center;
 }
 
+.fieldRow textarea {
+  width: 45%;
+  vertical-align: middle; 
+  display: inline-block; 
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px;
+  height: 100px; 
+}
+
 .fieldRow input {
-  width: 40%;
+  width: 45%;
   vertical-align: middle; 
   display: inline-block;
 }
 
 .fieldRow label {
   
-  width: 40%;
+  width: 45%;
   vertical-align: middle; 
   display: inline-block;
   text-align: right;
@@ -787,10 +810,14 @@ input, select{
   }
 
   .fieldRow input {
-    width: 150px
+    width: 200px;
+  }
+
+  .fieldRow textarea {
+    width: 200px;
   }
   .fieldRow label {
-    width: 150px;
+    width: 200px;
   }
 
   .intervalInput .fieldRow{

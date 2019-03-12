@@ -1,5 +1,81 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h1>Update Profile</h1>
+{{user}}
+
+<section class="settings">
+  
+  <h3>Update Profile</h3>
+  <form method="POST" action="">
+    {{form.hidden_tag()}}
+    <div class="fieldRow">
+      {{form.firstName.label}}
+      {{form.firstName}}
+    </div>
+    <div class="fieldRow">
+      {{form.lastName.label}}
+      {{form.lastName}}
+    </div>
+    <div class="fieldRow">
+        {{form.email.label}}
+        {%if form.email.errors %}
+        {{form.email(class="invalid")}}
+          <div class="invalid-input">
+            {% for error in form.email.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.email}}
+        {% endif %}
+    </div>
+    <div class="fieldRow">
+        {{form.club.label}}
+        {%if form.club.errors %}
+        {{form.club(class="invalid")}}
+          <div class="invalid-input">
+            {% for error in form.club.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.club}}
+        {% endif %}
+    </div>
+    <div class="fieldRow">
+        {{form.bio.label}}
+        {%if form.bio.errors %}
+        {{form.bio(class="invalid")}}
+          <div class="invalid-input">
+            {% for error in form.bio.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.bio}}
+        {% endif %}
+    </div>
+    <div class="fieldRow">
+        {{form.gsheet.label}}
+        {%if form.gsheet.errors %}
+        {{form.gsheet(class="invalid")}}
+          <div class="invalid-input">
+            {% for error in form.gsheet.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.gsheet}}
+        {% endif %}
+    </div>
+
+    {{ form.submit(class="button contrast center-align")}}
+
+
+  </form>
+
+</section>
+
+
+
 {% endblock content %}

@@ -406,12 +406,48 @@ def ergControl():
     formSL=formSL
   )
 
-@app.route("/settings")
+@app.route("/settings",  methods=['GET', 'POST'])
 def settings():
 
   update = UpdateAccount()
+  user = users.find_one(
+    {"_id": ObjectId(current_user._id)},
+    {
+      "firstName": 1,
+      "lastName": 1,
+      "email": 1,
+      "bio": 1,
+      "club": 1,
+      "gsheet": 1
+    })
 
-  
+  if update.submit.data and update.validate():
+    users.update({"_id": ObjectId(current_user._id)},{
+      "firstName":update.firstName.data,
+      "lastName":update.lastName.data,
+      "email":update.email.data,
+      "bio": update.bio.data,
+      "club": update.club.data,
+      "gsheet": update.gsheet.data,
+    })  
+    flash("Your profile has been successfully updated.", "success")
+    return redirect(url_for("profile"))
+
+  elif request.method == 'GET':
+    update.firstName.data = user['firstName']
+    update.lastName.data = user['lastName']
+    update.email.data = user['email']
+    try:
+      update.bio.data = user['bio']
+      update.club.data = user['club']
+      update.gsheet.data = user ['gsheet']
+    except KeyError:
+      update.bio.data = ''
+      update.club.data = ''
+      update.gsheet.data = ''
+
+    
+
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
     return g.sijax.process_request()
@@ -419,6 +455,8 @@ def settings():
   return render_template(
     'settings.html', 
     title="Settings",
+    form=update,
+    user=user
     )
 
 @app.route("/about")
