@@ -153,9 +153,7 @@ def profile():
   user = users.find_one(
     {"_id": ObjectId(current_user._id)},
     {
-      "firstName": 1,
-      "lastName": 1,
-      "profilePic": 1,
+      "workouts":0
     })
 
 
@@ -422,14 +420,15 @@ def settings():
     })
 
   if update.submit.data and update.validate():
-    users.update({"_id": ObjectId(current_user._id)},{
-      "firstName":update.firstName.data,
-      "lastName":update.lastName.data,
-      "email":update.email.data,
-      "bio": update.bio.data,
-      "club": update.club.data,
-      "gsheet": update.gsheet.data,
-    })  
+    users.update({"_id": ObjectId(current_user._id)},
+    {"$set": {
+        "firstName":update.firstName.data,
+        "lastName":update.lastName.data,
+        "email":update.email.data,
+        "bio": update.bio.data,
+        "club": update.club.data,
+        "gsheet": update.gsheet.data,
+    }})
     flash("Your profile has been successfully updated.", "success")
     return redirect(url_for("profile"))
 

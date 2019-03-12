@@ -2,12 +2,12 @@
 {% block content %}
 
 <section class="profileHeader">
-
+  
   <img src={{pp}}>
   <article class="userInfo">
     <h3>{{user.firstName + " "+ user.lastName}}</h3> 
     {% if user.club %}
-      {{user.club}}
+      <br>{{user.club}}<br><br>
     {% endif %}
 
     {% if user.bio %}
