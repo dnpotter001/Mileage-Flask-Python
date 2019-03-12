@@ -18,6 +18,7 @@ from mileage.workout import Workout
 import io, csv, os, json, time
 from io import StringIO
 import secrets
+from PIL import Image
 
 users = mongo.db.users
 
@@ -412,7 +413,12 @@ def savePicture(picture):
   _, f_ext = os.path.splitext(picture.filename)
   pic_fn = random_hex + f_ext
   pic_path = os.path.join(app.root_path, 'static/img/pp', pic_fn)
-  picture.save(pic_path)
+  
+  size = (300,300)
+  image = Image.open(picture)
+  image.thumbnail(size)
+
+  image.save(pic_path)
   return pic_fn
 
 @app.route("/settings",  methods=['GET', 'POST'])
