@@ -1,6 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<section class="profileHeader">
+
+  <img src={{pp}}>
+  <article class="userInfo">
+    <h3>{{user.firstName + " "+ user.lastName}}</h3> 
+    {% if user.squad %}
+      {{user.squad}}
+    {% endif %}
+
+    {% if user.bio %}
+      {{user.bio}}
+    {% else %}
+      <a href={{url_for("settings")}}>You don't have a bio, set one here</a>
+    {% endif %}
+
+  </article>
+  <div class="update">
+    <a href={{url_for("settings")}}>Upadate your profile</a>
+
+  </div>
+
+</section>
+
 {% include 'feed_template.html' %}
 
 {% endblock content%}

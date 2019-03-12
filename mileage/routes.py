@@ -149,12 +149,25 @@ def profile():
       {"$limit": 20}
   ]
   workouts = users.aggregate(pipeline)
+
+  user = users.find_one(
+    {"_id": ObjectId(current_user._id)},
+    {
+      "firstName": 1,
+      "lastName": 1,
+      "profilePic": 1,
+    })
+
+
+  pp = "static/img/defaultpp.png"
     
   return render_template(
     'profile.html',
     zip=zip,
     workouts=workouts,
     title='Your Profile',
+    user=user,
+    pp=pp
   )
 
 @app.route("/upload", methods=['GET', 'POST'])
@@ -393,9 +406,12 @@ def ergControl():
     formSL=formSL
   )
 
+@app.route("/settings")
+def settings():
+
+  return render_template('settings.html', title="Settings")
 
 @app.route("/about")
 def about():
 
-  
   return render_template('about.html', title="About")

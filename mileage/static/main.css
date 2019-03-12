@@ -231,6 +231,42 @@ footer a:visited {
   padding: 20px 0px;
 }
 
+/* -------------------------profile stylin-------------------------g*/
+.profileHeader {
+  margin:10px 0px;
+  background: #eee;
+  border: 1px solid var(--border);
+  padding: 20px;
+  width: calc(100% - 40px);
+}
+
+.profileHeader img{
+  width: 30%;
+  height: 100%;
+  border-radius: 20%;
+  border: 1px solid var(--border);
+}
+
+.profileHeader h3{
+  font-size: 30px
+}
+
+.profileHeader .update{
+  padding-top: 20px;
+  width: 30%;
+  text-align:center;
+}
+
+.profileHeader a{
+  color: #333;
+}
+
+.userInfo {
+  float: right;
+  width: 65%;
+}
+
+
 /* -------------------------login register stylin-------------------------g*/
 .login{
   margin:auto;

@@ -89,7 +89,9 @@ let LineGraph = function (area, intervals) {
 
     if (dotCount == 1) {
       area.innerHTML = "More intervals needed for a line graph. "
-      area.style.height = "20px"
+      if (window.screen.width <= "800"){
+        area.style.height = "20px"
+      }
       return;
     }
     intervals.forEach(x => {
