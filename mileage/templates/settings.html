@@ -4,7 +4,7 @@
 <section class="settings">
   
   <h3>Update Profile</h3>
-  <form method="POST" action="">
+  <form method="POST" action="" enctype="multipart/form-data">
     {{form.hidden_tag()}}
     <div class="fieldRow">
       {{form.firstName.label}}
@@ -52,6 +52,15 @@
         {% else %}
           {{form.bio}}
         {% endif %}
+    </div>
+    <div class="fieldRow">
+      {{form.picture.label}}
+      {{form.picture}}
+      {%if form.picture.errors %}
+          {% for error in form.picture.errors %}
+            <br><span class="invalid-input">{{error}}</span><br>
+          {% endfor %}
+      {% endif %}
     </div>
     <div class="fieldRow">
         {{form.gsheet.label}}

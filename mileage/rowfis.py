@@ -89,7 +89,7 @@ class MaleFIS(object):
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
     self.quality.view(sim=self.rowingFis)
-    plt.savefig("mileage/static/img/maleFis.png")
+    plt.savefig("mileage/static/img/fis/maleFis.png")
     return round(self.rowingFis.output['Quality'], 1)
 
   #def ViewPlots(self):
@@ -182,7 +182,7 @@ class FemaleFIS(object):
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
     self.quality.view(sim=self.rowingFis)
-    plt.savefig("mileage/static/img/femaleFis.png")
+    plt.savefig("mileage/static/img/fis/femaleFis.png")
     return round(self.rowingFis.output['Quality'],1)
 
   #def ViewPlots(self):

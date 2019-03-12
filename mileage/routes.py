@@ -17,6 +17,7 @@ from mileage.workout import Workout
 
 import io, csv, os, json, time
 from io import StringIO
+import secrets
 
 users = mongo.db.users
 
@@ -156,8 +157,10 @@ def profile():
       "workouts":0
     })
 
-
-  pp = "static/img/defaultpp.png"
+  if user['pp']:
+    pp = "static/img/pp/" + user['pp']
+  else:
+    pp = "static/img/pp/defaultpp.png"
     
   return render_template(
     'profile.html',
@@ -357,8 +360,8 @@ def workoutReview():
     intervals = workout.csv['intervals'],
     manFis=fisScores['male'],
     womanFis=fisScores['female'],
-    malePlot='/static/img/maleFis.png',
-    femalePlot='/static/img/femaleFis.png'
+    malePlot='/static/img/fis/maleFis.png',
+    femalePlot='/static/img/fis/femaleFis.png'
     )
     
 @app.route('/erg-control', methods=['GET', 'POST'])
@@ -404,6 +407,14 @@ def ergControl():
     formSL=formSL
   )
 
+def savePicture(picture):
+  random_hex = secrets.token_hex(8)
+  _, f_ext = os.path.splitext(picture.filename)
+  pic_fn = random_hex + f_ext
+  pic_path = os.path.join(app.root_path, 'static/img/pp', pic_fn)
+  picture.save(pic_path)
+  return pic_fn
+
 @app.route("/settings",  methods=['GET', 'POST'])
 def settings():
 
@@ -420,6 +431,14 @@ def settings():
     })
 
   if update.submit.data and update.validate():
+
+    if update.picture.data: 
+      picture_file = savePicture(update.picture.data)
+      users.update({"_id": ObjectId(current_user._id)},
+      {"$set": {
+        "pp":picture_file
+      }})
+
     users.update({"_id": ObjectId(current_user._id)},
     {"$set": {
         "firstName":update.firstName.data,

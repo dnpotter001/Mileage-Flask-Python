@@ -203,6 +203,8 @@ class UpdateAccount(FlaskForm):
   bio = TextAreaField('About You: ',
     validators=[Length(min=0, max=200)])
 
+  picture = FileField('Upload Profile Picture', validators=[FileAllowed(['jpg','png'])])
+
   gsheet = URLField('Google Sheet Link',
     validators=[url(), Optional()])
 

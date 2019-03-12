@@ -233,18 +233,16 @@ footer a:visited {
 
 /* -------------------------profile stylin-------------------------g*/
 .profileHeader {
-  margin:10px 0px;
+  margin-bottom: 10px;
   background: #eee;
   border: 1px solid var(--border);
   padding: 20px;
-  width: calc(100% - 40px);
+  width: calc(100% - 42px);
 }
 
 .profileHeader img{
   width: 30%;
   height: 100%;
-  border-radius: 20%;
-  border: 1px solid var(--border);
 }
 
 .profileHeader h3{
