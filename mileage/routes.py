@@ -14,6 +14,7 @@ from mileage.rowfis import MaleFIS, FemaleFIS
 from . import pyrow
 from mileage.user import User
 from mileage.workout import Workout
+from mileage.gsheet import GSheet
 
 import io, csv, os, json, time
 from io import StringIO
@@ -194,7 +195,9 @@ def upload():
       totalTime = int(timeArray[0]) * 60 * 60 + int(timeArray[1]) * 60 + float(timeArray[2])
 
     workout.add_Interval(singleInterval.distance.data, totalTime, None)
-    
+    gsheet = GSheet(str(current_user._id))
+    gsheet.add_Workout(workout)
+
     try:
       users.update_one(
         {'_id': ObjectId(current_user._id)},
@@ -203,6 +206,8 @@ def upload():
     except:
       flash('Workout correct but error uploading', 'warning')
       return redirect(url_for("upload"))
+
+
 
     flash('Workout Uploaded', 'success')
     return redirect(url_for("feed"))
@@ -254,6 +259,9 @@ def uploadFixed():
       flash('Time in the wrong format, try Minutes:Seconds.', 'warning')
       return redirect(url_for("upload"))
 
+  gsheet = GSheet(str(current_user._id))
+  gsheet.add_Workout(workout)
+
   try:
     users.update_one(
       {'_id': ObjectId(current_user._id)},
@@ -292,6 +300,9 @@ def uploadVariable():
     except:
       flash('Time or rest in the wrong format, try Minutes:Seconds.', 'warning')
       return redirect(url_for("upload"))
+
+  gsheet = GSheet(str(current_user._id))
+  gsheet.add_Workout(workout)
 
   try:
     users.update_one(
