@@ -353,7 +353,6 @@ footer a:visited {
   grid-area: graph;
   margin: 0;
   overflow: hidden;
-  height: 200px;
 }
 
 .averages{
