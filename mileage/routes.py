@@ -55,7 +55,7 @@ def register():
       "lastName": register.lastName.data,
       "password": hashedPW
     })
-    flash(f'Account created for {register.email.data}, your are now able to log in!', 'success')
+    flash(f'Account created for {register.email.data}, your are now able to log in!', 'info')
     return redirect(url_for('login'))
     
 
@@ -81,7 +81,7 @@ def login():
         next_page = request.args.get('next')
         return redirect(next_page) if next_page else redirect(url_for('feed'))
       else:
-        flash('Login Unsuccessful. Please check email and password', 'warning')
+        flash('Login Unsuccessful. Please check email and password', 'info')
 
   return render_template(
     'login.html',
@@ -290,14 +290,14 @@ def uploadFixed():
   workout = Workout(form['title'], "FIXED")
 
   if not form['count'] or form['count'] == "0":
-    flash("You didn't add any intervals", 'warning')
+    flash("You didn't add any intervals", 'info')
     return redirect(url_for('upload'))
 
   try:
     restArray = form['rest'].split(':')
     rest = (int(restArray[0]) * 60) + int(restArray[1])
   except:
-    flash('Rest in the wrong format, try Minutes:Seconds.', 'warning')
+    flash('Rest in the wrong format, try Minutes:Seconds.', 'info')
     return redirect(url_for("upload"))
 
   for x in range(1, int(form['count'])+1):
@@ -306,7 +306,7 @@ def uploadFixed():
       time = (int(timeArray[0]) * 60) + float(timeArray[1])
       workout.add_Interval(form['distance'+ str(x)], time, rest)
     except:
-      flash('Time in the wrong format, try Minutes:Seconds.', 'warning')
+      flash('Time in the wrong format, try Minutes:Seconds.', 'info')
       return redirect(url_for("upload"))
 
   gsheet = GSheet(str(current_user._id))
@@ -348,7 +348,7 @@ def uploadVariable():
       time = (int(timeArray[0]) * 60) + float(timeArray[1])
       workout.add_Interval(form['distance'+ str(x)], time, rest)
     except:
-      flash('Time or rest in the wrong format, try Minutes:Seconds.', 'warning')
+      flash('Time or rest in the wrong format, try Minutes:Seconds.', 'info')
       return redirect(url_for("upload"))
 
   gsheet = GSheet(str(current_user._id))
@@ -381,7 +381,7 @@ def workoutReview():
     splitName = upload.filename.split('.')
     fileExt = splitName[1]
     if fileExt != 'csv':
-      flash(f'{upload.filename} is not a .csv', 'warning')
+      flash(f'{upload.filename} is not a .csv', 'info')
       return redirect(url_for('upload'))
     else:
       flash(f"{upload.filename} successfully uploaded as {request.form['title']}", 'success')
@@ -406,7 +406,7 @@ def workoutReview():
         return flash('Workout correct but error uploading, all information is temporary', 'warning')
     
   else: 
-    flash('No .CSV uploaded.', 'warning')
+    flash('No .CSV uploaded.', 'info')
     return redirect(url_for('upload'))
 
   if g.sijax.is_sijax_request:
@@ -443,7 +443,7 @@ def ergControl():
         flash(f'Setting workout for {formDis.distance.data}m', 'success')
 
       except ValueError:
-        flash(f'Minimum of 1 split and maximum of 50, you entered: {int(formDis.distance.data / formDis.split.data)}', 'warning')
+        flash(f'Minimum of 1 split and maximum of 50, you entered: {int(formDis.distance.data / formDis.split.data)}', 'info')
 
   if formTime.submitTime.data and formTime.validate():
     for erg in ergs:
