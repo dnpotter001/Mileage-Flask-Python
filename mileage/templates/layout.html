@@ -24,7 +24,7 @@
     <div id="navbutton">&#9776; Mileage</div>
     <span class='desktopheader'>Mileage</span>
     {% if current_user.is_authenticated %}
-      <span class='logoutHeader'>
+      <span class='logoutHeader' id="logoutHeader">
         <a href={{url_for('profile')}}>Profile | </a>
         <a href={{url_for('logout')}}>Logout</a>
       </span> 

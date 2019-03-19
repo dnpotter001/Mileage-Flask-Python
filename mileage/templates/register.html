@@ -9,7 +9,7 @@
     
   {% if register.firstName.errors %}
     {{register.firstName(class="invalid") }}
-    <div class="invalid-input">
+    <div class="invalid-input-light">
       {% for error in register.firstName.errors %}
       <span>{{error}}</span>
       {% endfor %}
@@ -20,7 +20,7 @@
 
   {% if register.lastName.errors %}
     {{register.lastName(class="invalid") }}
-    <div class="invalid-input">
+    <div class="invalid-input-light">
       {% for error in register.lastName.errors %}
       <span>{{error}}</span>
       {% endfor %}
@@ -31,7 +31,7 @@
 
   {%if register.email.errors %}
     {{register.email(class="invalid")}}
-    <div class="invalid-input">
+    <div class="invalid-input-light">
       {% for error in register.email.errors %}
       <span>{{error}}</span>
       {% endfor %}
@@ -42,7 +42,7 @@
   
   {%if register.password.errors %}
   {{register.password(class="invalid")}}
-    <div class="invalid-input">
+    <div class="invalid-input-light">
       {% for error in register.password.errors %}
       <span>{{error}}</span>
       {% endfor %}
@@ -53,7 +53,7 @@
 
   {%if register.confirmPassword.errors %}
   {{register.confirmPassword(class="invalid")}}
-    <div class="invalid-input">
+    <div class="invalid-input-light">
       {% for error in register.confirmPassword.errors %}
       <span>{{error}}</span>
       {% endfor %}
