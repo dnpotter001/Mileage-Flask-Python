@@ -94,7 +94,7 @@ def logout():
   flash('Successfully logged out.','success')
   return redirect(url_for('welcome'))
 
-@app.route("/feed")
+@app.route("/feed", methods=['GET', 'POST'])
 @login_required
 def feed():
   
@@ -129,7 +129,7 @@ def feed():
     title="Your Feed"
   )
 
-@app.route('/profile')
+@app.route('/profile',methods=['GET', 'POST'])
 @login_required
 def profile():
 
@@ -176,7 +176,7 @@ def profile():
     pp=pp
   )
 
-@app.route("/user/<user_id>")
+@app.route("/user/<user_id>",methods=['GET', 'POST'])
 @login_required
 def user(user_id):
   
@@ -544,7 +544,12 @@ def settings():
     user=user
     )
 
-@app.route("/about")
+@app.route("/about",methods=['GET', 'POST'])
 def about():
+
+  if g.sijax.is_sijax_request:
+    g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
+    return g.sijax.process_request()
+
 
   return render_template('about.html', title="About")
