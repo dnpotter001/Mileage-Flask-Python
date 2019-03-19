@@ -102,6 +102,7 @@ def feed():
       {"$unwind": {"path": "$workouts"}},
       {"$project": {
           "_id": "$workouts._id",
+          "user_id": "$_id",
           "firstName": 1,
           "lastName": 1,
           "title": "$workouts.title",
@@ -137,6 +138,7 @@ def profile():
       {"$unwind": {"path": "$workouts"}},
       {"$project": {
           "_id": "$workouts._id",
+          "user_id": "$_id",
           "firstName": 1,
           "lastName": 1,
           "title": "$workouts.title",
@@ -159,10 +161,11 @@ def profile():
       "workouts":0
     })
 
-  if user['pp']:
-    pp = "static/img/pp/" + user['pp']
-  else:
-    pp = "static/img/pp/defaultpp.png"
+  try: 
+    pp = url_for('static', filename='img/pp/' + user['pp'])
+  except KeyError: 
+    pp = url_for('static', filename='img/pp/defaultpp.png')
+    flash("Set a profile picture and bio in settings on the right!", 'info')
     
   return render_template(
     'profile.html',
@@ -172,6 +175,53 @@ def profile():
     user=user,
     pp=pp
   )
+
+@app.route("/user/<user_id>")
+@login_required
+def user(user_id):
+  
+  pipeline = [
+    {"$match": {'_id': ObjectId(user_id)}},
+    {"$unwind": {"path": "$workouts"}},
+    {"$project": {
+        "_id": "$workouts._id",
+        "user_id": "$_id",
+        "firstName": 1,
+        "lastName": 1,
+        "title": "$workouts.title",
+        "workoutType": "$workouts.workoutType",
+        "intervals": "$workouts.intervals",
+        "csv": "$workouts.csv",
+        "dateTime": "$workouts.dateTime",
+        "unixTime": "$workouts.unixtime",
+        "maleFis": "$workouts.maleFis",
+        "femaleFis": "$workouts.femaleFis"
+        }},
+    {"$sort": {"unixTime":-1}},
+    {"$limit": 20}
+  ]
+  workouts = users.aggregate(pipeline)
+
+  user = users.find_one(
+    {"_id": ObjectId(user_id)},
+    {
+      "workouts":0
+    })
+
+  try: 
+    pp = url_for('static', filename='img/pp/' + user['pp'])
+  except KeyError: 
+    pp = url_for('static', filename='img/pp/defaultpp.png')
+    
+  return render_template(
+    'profile.html',
+    zip=zip,
+    workouts=workouts,
+    title='Your Profile',
+    user=user,
+    pp=pp
+  )
+
 
 @app.route("/upload", methods=['GET', 'POST'])
 @login_required

@@ -115,6 +115,11 @@ h2 {
   background: #b3ffb3;
   border:1px solid #00cc00
 }
+.alert-info{
+  background: #b3ddff;
+  border:1px solid #00b4cc
+}
+
 
 #navbutton {
   overflow: hidden;
@@ -394,9 +399,6 @@ footer a:visited {
   transform: rotate(180deg);
 }
 
-
-
-
 .table {
   grid-area: table;
   padding: 0px;
@@ -414,11 +416,14 @@ footer a:visited {
 }
 .table tr:nth-child(odd){background-color: var(--background);}
 
-
-
 .info {
   grid-area: info;
 }
+.info a {
+  color: #000;
+  font-style: italic;
+}
+
 
 /* -------------------------setting stylin-------------------------g*/
 

@@ -31,7 +31,10 @@
 
       </ul>
     </article>
-    <div class="feed info">On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
+    <div class="feed info">
+      On <b>{{workout.dateTime}}</b> 
+      by <b><a href="{{url_for('user', user_id=workout.user_id)}}">{{workout.firstName + ' '+  workout.lastName}}</b></a>
+    </div>
   </article>
 {% endif %}
 
@@ -58,7 +61,10 @@
       </li>
     </ul>
   </article>
-  <div class="feed info"> On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
+  <div class="feed info">
+      On <b>{{workout.dateTime}}</b> 
+      by <b><a href="{{url_for('user', user_id=workout.user_id)}}">{{workout.firstName + ' '+  workout.lastName}}</b></a>
+  </div>
 </article>
 {% endif %}
 {% if workout.workoutType == "FIXED" or workout.workoutType == "VARIABLE"  %}
@@ -108,7 +114,10 @@
         </script>
       </div>
     </article>
-    <div class="feed info">On <b>{{workout.dateTime}}</b> by <b>{{workout.firstName + ' '+  workout.lastName}}</b></div>
+    <div class="feed info">
+        On <b>{{workout.dateTime}}</b> 
+        by <b><a href="{{url_for('user', user_id=workout.user_id)}}">{{workout.firstName + ' '+  workout.lastName}}</b></a>
+    </div>
   </article>
 {% endif %}
 {% endfor %}
