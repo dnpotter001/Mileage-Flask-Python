@@ -165,7 +165,6 @@ def profile():
     pp = url_for('static', filename='img/pp/' + user['pp'])
   except KeyError: 
     pp = url_for('static', filename='img/pp/defaultpp.png')
-    flash("Set a profile picture and bio in settings on the right!", 'info')
   
   if g.sijax.is_sijax_request:
     g.sijax.register_callback('checkForErgs', ErgHandler.checkForErgs)
@@ -253,8 +252,8 @@ def upload():
       totalTime = int(timeArray[0]) * 60 * 60 + int(timeArray[1]) * 60 + float(timeArray[2])
 
     workout.add_Interval(singleInterval.distance.data, totalTime, None)
-    gsheet = GSheet(str(current_user._id))
-    gsheet.add_Workout(workout)
+    #gsheet = GSheet(str(current_user._id))
+    #gsheet.add_Workout(workout)
 
     try:
       users.update_one(
@@ -317,8 +316,8 @@ def uploadFixed():
       flash('Time in the wrong format, try Minutes:Seconds.', 'info')
       return redirect(url_for("upload"))
 
-  gsheet = GSheet(str(current_user._id))
-  gsheet.add_Workout(workout)
+  # gsheet = GSheet(str(current_user._id))
+  # gsheet.add_Workout(workout)
 
   try:
     users.update_one(
@@ -359,8 +358,8 @@ def uploadVariable():
       flash('Time or rest in the wrong format, try Minutes:Seconds.', 'info')
       return redirect(url_for("upload"))
 
-  gsheet = GSheet(str(current_user._id))
-  gsheet.add_Workout(workout)
+  # gsheet = GSheet(str(current_user._id))
+  # gsheet.add_Workout(workout)
 
   try:
     users.update_one(

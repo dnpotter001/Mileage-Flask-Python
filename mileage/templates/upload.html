@@ -32,8 +32,8 @@
     {{csv.csvField(id="csvInput", class="hidden")}}
 
     <div class="row">
-      <button class="button contrast wide" type="button" id="uploadCSV">Upload</button>
-      {{csv.submitCSV(class="button contrast wide", id="csvSubmit")}}
+      <button class="button contrast wide small_text" type="button" id="uploadCSV">Choose<br> File</button>
+      {{csv.submitCSV(class="button contrast wide small_text", id="csvSubmit")}}
     </div>
   </form>
   <div id="fileNameLabel" class="row center-align pad10">No file selected.</div>
@@ -124,13 +124,13 @@
           {{fixedInterval.rest}}
         </div>
       </article>
+
+      <div id="intervalForms" class="column">
+      </div>
       <div class="row">
         <button type="button" id="addInterval" class="button dark wide small_text">Add Interval</button>
         <button type="button" id="remove" class="button red wide small_text">Remove Interval</button>
       </div>
-      <div id="intervalForms" class="column">
-      </div>
-
       <input class="button dark wide center-align small_text" id="upload" name="upload" type="submit" value="Upload">
 
     </form>
@@ -156,13 +156,13 @@
             {{variableInterval.count(id="intervalCountVariable", type="hidden")}}
           </div>
         </article>
+   
+        <div id="intervalFormsVariable" class="column">
+        </div>
         <div class="row">
           <button type="button" id="addVariableInterval" class="button dark wide small_text">Add Interval</button>
           <button type="button" id="removeVariable" class="button red wide small_text">Remove Interval</button>
         </div>
-        <div id="intervalFormsVariable" class="column">
-        </div>
-
         <button class="button dark wide center-align small_text" id="upload" name="upload" type="submit">Upload</button>
 
       </form>
