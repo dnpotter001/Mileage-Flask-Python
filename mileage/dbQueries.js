@@ -67,3 +67,5 @@ db.users.aggregate([
   {$sort: {"unixTime":-1}},
   {$limit: 20}
 ])
+
+document.body.style.background = "yellow"

@@ -25,25 +25,24 @@
     <span class='desktopheader'>Mileage</span>
     {% if current_user.is_authenticated %}
       <span class='logoutHeader' id="logoutHeader">
-        <a href={{url_for('profile')}}>Profile | </a>
-        <a href={{url_for('logout')}}>Logout</a>
+        <a href="{{url_for('profile')}}">Profile | </a>
+        <a href="{{url_for('logout')}}">Logout</a>
       </span> 
     {% else %}
       <span class='loginHeader'>
-        <a href={{url_for('login')}}>Login | </a>
-        <a href={[url_for('register')}]>Register</a>
+        <a href="{{url_for('login')}}">Login | </a>
+        <a href="{{url_for('register')}}">Register</a>
       </span> 
     {% endif %}
   </header>
 
   <nav id="navbar">
-    <a href={{url_for('feed')}}>Your Feed</a>
-    <a href={{url_for('upload')}}>Upload</a>
-    <a href={{url_for('profile')}}>Your Profile</a>
-    <a href={{url_for('ergControl')}}>Erg Control</a>
-    <a href="settings">Settings</a>
-    <a href="about">About Site</a>
-
+    <a href="{{url_for('feed')}}">Your Feed</a>
+    <a href="{{url_for('upload')}}">Upload</a>
+    <a href="{{url_for('profile')}}">Your Profile</a>
+    <a href="{{url_for('ergControl')}}">Erg Control</a>
+    <a href="{{url_for('settings')}}">Settings</a>
+    <a href="{{url_for('about')}}">About Site</a>
   </nav>
   <article class="subheader">
     {% if title %}
@@ -52,7 +51,6 @@
 
     {% endif %}
   </article>
-
 
 
   <section class="content">
@@ -78,16 +76,15 @@
   
     <div class="row b-top">
       <button type="button" class="small red button center-align" id="refreshErgPane">Refresh</button>
-      <a href={{url_for('ergControl')}}><button class="small contrast button center-align">Erg Control</button></a>
+      <a href="{{url_for('ergControl')}}"><button class="small contrast button center-align">Erg Control</button></a>
     </div>
   </article>
 
 
   <footer>
-    <a href={{url_for('feed')}}>Your Feed</a>
-    <a href="upload">Upload</a>
-    <a href="squads">Squads</a>
-    <a href="profile">Your Profile</a>
+    <a href="{{url_for('feed')}}">Your Feed</a>
+    <a href="{{url_for('upload')}}">Upload</a>
+    <a href="{{url_for('profile')}}">Your Profile</a>
     <a href="{{url_for('ergControl')}}">Erg Control</a>
     <a href="{{url_for('settings')}}">Settings</a>
     <a href="{{url_for('about')}}">About Site</a>
