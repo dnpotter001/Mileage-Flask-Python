@@ -49,12 +49,12 @@ class Workout(object):
       wash = int(self.csv['overview'][17])
       length = catch + finish
 
-      print(catch,finish,slip,wash,length)
+      print(catch, slip, finish, wash, length)
 
       maleFIS = MaleFIS()
-      maleFisQuality = maleFIS.EvalStroke(catch, finish, slip, wash, length)
+      maleFisQuality = maleFIS.EvalStroke(catch, slip, finish, wash, length)
       femaleFIS = FemaleFIS()
-      femaleFISQuality = femaleFIS.EvalStroke(catch, finish, slip, wash, length)
+      femaleFISQuality = femaleFIS.EvalStroke(catch, slip, finish, wash, length)
 
       return {
         'male': maleFisQuality,
@@ -85,12 +85,12 @@ class Workout(object):
       wash = int(csvArray[15][17])
       length = catch + finish
 
-      print(catch,finish,slip,wash,length)
+      #print(catch, slip, finish, wash, length)
 
       maleFIS = MaleFIS()
-      maleFisQuality = maleFIS.EvalStroke(catch, finish, slip, wash, length)
+      maleFisQuality = maleFIS.EvalStroke(catch, slip, finish, wash, length)
       femaleFIS = FemaleFIS()
-      femaleFISQuality = femaleFIS.EvalStroke(catch, finish, slip, wash, length)
+      femaleFISQuality = femaleFIS.EvalStroke(catch, slip, finish, wash, length)
 
       return {
         'male': maleFisQuality,

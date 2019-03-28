@@ -81,7 +81,7 @@ class MaleFIS(object):
 
     self.rowingFis = ctrl.ControlSystemSimulation(rowingFIS_ctrl)
 
-  def EvalStroke(self, catch, finish, slip, wash, length):
+  def EvalStroke(self, catch, slip, finish, wash, length):
     self.rowingFis.input['Catch'] = catch
     self.rowingFis.input['Finish'] = finish
     self.rowingFis.input['Slip'] = slip
@@ -174,7 +174,7 @@ class FemaleFIS(object):
 
 
 
-  def EvalStroke(self, catch, finish, slip, wash, length):
+  def EvalStroke(self, catch, slip, finish, wash, length):
     self.rowingFis.input['Catch'] = catch
     self.rowingFis.input['Finish'] = finish
     self.rowingFis.input['Slip'] = slip
@@ -190,20 +190,26 @@ class FemaleFIS(object):
 
 
 
-male = MaleFIS()
-female = FemaleFIS()
+# male = MaleFIS()
+# female = FemaleFIS()
 
-maleTestData = [
-  []
-]
+# maleTestData = [
+#   [60.5, 7.1, 38.5, 19.4, 101.3], #novice
+#   [63.1, 5.6, 40.8, 16.8, 104.7], #intermediate
+#   [65.7, 4.1, 43.1, 14.3, 108.0], #international
+#   [68.2, 2.5, 45.5, 11.7, 111.4], #internations 
+# ]
 
-# print(male.EvalStroke(60,41,3,13,101))
+# for test in maleTestData:
+#   print(male.EvalStroke(*test))
 
 
 
 
 
-wait = input("PRESS ENTER TO EXIT.")
+
+
+# wait = input("PRESS ENTER TO EXIT.")
 
 
 
