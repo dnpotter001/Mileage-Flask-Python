@@ -89,7 +89,7 @@ class MaleFIS(object):
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
     self.quality.view(sim=self.rowingFis)
-    plt.savefig("mileage/static/img/fis/maleFis.png")
+    #plt.savefig("mileage/static/img/fis/maleFis.png")
     return round(self.rowingFis.output['Quality'], 1)
 
   #def ViewPlots(self):
@@ -182,7 +182,7 @@ class FemaleFIS(object):
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
     self.quality.view(sim=self.rowingFis)
-    plt.savefig("mileage/static/img/fis/femaleFis.png")
+    #plt.savefig("mileage/static/img/fis/femaleFis.png")
     return round(self.rowingFis.output['Quality'],1)
 
   #def ViewPlots(self):
@@ -190,13 +190,20 @@ class FemaleFIS(object):
 
 
 
-# male = MaleFIS()
+male = MaleFIS()
+female = FemaleFIS()
+
+maleTestData = [
+  []
+]
 
 # print(male.EvalStroke(60,41,3,13,101))
 
 
 
-# wait = input("PRESS ENTER TO CONTINUE.")
+
+
+wait = input("PRESS ENTER TO EXIT.")
 
 
 
