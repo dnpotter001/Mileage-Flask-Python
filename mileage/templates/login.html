@@ -5,7 +5,7 @@
   {{login.hidden_tag()}}
   <fieldset class='column'>
     <legend><h3>Login</h3></legend>
-    {{login.email}}
+
     {%if login.email.errors %}
     {{login.email(class="invalid")}}
       <div class="invalid-input-light">
@@ -14,7 +14,7 @@
         {% endfor %}
       </div>
     {% else %}
-      
+      {{login.email}}
     {% endif %}
   
     {%if login.password.errors %}
