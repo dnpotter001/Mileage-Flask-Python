@@ -88,8 +88,8 @@ class MaleFIS(object):
     self.rowingFis.input['Wash'] = wash
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
-    self.quality.view(sim=self.rowingFis)
-    #plt.savefig("mileage/static/img/fis/maleFis.png")
+    #self.quality.view(sim=self.rowingFis)
+    plt.savefig("mileage/static/img/fis/maleFis.png")
     return round(self.rowingFis.output['Quality'], 1)
 
   #def ViewPlots(self):
@@ -182,34 +182,41 @@ class FemaleFIS(object):
     self.rowingFis.input['Length'] = length  
     self.rowingFis.compute()
     self.quality.view(sim=self.rowingFis)
-    #plt.savefig("mileage/static/img/fis/femaleFis.png")
+    plt.savefig("mileage/static/img/fis/femaleFis.png")
     return round(self.rowingFis.output['Quality'],1)
 
   #def ViewPlots(self):
   #  return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()
 
+male = MaleFIS()
+maleTestData = [
+  [60.5, 7.1, 38.5, 19.4, 101.3], #novice
+  [63.1, 5.6, 40.8, 16.8, 104.7], #intermediate
+  [65.7, 4.1, 43.1, 14.3, 108.0], #national
+  [68.2, 2.5, 45.5, 11.7, 111.4], #internations 
+]
+for test in maleTestData:
+  print(male.EvalStroke(*test))
+  
+
+female = FemaleFIS()
+femaleTestData = [
+  [58.0, 8.3, 37.6, 26.8, 97.7],  #novice 
+  [60.8, 6.7, 39.9, 23.5, 101.4], #intermediate
+  [63.7, 5.2, 42.2, 20.2, 105.2], #national
+  [66.5, 3.7, 44.5, 16.9, 108.9],  #international
+]
+for test in femaleTestData:
+  print(female.EvalStroke(*test))
 
 
-# male = MaleFIS()
-# female = FemaleFIS()
-
-# maleTestData = [
-#   [60.5, 7.1, 38.5, 19.4, 101.3], #novice
-#   [63.1, 5.6, 40.8, 16.8, 104.7], #intermediate
-#   [65.7, 4.1, 43.1, 14.3, 108.0], #international
-#   [68.2, 2.5, 45.5, 11.7, 111.4], #internations 
-# ]
-
-# for test in maleTestData:
-#   print(male.EvalStroke(*test))
 
 
 
 
 
 
-
-# wait = input("PRESS ENTER TO EXIT.")
+wait = input("PRESS ENTER TO EXIT.")
 
 
 
