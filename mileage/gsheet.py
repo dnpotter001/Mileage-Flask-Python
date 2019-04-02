@@ -2,7 +2,6 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from bson import ObjectId
 from mileage import mongo
-from mileage.workout import Workout
 from flask import flash
 
 class GSheet(object):

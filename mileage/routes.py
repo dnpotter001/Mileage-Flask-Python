@@ -252,8 +252,7 @@ def upload():
       totalTime = int(timeArray[0]) * 60 * 60 + int(timeArray[1]) * 60 + float(timeArray[2])
 
     workout.add_Interval(singleInterval.distance.data, totalTime, None)
-    #gsheet = GSheet(str(current_user._id))
-    #gsheet.add_Workout(workout)
+    workout.addToSheets()
 
     try:
       users.update_one(
@@ -316,8 +315,7 @@ def uploadFixed():
       flash('Time in the wrong format, try Minutes:Seconds.', 'info')
       return redirect(url_for("upload"))
 
-  # gsheet = GSheet(str(current_user._id))
-  # gsheet.add_Workout(workout)
+  workout.addToSheets()
 
   try:
     users.update_one(
@@ -358,8 +356,7 @@ def uploadVariable():
       flash('Time or rest in the wrong format, try Minutes:Seconds.', 'info')
       return redirect(url_for("upload"))
 
-  # gsheet = GSheet(str(current_user._id))
-  # gsheet.add_Workout(workout)
+  workout.addToSheets()
 
   try:
     users.update_one(

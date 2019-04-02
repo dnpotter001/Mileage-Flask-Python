@@ -2,6 +2,8 @@ import datetime
 import time
 from bson import ObjectId
 from mileage.rowfis import MaleFIS, FemaleFIS
+from mileage.gsheet import GSheet
+from flask_login import current_user
 
 class Workout(object):
 
@@ -70,7 +72,14 @@ class Workout(object):
   def addRowFis(self):
     self.maleFis = self.rowFis()['male']
     self.femaleFis = self.rowFis()['female']
-      
+
+  def addToSheets(self):
+    try:
+      gsheet = GSheet(str(current_user._id))
+      gsheet.add_Workout(self)
+    except:
+      return
+
 
   @staticmethod
   def createInterval(distance, time, rest, spm):
