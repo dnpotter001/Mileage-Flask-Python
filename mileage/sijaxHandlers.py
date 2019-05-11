@@ -11,6 +11,7 @@ class ErgHandler(object):
 
     if len(ergs) == 0:
       obj_response.html('#status', 'No ergs found')
+      obj_response.html('#status-pane', "")
     else:
       obj_response.html('#status', f'{len(ergs)} erg found')
       for erg in ergs:

@@ -188,16 +188,15 @@ class FemaleFIS(object):
   def ViewPlots(self):
    return self.quality.view(), self.catch.view(), self.finish.view(), self.slip.view(), self.wash.view(), self.length.view()
 
-# female = FemaleFIS()
-# female.ViewPlots()
 
-# # male = MaleFIS()
+# male = MaleFIS()
 # maleTestData = [
 #   [60.5, 7.1, 38.5, 19.4, 101.3], #novice
 #   [63.1, 5.6, 40.8, 16.8, 104.7], #intermediate
 #   [65.7, 4.1, 43.1, 14.3, 108.0], #national
 #   [68.2, 2.5, 45.5, 11.7, 111.4], #internations 
 # ]
+# print("male:")
 # for test in maleTestData:
 #   print(male.EvalStroke(*test))
   
@@ -209,9 +208,19 @@ class FemaleFIS(object):
 #   [63.7, 5.2, 42.2, 20.2, 105.2], #national
 #   [66.5, 3.7, 44.5, 16.9, 108.9],  #international
 # ]
+# print("female:")
 # for test in femaleTestData:
 #   print(female.EvalStroke(*test))
-#wait = input("PRESS ENTER TO EXIT.")
+
+# unrealistic = [
+#   [60.5,7.1, 38.5,11.7,111.4],
+#   [68,2,38.5,16.8,108],
+#   [65,4.1,43.1,16.8,104.7]
+# ]
+# print("Unrealistic:")
+# for x in unrealistic:
+#   print(male.EvalStroke(*x ))
+# wait = input("PRESS ENTER TO EXIT.")
 
 
 
